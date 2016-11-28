@@ -1,8 +1,10 @@
 package ru.pinch.model.database;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
-
+@Component
 @Entity
 @Table(name = "constructionmaterials", schema = "buildingonlineshop", catalog = "")
 public class ConstructionmaterialsEntity {
@@ -11,13 +13,14 @@ public class ConstructionmaterialsEntity {
     private Integer length;
     private Integer weight;
     private Integer thickness;
-    private Integer grade;
+    private String grade;
     private Double price;
-    private Boolean sanded;
-    private Boolean waterResistance;
+    private Integer sanded;
+    private Integer waterResistance;
     private Integer numberOfSheets;
     private Integer numberOfPackages;
     private String machineDescription;
+    private String color;
 
     @Id
     @Column(name = "ProductID", nullable = false, length = 25)
@@ -70,12 +73,12 @@ public class ConstructionmaterialsEntity {
     }
 
     @Basic
-    @Column(name = "Grade", nullable = true)
-    public Integer getGrade() {
+    @Column(name = "Grade", nullable = true, length = 45)
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
@@ -91,21 +94,21 @@ public class ConstructionmaterialsEntity {
 
     @Basic
     @Column(name = "Sanded", nullable = true)
-    public Boolean getSanded() {
+    public Integer getSanded() {
         return sanded;
     }
 
-    public void setSanded(Boolean sanded) {
+    public void setSanded(Integer sanded) {
         this.sanded = sanded;
     }
 
     @Basic
     @Column(name = "WaterResistance", nullable = true)
-    public Boolean getWaterResistance() {
+    public Integer getWaterResistance() {
         return waterResistance;
     }
 
-    public void setWaterResistance(Boolean waterResistance) {
+    public void setWaterResistance(Integer waterResistance) {
         this.waterResistance = waterResistance;
     }
 
@@ -139,6 +142,16 @@ public class ConstructionmaterialsEntity {
         this.machineDescription = machineDescription;
     }
 
+    @Basic
+    @Column(name = "color", nullable = true, length = 45)
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -162,6 +175,7 @@ public class ConstructionmaterialsEntity {
             return false;
         if (machineDescription != null ? !machineDescription.equals(that.machineDescription) : that.machineDescription != null)
             return false;
+        if (color != null ? !color.equals(that.color) : that.color != null) return false;
 
         return true;
     }
@@ -180,6 +194,7 @@ public class ConstructionmaterialsEntity {
         result = 31 * result + (numberOfSheets != null ? numberOfSheets.hashCode() : 0);
         result = 31 * result + (numberOfPackages != null ? numberOfPackages.hashCode() : 0);
         result = 31 * result + (machineDescription != null ? machineDescription.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
         return result;
     }
 }

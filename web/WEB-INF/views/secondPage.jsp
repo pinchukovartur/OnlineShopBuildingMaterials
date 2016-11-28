@@ -4,9 +4,9 @@
     <title>Second Page</title>
 </head>
 <body>
-Введенное имя: ${userJSP.name};
+Введенное имя: ${userJSP.productId};
 <br/>
-Введенный пароль: ${userJSP.password};
+Введенный пароль: ${userJSP.type};
 <br/>
 </body>
 </html>

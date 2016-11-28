@@ -3,7 +3,7 @@ package ru.pinch.model.database;
 import javax.persistence.*;
 
 /**
- * Created by pincha on 25.11.2016.
+ * Created by pincha on 27.11.2016.
  */
 @Entity
 @Table(name = "photoconstructionmaterials", schema = "buildingonlineshop", catalog = "")
