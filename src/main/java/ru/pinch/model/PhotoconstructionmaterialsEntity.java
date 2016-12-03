@@ -1,10 +1,8 @@
-package ru.pinch.model.database;
+package ru.pinch.model;
 
 import javax.persistence.*;
 
-/**
- * Created by pincha on 27.11.2016.
- */
+
 @Entity
 @Table(name = "photoconstructionmaterials", schema = "buildingonlineshop", catalog = "")
 public class PhotoconstructionmaterialsEntity {

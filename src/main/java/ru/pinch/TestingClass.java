@@ -2,8 +2,8 @@ package ru.pinch;
 
 
 
-import ru.pinch.model.database.ConstructionmaterialsEntity;
-import ru.pinch.model.database.dao.ShopDataBaseImpl;
+import ru.pinch.model.ConstructionmaterialsEntity;
+import ru.pinch.dao.ProductServiceImpl;
 
 public class TestingClass {
     public static void main(String[] args) {
@@ -33,9 +33,13 @@ public class TestingClass {
         constructionmaterialsEntity2.setNumberOfPackages(9);
         constructionmaterialsEntity2.setMachineDescription("very good");
 
-        ShopDataBaseImpl shopDataBase = new ShopDataBaseImpl();
-        shopDataBase.addEntity(constructionmaterialsEntity2);
+        ProductServiceImpl shopDataBase = new ProductServiceImpl();
+        /*shopDataBase.addEntity(constructionmaterialsEntity2);*/
         /*shopDataBase.deleteEntity(shopDataBase.listProducts());*/
         /*System.out.println(shopDataBase.listProducts());*/
+
+        ConstructionmaterialsEntity entity = new ConstructionmaterialsEntity();
+        entity.setProductId("test");
+        shopDataBase.deleteEntity("test");
     }
 }

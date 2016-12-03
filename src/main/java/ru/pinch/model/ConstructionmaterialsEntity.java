@@ -1,4 +1,4 @@
-package ru.pinch.model.database;
+package ru.pinch.model;
 
 import org.springframework.stereotype.Component;
 

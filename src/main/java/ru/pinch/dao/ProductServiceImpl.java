@@ -1,18 +1,17 @@
-package ru.pinch.model.database.dao;
+package ru.pinch.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
-import ru.pinch.model.database.BuildingOnlineShopDataBase;
-import ru.pinch.model.database.ConstructionmaterialsEntity;
+import ru.pinch.model.ConstructionmaterialsEntity;
 
 import java.util.List;
 
-public class ShopDataBaseImpl implements BuildingOnlineShopDataBase{
+public class ProductServiceImpl implements BuildingOnlineShopDataBase{
 
     Session session;
 
-    public ShopDataBaseImpl(){
+    public ProductServiceImpl(){
         session  = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
     }
@@ -34,18 +33,13 @@ public class ShopDataBaseImpl implements BuildingOnlineShopDataBase{
             tx.commit();
         }
         for(ConstructionmaterialsEntity p : result) {
-            System.out.println("Delete:"+p.getProductId());
             session.delete(p);
         }
         session.getTransaction().commit();
     }
 
-    public void deleteEntity(Object o) {
-        Transaction tx = session.beginTransaction();
-        if(!tx.getStatus().equals(TransactionStatus.ACTIVE) ) {
-            tx.commit();
-        }
-        session.delete(o);
+    public void deleteEntity(String id) {
+        session.delete(session.get(ConstructionmaterialsEntity.class, id));
         session.getTransaction().commit();
     }
 }

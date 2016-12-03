@@ -4,15 +4,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/bootstrap/css/bootstrap.min.css">
-    <script src="/resources/js/lib/jquery-3.1.1.js"></script>
-
-    <script src="/resources/js/modal_window.js"></script>
-    <link href="<c:url value ="/resources/css/admin.css" />" rel="stylesheet">
-
+    <%--lib--%>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--/lib--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css"/>
     <title>Admin</title>
 </head>
 <body>
+
 <table class="simple-little-table" border="3">
     <caption>PRODUCTS</caption>
     <tr>
@@ -48,32 +49,54 @@
         </tr>
     </c:forEach>
 </table>
-<div class="text-center">
-    <a href="#" id="go" class="button7">Добавить</a>
-    <a href="#" class="button7">Удалить</a>
-    <a href="#" class="button7">Изменить</a>
+
+<button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#addModal">Добавить</button>
+<div id="addModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Добавление товара</h4>
+            </div>
+            <div class="modal-body">
+                <spring:form method="POST" modelAttribute="addProduct" action="newProduct">
+                    ProductID: <spring:input path="productId"/><br/>
+                    Type: <spring:input path="type"/><br/>
+                    Length: <spring:input path="length"/><br/>
+                    Weight: <spring:input path="weight"/><br/>
+                    Thickness: <spring:input path="thickness"/><br/>
+                    Grade: <spring:input path="grade"/><br/>
+                    Price: <spring:input path="price"/><br/>
+                    Sanded: <spring:input path="sanded"/><br/>
+                    WaterResistance: <spring:input path="waterResistance"/><br/>
+                    NumberOfSheets: <spring:input path="numberOfSheets"/><br/>
+                    NumberOfPackages: <spring:input path="numberOfPackages"/><br/>
+                    MachineDescription: <spring:input path="machineDescription"/><br/>
+                    Сolor: <spring:input path="color"/><br/>
+                    <spring:button>Добавить</spring:button>
+                </spring:form>
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
+        </div>
+    </div>
 </div>
 
-<div id="modal_form">
-    <span id="modal_close">X</span>
-    <spring:form method="POST"  modelAttribute="addProduct" action="admin">
-        ProductID: <spring:input path="productId"/><br/>
-        Type: <spring:input path="type"/><br/>
-      <%--  Length: <spring:input path="Length"/><br/>
-        Weight: <spring:input path="Weight"/><br/>
-        Thickness: <spring:input path="Thickness"/><br/>
-        Grade: <spring:input path="Grade"/><br/>
-        Price: <spring:input path="Price"/><br/>
-        Sanded: <spring:input path="Sanded"/><br/>
-        WaterResistance: <spring:input path="WaterResistance"/><br/>
-        NumberOfSheets: <spring:input path="NumberOfSheets"/><br/>
-        NumberOfPackages: <spring:input path="NumberOfPackages"/><br/>
-        MachineDescription: <spring:input path="MachineDescription"/><br/>
-        Сolor: <spring:input path="Сolor"/><br/>--%>
-        <spring:button>Добавить</spring:button>
-    </spring:form>
-    </form>
+<button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#delModal">Удалить</button>
+<div id="delModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Удаление товара</h4>
+            </div>
+            <div class="modal-body">
+                <form action ="dProduct" method="post">
+                    ID: <input type="text" name="idProduct" style="width:50px" min="1" max="100" REQUIRED>
+                    <input type="submit" name="idProduct" value="Delete by ID">
+                </form>
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
+        </div>
+    </div>
 </div>
-<div id="overlay"></div>
+
 </body>
 </html>

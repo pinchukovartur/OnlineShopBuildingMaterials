@@ -1,18 +1,28 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css"/>
+
+
     <title>Index Page</title>
 </head>
 <body>
-<spring:form method="post"  modelAttribute="userJSP" action="check-user">
+    <a href="/admin">перейти на админа</a>
 
-    Name: <spring:input path="productId"/> (path="" - указывает путь, используемый в modelAttribute=''. в нашем случае User.name)  <br/>
-    Password: <spring:input path="type"/>   <br/>
-    <spring:button>Next Page</spring:button>
 
-</spring:form>
+    <table border="0">
+        <c:forEach var="x" items="${listProduct}" varStatus="status">
+            <tr>
+                <td>
+                    <img src="/resources/images/plywood%201.jpg" class="images">
+                    <c:out value="${x.productId }"/>
+                    <c:out value="${x.type }"/>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
-
 </html>
