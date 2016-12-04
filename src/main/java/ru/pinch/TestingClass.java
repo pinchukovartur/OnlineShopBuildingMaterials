@@ -36,10 +36,10 @@ public class TestingClass {
         ProductServiceImpl shopDataBase = new ProductServiceImpl();
         /*shopDataBase.addEntity(constructionmaterialsEntity2);*/
         /*shopDataBase.deleteEntity(shopDataBase.listProducts());*/
-        /*System.out.println(shopDataBase.listProducts());*/
+        System.out.println(shopDataBase.listProducts());
 
-        ConstructionmaterialsEntity entity = new ConstructionmaterialsEntity();
+        /*ConstructionmaterialsEntity entity = new ConstructionmaterialsEntity();
         entity.setProductId("test");
-        shopDataBase.deleteEntity("test");
+        shopDataBase.deleteEntity("test");*/
     }
 }
