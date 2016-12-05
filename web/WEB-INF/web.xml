@@ -18,6 +18,15 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <welcome-file-list>
+        <welcome-file>redirectPage.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/accessDenied.jsp</location>
+    </error-page>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

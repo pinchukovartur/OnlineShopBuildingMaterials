@@ -1,10 +1,13 @@
 package ru.pinch.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pinch.dao.ProductServiceImpl;
 import ru.pinch.model.ConstructionmaterialsEntity;
@@ -32,8 +35,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView main() {
+    public ModelAndView main(@RequestParam(value = "error", required = false) String error) {
         ModelAndView modelAndView = new ModelAndView();
+        if (error != null) {
+            modelAndView.addObject("error", "Invalid username or password!");
+        }
         ProductServiceImpl productService = new ProductServiceImpl();
         modelAndView.addObject("listProduct", productService.listProducts());
         modelAndView.setViewName("index");
