@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="local"%>
 
-
-<%@ include file="/WEB-INF/views/include.jsp" %>
-
 <html>
 <head>
     <%--lib--%>
@@ -21,12 +18,6 @@
 </head>
 <body>
 
-<span style="float: right">
-    <a href="?lang=en">en</a>
-    |
-    <a href="?lang=ru">ru</a>
-</span>
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,13 +28,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Строительный Магазин<%--<local:message code="label.ha"--%></a>
+            <a class="navbar-brand" href="/"><local:message code="label.hardwareStore"/></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" style="margin-left: 16%;">
-                <li class="active"><a href="/">Каталог</a></li>
-                <li><a href="/">Корзина</a></li>
-                <li><a href="/admin">Личный кабинет</a></li>
+                <li class="active"><a href="/"><local:message code="label.catalog"/></a></li>
+                <li><a href="/"><local:message code="label.basket"/></a></li>
+                <li><a href="/admin"><local:message code="label.personalArea"/></a></li>
+                <li><a href="/j_spring_security_logout"><local:message code="label.exit"/></a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -51,19 +43,25 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+            <ul>
+                <li><a href="?lang=en">en</a></li>
+                <li><a href="?lang=ru">ru</a></li>
+            </ul>
         </div>
     </div>
 </nav>
 
+
+
+
+
 <div class="container">
-        <h1>Каталог</h1>
         <div class="catalog">
             <c:forEach var="x" items="${listProduct}" varStatus="status">
             <div class="item">
                 <img src="/resources/images/plywood%201.jpg" class="images">
                 <c:out value="${x.productId }"/>
-                <c:out value="${x.price }"/>$
-                <local:message code="label.basket"/>
+                <span style="color: orange"><c:out value="${x.price}"/> $</span>
             </div>
             </c:forEach>
         </div>

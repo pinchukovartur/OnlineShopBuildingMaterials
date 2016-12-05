@@ -9,14 +9,26 @@
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <http auto-config="true">
+        <access-denied-handler error-page="/accessDenied" />
+
+
         <intercept-url pattern="/" access="ROLE_USER" />
         <intercept-url pattern="/admin" access="ROLE_ADMIN" />
+
+        <form-login
+            login-page="/login.jsp"
+            default-target-url="/"
+            authentication-failure-url="/error"
+            username-parameter="user_login"
+            password-parameter="password_login"/>
+
+        <logout logout-success-url="/login.jsp" />
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="admin" password="apass" authorities="ROLE_ADMIN, ROLE_USER" />
+                <user name="admin" password="a" authorities="ROLE_ADMIN, ROLE_USER" />
                 <user name="user" password="upass" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
