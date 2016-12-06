@@ -7,7 +7,10 @@
     <!-- Создает Spring Container, доступный всем сервлетам и фильтрам -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/application-security.xml</param-value>
+        <param-value>
+            /WEB-INF/mysql-datasource.xml
+            /WEB-INF/application-security.xml
+        </param-value>
     </context-param>
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -22,10 +25,6 @@
         <welcome-file>redirectPage.jsp</welcome-file>
     </welcome-file-list>
 
-    <error-page>
-        <error-code>403</error-code>
-        <location>/accessDenied.jsp</location>
-    </error-page>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
