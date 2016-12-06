@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Component
 @Entity
-@Table(name = "constructionmaterials", schema = "buildingonlineshop", catalog = "")
+@Table(name = "constructionmaterials", schema = "buildingonlineshop")
 public class ConstructionmaterialsEntity {
     private String productId;
     private String type;

@@ -1,17 +1,19 @@
-package ru.pinch.dao;
+package ru.pinch.dao.constmaterials;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+import ru.pinch.dao.HibernateUtil;
 import ru.pinch.model.ConstructionmaterialsEntity;
+import ru.pinch.model.PhotoconstructionmaterialsEntity;
 
 import java.util.List;
 
-public class ProductServiceImpl implements BuildingOnlineShopDataBase{
+public class BuildingOnlineShopDataBaseImpl implements BuildingOnlineShopDataBase{
 
-    Session session;
+    private Session session;
 
-    public ProductServiceImpl(){
+    public BuildingOnlineShopDataBaseImpl(){
         session  = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
     }
@@ -22,7 +24,7 @@ public class ProductServiceImpl implements BuildingOnlineShopDataBase{
     }
 
     public List<ConstructionmaterialsEntity> listProducts() {
-        List<ConstructionmaterialsEntity> result = session.createQuery("from ConstructionmaterialsEntity").list();
+        List result = session.createQuery("from ConstructionmaterialsEntity").list();
         session.getTransaction().commit();
         return result;
     }
@@ -40,6 +42,31 @@ public class ProductServiceImpl implements BuildingOnlineShopDataBase{
 
     public void deleteEntity(String id) {
         session.delete(session.get(ConstructionmaterialsEntity.class, id));
+        session.getTransaction().commit();
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    public boolean addPhoto(PhotoconstructionmaterialsEntity entity) {
+        if(entity.getProductId().equals("")){
+            return false;
+        }
+        else {
+            session.save(entity);
+            session.getTransaction().commit();
+            return true;
+        }
+    }
+
+    public List<PhotoconstructionmaterialsEntity> listPhoto() {
+        List result = session.createQuery("from PhotoconstructionmaterialsEntity ").list();
+        session.getTransaction().commit();
+        return result;
+    }
+
+    public void deletePhoto(String id) {
+        session.delete(session.get(PhotoconstructionmaterialsEntity.class, id));
         session.getTransaction().commit();
     }
 }

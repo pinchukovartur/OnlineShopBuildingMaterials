@@ -2,8 +2,10 @@ package ru.pinch;
 
 
 
+import ru.pinch.dao.userbase.UserDataBaseImpl;
 import ru.pinch.model.ConstructionmaterialsEntity;
-import ru.pinch.dao.ProductServiceImpl;
+import ru.pinch.dao.constmaterials.BuildingOnlineShopDataBaseImpl;
+import ru.pinch.model.UsersEntity;
 
 public class TestingClass {
     public static void main(String[] args) {
@@ -33,13 +35,33 @@ public class TestingClass {
         constructionmaterialsEntity2.setNumberOfPackages(9);
         constructionmaterialsEntity2.setMachineDescription("very good");
 
-        ProductServiceImpl shopDataBase = new ProductServiceImpl();
+        BuildingOnlineShopDataBaseImpl shopDataBase = new BuildingOnlineShopDataBaseImpl();
+
+        System.out.println(shopDataBase.listProducts());
         /*shopDataBase.addEntity(constructionmaterialsEntity2);*/
         /*shopDataBase.deleteEntity(shopDataBase.listProducts());*/
-        System.out.println(shopDataBase.listProducts());
+        /*System.out.println(shopDataBase.listPhoto().get(0).getProductId());*/
+
+        /*shopDataBase.addEntity(constructionmaterialsEntity);*/
 
         /*ConstructionmaterialsEntity entity = new ConstructionmaterialsEntity();
         entity.setProductId("test");
         shopDataBase.deleteEntity("test");*/
+
+        UsersEntity usersEntity = new UsersEntity();
+        usersEntity.setUsername("pinch2");
+        usersEntity.setPassword("pinch2");
+        usersEntity.setEnabled(1);
+        usersEntity.setEmail("pinch2");
+        usersEntity.setRole("ROLE_USER");
+
+
+
+        UserDataBaseImpl userDataBase = new UserDataBaseImpl();
+        /*userDataBase.addUser(usersEntity,authoritiesEntity);*/
+
+        /*System.out.println(userDataBase.listUsers());*/
+        /*System.out.println(userDataBase.listUsers());*/
+        /*System.out.println(userDataBase.addUser(usersEntity));*/
     }
 }

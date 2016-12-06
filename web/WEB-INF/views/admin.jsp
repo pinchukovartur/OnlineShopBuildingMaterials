@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <html>
 <head>
@@ -121,5 +121,29 @@
     </div>
 </div>
 
+<table class="simple-little-table" border="3">
+    <caption>User</caption>
+    <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>email</th>
+        <th>role</th>
+    </tr>
+    <%--@elvariable id="listUsers" type="java.util.List"--%>
+    <c:forEach var="elem" items="${listUsers}" varStatus="status">
+        <tr>
+            <td><c:out value="${ elem.username }"/></td>
+            <td><c:out value="${ elem.password }"/></td>
+            <td><c:out value="${ elem.email }"/></td>
+            <td><c:out value="${ elem.role }"/></td>
+        </tr>
+    </c:forEach>
+</table>
+
+<spring:form method="POST" action="uploadFile" enctype="multipart/form-data">
+     <input type="file" name="file"/>
+     <input type="text" name="fileName"/>
+     <input type="submit" value="Upload">
+</spring:form>
 </body>
 </html>
