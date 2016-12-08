@@ -10,6 +10,8 @@
 
     <properties>
         <spring-framework-version>4.1.5.RELEASE</spring-framework-version>
+        <maven-compiler-plugin-version>3.3.9</maven-compiler-plugin-version>
+        <java-version>1.8</java-version>
     </properties>
 
     <dependencies>
@@ -200,4 +202,19 @@
         </dependency>
 
     </dependencies>
+
+   <!-- <build>
+        <finalName>InternetBanking</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
 </project>

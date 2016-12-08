@@ -14,29 +14,38 @@
     <title>Admin</title>
 </head>
 <body>
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header" style="margin-left: 12%">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Строительный магазин</a>
+            <a class="navbar-brand" href="/"><local:message code="label.hardwareStore"/></a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left: 16%">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Каталог</a></li>
-                <li><a href="/">Корзина</a></li>
-                <li class="active"><a href="/admin">Личный кабинет</a></li>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" style="margin-left: 16%;">
+                <li class="active"><a href="/"><local:message code="label.catalog"/></a></li>
+                <li><a href="/"><local:message code="label.basket"/></a></li>
+                <li><a href="/admin"><local:message code="label.personalArea"/></a></li>
+                <li><a href="/j_spring_security_logout"><local:message code="label.exit"/></a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul>
+                <li><a href="?lang=en">en</a></li>
+                <li><a href="?lang=ru">ru</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 <table class="simple-little-table" border="3">
     <caption>PRODUCTS</caption>
     <tr>
@@ -135,7 +144,6 @@
             <td><c:out value="${ elem.username }"/></td>
             <td><c:out value="${ elem.password }"/></td>
             <td><c:out value="${ elem.email }"/></td>
-            <td><c:out value="${ elem.role }"/></td>
         </tr>
     </c:forEach>
 </table>

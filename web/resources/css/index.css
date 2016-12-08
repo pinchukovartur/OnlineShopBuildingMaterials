@@ -16,6 +16,7 @@ h1 {
 }
 
 .catalog {
+    border-radius: 25px;
     width: 900px;
     background: #ecf0f1;
     box-shadow: 0 0 3px #999999;
@@ -26,11 +27,12 @@ h1 {
     margin-left: 10px;
     display: inline-block;
     vertical-align: top;
-    width: 270px;
+    width: 220px;
+    height: 290px;
     margin-right: 20px;
     margin-bottom: 20px;
     text-align: center;
-    background: #909edd;
+    background: #414bbc;
     border-radius: 12px;
 }
 
@@ -39,16 +41,16 @@ h1 {
 }
 
 .images{
-    margin-top: 2%;
-    width: 250px;
+    margin-top: 5%;
+    width: 200px;
     height: 200px;
-    border-radius: 12px;
+    border-radius: 5px;
 }
 
 .navbar {
     opacity: 0.6;
     margin-bottom: 0;
-    background-color: #160995;
+    background-color: #414bbc;
     z-index: 9999;
     border: 0;
     font-size: 18px !important;
@@ -70,4 +72,14 @@ h1 {
 .navbar-default .navbar-toggle {
     border-color: transparent;
     color: #fff !important;
+}
+
+.lang_div{
+    text-align: right;
+    height: 20px;
+    background-color: #2d6ca2;
+}
+
+.lang_button{
+    color: white;
 }

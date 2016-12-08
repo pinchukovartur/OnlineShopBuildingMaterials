@@ -1,4 +1,4 @@
-package ru.pinch.model;
+package ru.pinch.entity;
 
 import org.springframework.stereotype.Component;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Component
 @Entity
 @Table(name = "constructionmaterials", schema = "buildingonlineshop")
-public class ConstructionmaterialsEntity {
+public class Material {
     private String productId;
     private String type;
     private Integer length;
@@ -157,7 +157,7 @@ public class ConstructionmaterialsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ConstructionmaterialsEntity that = (ConstructionmaterialsEntity) o;
+        Material that = (Material) o;
 
         if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;

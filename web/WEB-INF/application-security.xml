@@ -40,6 +40,6 @@
 
     </beans:bean>
 
-    <context:component-scan base-package="ru.pinch.controller"/>
+    <context:component-scan base-package="ru.pinch"/>
 
 </beans:beans>

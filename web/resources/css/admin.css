@@ -194,16 +194,3 @@ a.button7:active {
     box-shadow: 0 3px rgb(33, 147, 90) inset;
 }
 
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
-}
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #6505bc !important;
-    background-color: #fff !important;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-}

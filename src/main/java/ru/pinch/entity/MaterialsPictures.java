@@ -1,14 +1,14 @@
-package ru.pinch.model;
+package ru.pinch.entity;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "photoconstructionmaterials", schema = "buildingonlineshop", catalog = "")
-public class PhotoconstructionmaterialsEntity {
+public class MaterialsPictures {
     private String productId;
     private String photo;
-    private ConstructionmaterialsEntity constructionmaterialsByProductId;
+    private Material constructionmaterialsByProductId;
 
     @Id
     @Column(name = "ProductID", nullable = false, length = 45)
@@ -35,7 +35,7 @@ public class PhotoconstructionmaterialsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PhotoconstructionmaterialsEntity that = (PhotoconstructionmaterialsEntity) o;
+        MaterialsPictures that = (MaterialsPictures) o;
 
         if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
@@ -52,11 +52,11 @@ public class PhotoconstructionmaterialsEntity {
 
     @OneToOne
     @JoinColumn(name = "ProductID", referencedColumnName = "ProductID", nullable = false)
-    public ConstructionmaterialsEntity getConstructionmaterialsByProductId() {
+    public Material getConstructionmaterialsByProductId() {
         return constructionmaterialsByProductId;
     }
 
-    public void setConstructionmaterialsByProductId(ConstructionmaterialsEntity constructionmaterialsByProductId) {
+    public void setConstructionmaterialsByProductId(Material constructionmaterialsByProductId) {
         this.constructionmaterialsByProductId = constructionmaterialsByProductId;
     }
 }

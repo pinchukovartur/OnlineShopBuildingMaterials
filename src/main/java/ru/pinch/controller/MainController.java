@@ -1,21 +1,24 @@
 package ru.pinch.controller;
 
 
+import com.sun.xml.internal.ws.developer.Serialization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pinch.dao.constmaterials.BuildingOnlineShopDataBaseImpl;
-import ru.pinch.dao.userbase.UserDataBaseImpl;
-import ru.pinch.dto.ProductService;
-import ru.pinch.dto.ProductServiceImpl;
-import ru.pinch.model.ConstructionmaterialsEntity;
-import ru.pinch.model.UsersEntity;
+import ru.pinch.entity.Material;
+import ru.pinch.entity.Role;
+import ru.pinch.entity.User;
+import ru.pinch.service.material.MaterialService;
+import ru.pinch.service.user.UserService;
 
-import javax.print.attribute.standard.MediaSize;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,46 +27,37 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
+    public static final int ENABLED = 1;
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final int USER_ID = 1;
+
+    @Autowired
+    private MaterialService materialService;
+
+    @Autowired
+    private UserService userservice;
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView admin() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView admin(ModelAndView modelAndView) {
         String idProduct = "";
-        ProductService productService = new ProductServiceImpl();
         modelAndView.setViewName("WEB-INF/views/" + "admin");
-        modelAndView.addObject("addProduct", new ConstructionmaterialsEntity());
+        modelAndView.addObject("addProduct", new Material());
         modelAndView.addObject("delProduct", idProduct);
-        modelAndView.addObject("listProduct", productService.listProducts());
-        modelAndView.addObject("listUsers", productService.listUsers());
-        /*modelAndView.addObject("dto", productService);*/
+        modelAndView.addObject("listProduct", materialService.getMaterials());
+        modelAndView.addObject("listUsers", userservice.getUsers());
         return modelAndView;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView main() {
-        ModelAndView modelAndView = new ModelAndView();
-        BuildingOnlineShopDataBaseImpl productService = new BuildingOnlineShopDataBaseImpl();
-        modelAndView.addObject("listProduct", productService.listProducts());
+    public ModelAndView main(ModelAndView modelAndView) {
+        modelAndView.addObject("listProduct", materialService.getMaterials());
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/newProduct", method = RequestMethod.POST)
-    public ModelAndView addProduct(@ModelAttribute("addProduct") ConstructionmaterialsEntity product) {
-        BuildingOnlineShopDataBaseImpl productService = new BuildingOnlineShopDataBaseImpl();
-        productService.addEntity(product);
-        return admin();
-    }
-
-    @RequestMapping(value = "/dProduct", method = RequestMethod.POST)
-    public ModelAndView deleteContact(@ModelAttribute("idProduct") String idProduct) {
-        BuildingOnlineShopDataBaseImpl productService = new BuildingOnlineShopDataBaseImpl();
-        productService.deleteEntity(idProduct);
-        return admin();
-    }
-
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
-    public ModelAndView accessDenied(Principal user) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView accessDenied(Principal user, ModelAndView modelAndView) {
         if (user != null) {
             modelAndView.addObject("errorMsg", user.getName() + "У вас нет доступа");
         } else {
@@ -75,9 +69,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView checkUser(@RequestParam(value = "error", required = false) String error) {
-
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView checkUser(@RequestParam(value = "error", required = false) String error,
+                                  ModelAndView modelAndView) {
 
         if (error != null) {
             modelAndView.addObject("error", "Invalid username or password!");
@@ -87,42 +80,35 @@ public class MainController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView regist() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", new UsersEntity());
+    public ModelAndView regist(ModelAndView modelAndView) {
+        modelAndView.addObject("user", new User());
         modelAndView.setViewName("WEB-INF/views/" + "regist");
         return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registration(@ModelAttribute("user") UsersEntity user,
-                                     @RequestParam(value = "error", required = false) String error) {
-
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registration(@ModelAttribute("user") User user,
+                                     @RequestParam(value = "error", required = false) String error,
+                                     ModelAndView modelAndView) {
 
         if (user.getUsername().equals("") || user.getEmail().equals("") || user.getPassword().equals("")) {
             modelAndView.addObject("error", "Заполните все поля");
             modelAndView.setViewName("WEB-INF/views/" + "regist");
             return modelAndView;
-        }
-        else {
-            user.setRole("ROLE_USER");
-            user.setEnabled(1);
-            UserDataBaseImpl userDataBase = new UserDataBaseImpl();
-            userDataBase.addUser(user);
-
+        } else {
+            user.setEnabled(ENABLED);
+            user.setId(USER_ID);
+            userservice.addUser(user);
             modelAndView.setViewName("login");
             return modelAndView;
         }
     }
 
-    private static  final Logger logger = LoggerFactory.getLogger(MainController.class);
-
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody
+    public
+    @ResponseBody
     String uploadFileHandler(@RequestParam("fileName") String name,
                              @RequestParam("file") MultipartFile file) {
-
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -134,8 +120,8 @@ public class MainController {
                     dir.mkdirs();
 
                 // Create the file on server
-                System.err.println("нАЗВАНИЕ ФАЙЛА:" + name);
-                File serverFile = new File("E:\\Programs\\apache-tomcat-8.5.8\\images\\" + name);
+                logger.info("нАЗВАНИЕ ФАЙЛА:" + name);
+                File serverFile = new File("E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\images" + "image.png");
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -146,7 +132,7 @@ public class MainController {
 
                 return "You successfully uploaded file=" + name;
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
         } else {
