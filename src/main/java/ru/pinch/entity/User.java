@@ -9,7 +9,7 @@ public class User{
     private String password;
     private String email;
     private int enabled;
-    private int id;
+    /*private int role_id;*/
     private Role role;
 
     @Id
@@ -52,15 +52,15 @@ public class User{
         this.enabled = enabled;
     }
 
-    @Basic
+/*    @Basic
     @Column(name = "id_role", nullable = false)
-    public int getId() {
-        return id;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setRole_id(int id) {
+        this.role_id = id;
+    }*/
 
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
@@ -80,7 +80,9 @@ public class User{
         User that = (User) o;
 
         if (enabled != that.enabled) return false;
-        if (id != that.id) return false;
+/*
+        if (role_id != that.role_id) return false;
+*/
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
@@ -94,7 +96,9 @@ public class User{
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + enabled;
-        result = 31 * result + id;
+/*
+        result = 31 * result + role_id;
+*/
         return result;
     }
 }

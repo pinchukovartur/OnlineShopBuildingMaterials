@@ -1,7 +1,6 @@
 package ru.pinch.controller;
 
 
-import com.sun.xml.internal.ws.developer.Serialization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pinch.entity.Material;
-import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 import ru.pinch.service.material.MaterialService;
 import ru.pinch.service.user.UserService;
@@ -27,10 +25,10 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    public static final int ENABLED = 1;
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final int USER_ID = 1;
+
+    public static final int USER_ROLE_ID = 0;
+    public static final int ENABLED = 1;
 
     @Autowired
     private MaterialService materialService;
@@ -97,7 +95,7 @@ public class MainController {
             return modelAndView;
         } else {
             user.setEnabled(ENABLED);
-            user.setId(USER_ID);
+            user.setRole(userservice.getRoleByID(USER_ROLE_ID));
             userservice.addUser(user);
             modelAndView.setViewName("login");
             return modelAndView;

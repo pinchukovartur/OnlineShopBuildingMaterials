@@ -30,7 +30,6 @@ public class MaterialDAOImpl implements MaterialDAO {
     public List<Material> getMaterials() {
         openSession();
         List result = session.createQuery("from Material").list();
-        session.getTransaction().commit();
         return result;
     }
 
@@ -68,7 +67,6 @@ public class MaterialDAOImpl implements MaterialDAO {
     public List<MaterialsPictures> getPhotos() {
         openSession();
         List result = session.createQuery("from MaterialsPictures ").list();
-        session.getTransaction().commit();
         return result;
     }
 
