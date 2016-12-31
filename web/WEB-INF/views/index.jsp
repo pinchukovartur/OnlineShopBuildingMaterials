@@ -1,3 +1,4 @@
+<%@ page import="ru.pinch.service.ApplicationMailer" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,8 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css"/>
     <title>Index Page</title>
 </head>
-<div>
-
     <div class="lang_div">
         <a class="lang_button" href="?lang=en">en</a>
         <a class="lang_button" href="?lang=ru">ru</a>
@@ -39,8 +38,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-left: 16%;">
                     <li class="active"><a href="/"><local:message code="label.catalog"/></a></li>
-                    <li><a href="/"><local:message code="label.basket"/></a></li>
-                    <li><a href="/admin"><local:message code="label.personalArea"/></a></li>
+                    <li><a href="/basket"><local:message code="label.basket"/></a></li>
+                    <li><a href="/cabinet"><local:message code="label.personalArea"/></a></li>
                     <li><a href="/j_spring_security_logout"><local:message code="label.exit"/></a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
@@ -68,11 +67,12 @@
                 <div class="catalog">
                     <c:forEach var="x" items="${listProduct}" varStatus="status">
                         <div class="item">
-                            <img src="/resources/images/plywood%201.jpg" class="images">
+                            <img src="${pageContext.request.contextPath}/resources/images/plywood%201.jpg" class="images">
                             <br>
-                            <c:out value="${x.productId }"/>
-                            <br>
-                            <span style="color: orange"><c:out value="${x.price}"/> $</span>
+                                <c:out value="${x.productId }"/>
+                                <br>
+                                <span style="color: orange"><c:out value="${x.price}"/> $</span>
+                            <a href="/addtobasket/${x.productId}">Добавить в коорзину</a>
                         </div>
                     </c:forEach>
                 </div>

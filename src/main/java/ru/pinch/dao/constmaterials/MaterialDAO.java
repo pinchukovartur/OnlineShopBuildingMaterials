@@ -10,6 +10,7 @@ public interface MaterialDAO {
     List<Material> getMaterials();
     void deleteMaterials(List<Material> result);
     void deleteMaterial(String id);
+    Material getMaterialsByID(String productID);
 
 
     boolean addPhoto(MaterialsPictures entity);

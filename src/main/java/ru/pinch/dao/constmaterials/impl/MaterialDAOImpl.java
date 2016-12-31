@@ -2,6 +2,7 @@ package ru.pinch.dao.constmaterials.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.stereotype.Repository;
 import ru.pinch.dao.HibernateUtil;
@@ -49,6 +50,14 @@ public class MaterialDAOImpl implements MaterialDAO {
         openSession();
         session.delete(session.get(Material.class, id));
         session.getTransaction().commit();
+    }
+
+    public Material getMaterialsByID(String productID) {
+        openSession();
+        Query query = session.createQuery("from Material where productId = :productId");
+        query.setParameter("productId", productID);
+        List<Material> result = query.list();
+        return result.get(0);
     }
 
 

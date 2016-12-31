@@ -3,12 +3,17 @@ package ru.pinch.dao.user.impl;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.query.internal.QueryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.pinch.dao.HibernateUtil;
+import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.dao.user.UserDAO;
+import ru.pinch.entity.Basket;
+import ru.pinch.entity.Material;
 import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -59,5 +64,19 @@ public class UserDAOImpl implements UserDAO {
         Query query = session.createQuery("delete Role where id = :id");
         query.setParameter("id", id);
         session.getTransaction().commit();
+    }
+
+    public void addToBasket(Basket basket) {
+        openSession();
+        session.save(basket);
+        session.getTransaction().commit();
+    }
+
+    public List<String> getProductIDUsers(String username) {
+        openSession();
+        Query query = session.createQuery("select distinct productId from Basket where username = :username");
+        query.setParameter("username", username);
+        List<String> result = query.list();
+        return result;
     }
 }

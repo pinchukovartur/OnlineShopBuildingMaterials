@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="local" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
@@ -28,10 +29,10 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" style="margin-left: 16%;">
-                <li class="active"><a href="/"><local:message code="label.catalog"/></a></li>
+                <li><a href="/"><local:message code="label.catalog"/></a></li>
                 <li><a href="/"><local:message code="label.basket"/></a></li>
-                <li><a href="/admin"><local:message code="label.personalArea"/></a></li>
-                <li><a href="/j_spring_security_logout"><local:message code="label.exit"/></a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/admin"><local:message code="label.personalArea"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/j_spring_security_logout"><local:message code="label.exit"/></a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -46,22 +47,23 @@
         </div>
     </div>
 </nav>
+
 <table class="simple-little-table" border="3">
     <caption>PRODUCTS</caption>
     <tr>
-        <th>productId</th>
-        <th>type</th>
-        <th>length</th>
-        <th>weight</th>
-        <th>thickness</th>
-        <th>color</th>
-        <th>grade</th>
-        <th>sanded</th>
-        <th>waterResistance</th>
-        <th>price</th>
-        <th>numberOfSheets</th>
-        <th>numberOfPackages</th>
-        <th>machineDescription</th>
+        <th><local:message code="label.productId"/></th>
+        <th><local:message code="label.type"/></th>
+        <th><local:message code="label.length"/></th>
+        <th><local:message code="label.weight"/></th>
+        <th><local:message code="label.thickness"/></th>
+        <th><local:message code="label.color"/></th>
+        <th><local:message code="label.grade"/></th>
+        <th><local:message code="label.sanded"/></th>
+        <th><local:message code="label.waterResistance"/></th>
+        <th><local:message code="label.price"/></th>
+        <th><local:message code="label.numberOfSheets"/></th>
+        <th><local:message code="label.numberOfPackages"/></th>
+        <th><local:message code="label.machineDescription"/></th>
     </tr>
     <c:forEach var="elem" items="${listProduct}" varStatus="status">
         <tr>
@@ -104,7 +106,7 @@
                     NumberOfPackages: <spring:input path="numberOfPackages"/><br/>
                     MachineDescription: <spring:input path="machineDescription"/><br/>
                     Сolor: <spring:input path="color"/><br/>
-                    <spring:button>Добавить</spring:button>
+                    <spring:button class="btn btn-info btn-lg">Добавить</spring:button>
                 </spring:form>
             </div>
             <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
@@ -138,6 +140,7 @@
         <th>email</th>
         <th>role</th>
     </tr>
+
     <%--@elvariable id="listUsers" type="java.util.List"--%>
     <c:forEach var="elem" items="${listUsers}" varStatus="status">
         <tr>

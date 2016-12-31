@@ -46,4 +46,8 @@ public class MaterialServiceImpl implements MaterialService {
         shopDataBase.deleteMaterial(id);
     }
 
+    public Material getMaterialsByID(String productID) {
+        return shopDataBase.getMaterialsByID(productID);
+    }
+
 }

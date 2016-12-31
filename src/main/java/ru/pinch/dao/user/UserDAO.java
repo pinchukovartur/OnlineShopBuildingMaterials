@@ -1,5 +1,7 @@
 package ru.pinch.dao.user;
 
+import ru.pinch.entity.Basket;
+import ru.pinch.entity.Material;
 import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 
@@ -13,4 +15,7 @@ public interface UserDAO {
     void addRole(Role role);
     Role getRoleByID(int id);
     void deleteRoleByID(int id);
+
+    void addToBasket(Basket basket);
+    List<String> getProductIDUsers (String username);
 }

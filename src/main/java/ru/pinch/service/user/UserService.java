@@ -1,5 +1,7 @@
 package ru.pinch.service.user;
 
+import ru.pinch.entity.Basket;
+import ru.pinch.entity.Material;
 import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 
@@ -13,4 +15,10 @@ public interface UserService {
     void addRole(Role role);
     Role getRoleByID(int id);
     void deleteRoleByID(int id);
+
+    void addToBasket(String username, String productId);
+
+    List<Material> getUserMaterials(String username);
+
+    void buyMaterialsUser(User user, Material material);
 }

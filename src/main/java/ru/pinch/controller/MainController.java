@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class MainController {
     private MaterialService materialService;
 
     @Autowired
-    private UserService userservice;
+    private UserService userService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView modelAndView) {
@@ -43,7 +44,7 @@ public class MainController {
         modelAndView.addObject("addProduct", new Material());
         modelAndView.addObject("delProduct", idProduct);
         modelAndView.addObject("listProduct", materialService.getMaterials());
-        modelAndView.addObject("listUsers", userservice.getUsers());
+        modelAndView.addObject("listUsers", userService.getUsers());
         return modelAndView;
     }
 
@@ -95,8 +96,8 @@ public class MainController {
             return modelAndView;
         } else {
             user.setEnabled(ENABLED);
-            user.setRole(userservice.getRoleByID(USER_ROLE_ID));
-            userservice.addUser(user);
+            user.setRole(userService.getRoleByID(USER_ROLE_ID));
+            userService.addUser(user);
             modelAndView.setViewName("login");
             return modelAndView;
         }
@@ -137,5 +138,24 @@ public class MainController {
             return "You failed to upload " + name
                     + " because the file was empty.";
         }
+    }
+
+    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
+    public ModelAndView cabinet(ModelAndView modelAndView) {
+        modelAndView.setViewName("WEB-INF/views/" + "cabinet");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/basket", method = RequestMethod.GET)
+    public ModelAndView basket(ModelAndView modelAndView, Principal user) {
+        modelAndView.setViewName("WEB-INF/views/" + "basket");
+        modelAndView.addObject("basketList", userService.getUserMaterials(user.getName()));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
+    public String buyMaterial(@PathVariable("productID") String productID, Principal user) {
+        userService.buyMaterialsUser(null,materialService.getMaterialsByID(productID));
+        return "redirect:/";
     }
 }
