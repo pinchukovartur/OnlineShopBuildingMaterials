@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import org.hibernate.query.internal.QueryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.pinch.dao.HibernateUtil;
 import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.dao.user.UserDAO;
@@ -27,9 +28,14 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public boolean addUser(User user) {
-        openSession();
-        session.save(user);
-        session.getTransaction().commit();
+        try {
+            openSession();
+            session.save(user);
+            session.getTransaction().commit();
+        }
+        catch (Exception e){
+            System.err.println("ERROR ADD USER");
+        }
         return true;
     }
 
@@ -39,6 +45,20 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    public User getUserByID(String username) {
+        try {
+            openSession();
+            Query query = session.createQuery("from User where username = :username");
+            query.setParameter("username", username);
+            List<User> result = query.list();
+            return result.get(0);
+        }
+        catch (Exception e){
+            System.err.println(e);
+            return null;
+        }
+    }
+
     public void deleteUser(String id) {
         openSession();
         session.delete(session.get(User.class, id));
@@ -46,18 +66,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public void addRole(Role role) {
-        openSession();
-        session.save(role);
-        session.getTransaction().commit();
+        try {
+            openSession();
+            session.save(role);
+            session.getTransaction().commit();
+        }
+        catch (Exception e){
+            System.err.println("ERROR ADD ROLE");
+        }
     }
 
-    public Role getRoleByID(int id) {
-        openSession();
-        Query query = session.createQuery("from Role where id = :id");
-        query.setParameter("id", id);
-        Role result = (Role) query.uniqueResult();
-        return result;
-    }
 
     public void deleteRoleByID(int id) {
         openSession();

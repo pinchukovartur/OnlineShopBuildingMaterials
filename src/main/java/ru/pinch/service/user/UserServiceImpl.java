@@ -34,28 +34,36 @@ public class UserServiceImpl implements UserService{
         return userDAO.getUsers();
     }
 
+    public User getUserByID(String username) {
+        return userDAO.getUserByID(username);
+    }
+
     @Transactional
     public void deleteUser(String id) {
         userDAO.deleteUser(id);
     }
 
+    public void saveUser(String username, String password, String email) {
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setEnabled(1);
+        Role role = new Role();
+        role.setUsername(username);
+        role.setAuthority("ROLE_USER");
+        userDAO.addRole(role);
+        userDAO.addUser(user);
+    }
 
-    @Transactional
-    public void addRole(Role role) {
+
+   /* public void addRole(Role role) {
         userDAO.addRole(role);
     }
 
-
-    @Transactional
-    public Role getRoleByID(int id) {
-        return userDAO.getRoleByID(id);
-    }
-
-
-    @Transactional
     public void deleteRoleByID(int id) {
         userDAO.deleteRoleByID(id);
-    }
+    }*/
 
     public void addToBasket(String username, String productId) {
         Basket basket = new Basket();
@@ -64,7 +72,7 @@ public class UserServiceImpl implements UserService{
         userDAO.addToBasket(basket);
     }
 
-    public List<Material> getUserMaterials(String username) {
+    public List<Material> getAllTheMaterialsOfThisUser(String username) {
         List<String> result = userDAO.getProductIDUsers(username);
 
         List<Material> materialsListUser = new ArrayList<Material>();
@@ -78,6 +86,6 @@ public class UserServiceImpl implements UserService{
         ApplicationMailer mailer = new ApplicationMailer();
         String message = "Вы заказали:" + material.getProductId() + material.getType()
                             + "Стоимость:" +  material.getPrice();
-        mailer.send("Online Materials Shop", message, "pinchukovartur@gmail.com", "pinchukovartur@gmail.com");
+        mailer.send("Online Materials Shop", message,  user.getEmail());
     }
 }

@@ -3,10 +3,14 @@ package ru.pinch.service.material;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -15,39 +19,63 @@ public class MaterialServiceImpl implements MaterialService {
     @Autowired
     private MaterialDAO shopDataBase;
 
-    public MaterialServiceImpl() {
-    }
-
-    public void addMaterial(Material material) {
+    @Transactional
+    public void addMaterialInDataBase(Material material) {
         shopDataBase.addMaterial(material);
     }
 
-    public List<Material> getMaterials() {
+    @Transactional
+    public List<Material> getAllMaterialsOfTheDataBase() {
         return shopDataBase.getMaterials();
     }
 
-    public void deleteMaterials(List<Material> result) {
+    @Transactional
+    public void deleteAllMaterialsOfTheDataBase(List<Material> result) {
         shopDataBase.deleteMaterials(result);
     }
 
-    public void deleteMaterial(String id) {
+    @Transactional
+    public void deleteMaterialByIDOfTheDataBase(String id) {
         shopDataBase.deleteMaterial(id);
     }
 
-    public boolean addPhoto(MaterialsPictures materialsPictures) {
+    @Transactional
+    public boolean addPhotoInDataBase(MaterialsPictures materialsPictures) {
         return shopDataBase.addPhoto(materialsPictures);
     }
 
-    public List<MaterialsPictures> getPhotos() {
+    @Transactional
+    public List<MaterialsPictures> getAllPhotosOfTheDataBase() {
         return shopDataBase.getPhotos();
     }
 
-    public void deletePhoto(String id) {
+    @Transactional
+    public void deletePhotoByIDOfTheDataBase(String id) {
         shopDataBase.deleteMaterial(id);
     }
 
-    public Material getMaterialsByID(String productID) {
+    @Transactional
+    public Material getMaterialsByIDOfTheDataBase(String productID) {
         return shopDataBase.getMaterialsByID(productID);
     }
 
+    public boolean saveTheImageOnServer(String filename, byte[] bytes) {
+        try {
+            String rootPath = System.getProperty("catalina.properties");
+
+            File dir = new File(rootPath + File.separator + "tmpFiles");
+            if (!dir.exists())
+                dir.mkdirs();
+            File serverFile = new File("E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\images"
+                    +filename+ ".png");
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(serverFile));
+            stream.write(bytes);
+            stream.close();
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

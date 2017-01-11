@@ -10,10 +10,10 @@ import java.util.List;
 public interface UserDAO {
     boolean addUser(User user);
     List<User> getUsers();
+    User getUserByID(String username);
     void deleteUser(String id);
 
     void addRole(Role role);
-    Role getRoleByID(int id);
     void deleteRoleByID(int id);
 
     void addToBasket(Basket basket);

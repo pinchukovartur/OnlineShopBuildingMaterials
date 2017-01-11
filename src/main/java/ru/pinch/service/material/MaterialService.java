@@ -7,20 +7,22 @@ import java.util.List;
 
 public interface MaterialService {
 
-    void addMaterial(Material material);
+    void addMaterialInDataBase(Material material);
 
-    List<Material> getMaterials();
+    List<Material> getAllMaterialsOfTheDataBase();
 
-    void deleteMaterials(List<Material> result);
+    void deleteAllMaterialsOfTheDataBase(List<Material> result);
 
-    void deleteMaterial(String id);
+    void deleteMaterialByIDOfTheDataBase(String id);
 
-    boolean addPhoto(MaterialsPictures materialsPictures);
+    boolean addPhotoInDataBase(MaterialsPictures materialsPictures);
 
-    List<MaterialsPictures> getPhotos();
+    List<MaterialsPictures> getAllPhotosOfTheDataBase();
 
-    void deletePhoto(String id);
+    void deletePhotoByIDOfTheDataBase(String id);
 
-    Material getMaterialsByID(String productID);
+    Material getMaterialsByIDOfTheDataBase(String productID);
+
+    public boolean saveTheImageOnServer(String filename, byte[] bytes);
 
 }

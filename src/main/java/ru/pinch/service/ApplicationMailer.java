@@ -9,10 +9,10 @@ import java.util.Properties;
 
 public class ApplicationMailer
 {
-    private final String USER_NAME="pinchukovartur@gmail.com"; //Нужно вставить почту, от кого будет идти письмо
-    private final String PASSWORD="*your password*";
+    private final String USER_NAME = "pinchukovartur@gmail.com"; //Нужно вставить почту, от кого будет идти письмо
+    private final String PASSWORD = "9012qw9012QW";
 
-    public void send(String subject, String text, String fromEmail, String toEmail){
+    public void send(String subject, String text, String toEmail){
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -37,7 +37,6 @@ public class ApplicationMailer
             message.setSubject(subject);
             //Содержимое
             message.setText(text);
-
             //Отправляем сообщение
             Transport.send(message);
         } catch (MessagingException e) {
