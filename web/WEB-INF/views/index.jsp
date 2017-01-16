@@ -67,9 +67,11 @@
                 <div class="catalog">
                     <c:forEach var="x" items="${listProduct}" varStatus="status">
                         <div class="item">
-                            <img src="${pageContext.request.contextPath}/resources/images/plywood%201.jpg" class="images">
+<%--
+                            <img src="${pageContext.request.contextPath}/resources/images/${x.materialsPictures[0].photo}.png" class="images">
+--%>
                             <br>
-                                <c:out value="${x.productId }"/>
+                                <c:out value="${x.productId}"/>
                                 <br>
                                 <span style="color: orange"><c:out value="${x.price}"/> $</span>
                             <a href="/addtobasket/${x.productId}">Добавить в коорзину</a>

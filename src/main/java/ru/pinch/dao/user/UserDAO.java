@@ -1,7 +1,6 @@
 package ru.pinch.dao.user;
 
 import ru.pinch.entity.Basket;
-import ru.pinch.entity.Material;
 import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 

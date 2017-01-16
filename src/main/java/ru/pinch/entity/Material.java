@@ -1,10 +1,16 @@
 package ru.pinch.entity;
 
-import org.springframework.stereotype.Component;
+import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
 
-@Component
 @Entity
 @Table(name = "constructionmaterials", schema = "buildingonlineshop")
 public class Material {
@@ -21,9 +27,11 @@ public class Material {
     private Integer numberOfPackages;
     private String machineDescription;
     private String color;
+    private int idPhoto;
+    /*private List<MaterialsPictures> materialsPicturesList;*/
 
     @Id
-    @Column(name = "ProductID", nullable = false, length = 25)
+    @Column(name = "ProductID", nullable = false, length = 45)
     public String getProductId() {
         return productId;
     }
@@ -33,7 +41,7 @@ public class Material {
     }
 
     @Basic
-    @Column(name = "Type", nullable = false, length = 25)
+    @Column(name = "Type", nullable = false, length = 45)
     public String getType() {
         return type;
     }
@@ -133,7 +141,7 @@ public class Material {
     }
 
     @Basic
-    @Column(name = "MachineDescription", nullable = true, length = 255)
+    @Column(name = "MachineDescription", nullable = true, length = 45)
     public String getMachineDescription() {
         return machineDescription;
     }
@@ -143,7 +151,7 @@ public class Material {
     }
 
     @Basic
-    @Column(name = "color", nullable = true, length = 45)
+    @Column(name = "Color", nullable = true, length = 45)
     public String getColor() {
         return color;
     }
@@ -152,6 +160,25 @@ public class Material {
         this.color = color;
     }
 
+    @Basic
+    @Column(name = "id_photo", nullable = false)
+    public int getIdPhoto() {
+        return idPhoto;
+    }
+
+    public void setIdPhoto(int idPhoto) {
+        this.idPhoto = idPhoto;
+    }
+
+   /* @OneToMany(mappedBy = "material", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+        public List<MaterialsPictures> getUserList() {
+            return userList;
+        }
+
+        public void setUserList(List<User> userList) {
+            this.userList = userList;
+        }*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -159,6 +186,7 @@ public class Material {
 
         Material that = (Material) o;
 
+        if (idPhoto != that.idPhoto) return false;
         if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (length != null ? !length.equals(that.length) : that.length != null) return false;
@@ -195,6 +223,7 @@ public class Material {
         result = 31 * result + (numberOfPackages != null ? numberOfPackages.hashCode() : 0);
         result = 31 * result + (machineDescription != null ? machineDescription.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + idPhoto;
         return result;
     }
 }

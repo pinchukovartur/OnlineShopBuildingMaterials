@@ -3,18 +3,16 @@ package ru.pinch.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.entity.Material;
+import ru.pinch.entity.MaterialsPictures;
 import ru.pinch.service.material.MaterialService;
-import ru.pinch.service.user.UserService;
 
 import java.io.IOException;
-import java.security.Principal;
+import java.util.Date;
 
 @Controller
 public class MaterialsController {
@@ -34,21 +32,22 @@ public class MaterialsController {
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    String uploadFileHandler(@RequestParam("fileName") String filename,
-                             @RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("material") String material) {
+        /*if (!file.isEmpty()) {
             try {
-                byte[] bytes = file.getBytes();
-                materialService.saveTheImageOnServer(filename, bytes);
-                return "Successful";
+                Date date = new Date();
+                MaterialsPictures materialsPictures = new MaterialsPictures();
+                String imageName = date.toString().replaceAll(":",",");
+                materialService.saveTheImageOnServer(imageName, file.getBytes());
+                materialsPictures.setMaterial(materialService.getMaterialsByIDOfTheDataBase(material));
+                materialsPictures.setPhoto(imageName);
+                materialService.saveTheImageOnDataBase(materialsPictures);
+                return "redirect:/admin";
             } catch (IOException e) {
                 e.printStackTrace();
-                return "Exception";
+                return "redirect:/admin";
             }
         }
-        else return "failed";
+        else*/ return "redirect:/admin";
     }
-
 }

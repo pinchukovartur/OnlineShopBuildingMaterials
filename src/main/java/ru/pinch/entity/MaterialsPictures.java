@@ -1,26 +1,19 @@
 package ru.pinch.entity;
 
-import javax.persistence.*;
-
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "photoconstructionmaterials", schema = "buildingonlineshop", catalog = "")
 public class MaterialsPictures {
-    private String productId;
     private String photo;
-    private Material constructionmaterialsByProductId;
+    private int id_photo;
+    /*private Material material;*/
 
     @Id
-    @Column(name = "ProductID", nullable = false, length = 45)
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    @Basic
     @Column(name = "Photo", nullable = false, length = 45)
     public String getPhoto() {
         return photo;
@@ -30,6 +23,18 @@ public class MaterialsPictures {
         this.photo = photo;
     }
 
+    @Basic
+    @Column(name = "id_photo", nullable = false, length = 45)
+    public int getId_photo() {
+        return id_photo;
+    }
+
+    public void setId_photo(int id_photo) {
+        this.id_photo = id_photo;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,7 +42,6 @@ public class MaterialsPictures {
 
         MaterialsPictures that = (MaterialsPictures) o;
 
-        if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
 
         return true;
@@ -45,18 +49,6 @@ public class MaterialsPictures {
 
     @Override
     public int hashCode() {
-        int result = productId != null ? productId.hashCode() : 0;
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
-        return result;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID", nullable = false)
-    public Material getConstructionmaterialsByProductId() {
-        return constructionmaterialsByProductId;
-    }
-
-    public void setConstructionmaterialsByProductId(Material constructionmaterialsByProductId) {
-        this.constructionmaterialsByProductId = constructionmaterialsByProductId;
+        return photo != null ? photo.hashCode() : 0;
     }
 }

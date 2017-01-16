@@ -63,10 +63,11 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     public boolean addPhoto(MaterialsPictures entity) {
         openSession();
-        if(entity.getProductId().equals("")){
+        if(entity.getPhoto().equals("")){
             return false;
         }
         else {
+            System.err.println(entity.getPhoto());
             session.save(entity);
             session.getTransaction().commit();
             return true;

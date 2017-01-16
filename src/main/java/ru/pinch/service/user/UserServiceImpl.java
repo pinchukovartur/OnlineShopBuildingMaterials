@@ -1,17 +1,17 @@
 package ru.pinch.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.dao.user.UserDAO;
 import ru.pinch.entity.Basket;
-import ru.pinch.entity.Material;
 import ru.pinch.entity.Role;
 import ru.pinch.entity.User;
 import ru.pinch.service.ApplicationMailer;
 
+import ru.pinch.entity.Material;
+import ru.pinch.entity.MaterialsPictures;
 import java.util.ArrayList;
 import java.util.List;
 

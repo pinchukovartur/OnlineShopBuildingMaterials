@@ -153,8 +153,10 @@
 
 <spring:form method="POST" action="uploadFile" enctype="multipart/form-data">
      <input type="file" name="file"/>
-     <input type="text" name="fileName"/>
+     <label>Название продукта:</label>
+     <input type="text" name="material"/>
      <input type="submit" value="Upload">
 </spring:form>
+
 </body>
 </html>
