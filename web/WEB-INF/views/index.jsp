@@ -16,7 +16,7 @@
 
     <%--------------------------------------------------STYLES--------------------------------------------------------%>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/MAIN_CATALOG.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/NAVBAR.css"/>
     <%----------------------------------------------------------------------------------------------------------------%>
 
@@ -27,17 +27,24 @@
 <%------------------------------------------------------NAVBAR--------------------------------------------------------%>
 <header>
     <div class="top_header">
-        <p class="glyphicon glyphicon-envelope top_header_color margin_13">
-        <spam class="contact_s"> EfTech@mail.ru</spam></p>
+        <p class="glyphicon glyphicon-envelope top_header_color margin_left_18">
+            <spam class="contact_s"> EfTech@mail.ru</spam>
+        </p>
         <p class="glyphicon glyphicon-earphone top_header_color">
-        <spam class="contact_s"> +12 345 67 89</spam></p>
+            <spam class="contact_s"> +12 345 67 89</spam>
+        </p>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <spam class="top_header_color margin_left_18 ">
+                <local:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name}
+            </spam>
+        </c:if>
         <p class="glyphicon glyphicon-cog top_header_color"></p>
         <a class="lng_btn" href="?lang=ru">ru</a>
         <a class="lng_btn" href="?lang=en">en</a>
     </div>
 
     <nav class="navbar navbar-default">
-        <div class="container-fluid margin_13">
+        <div class="container-fluid margin_left_18">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -46,25 +53,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="<c:url value="/"/>">
                     <local:message code="label.hardwareStore"/>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" style="margin-left: 16%;">
-                    <li class="active">
-                        <a href="<c:url value="/"/>">
-                            <local:message code="label.catalog"/>
-                        </a>
-                    </li>
+                <ul class="nav navbar-nav navbar-right margin_right_18">
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <li>
                         <a href="<c:url value="/basket"/>">
                             <local:message code="label.basket"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/cabinet"/>">
-                            <local:message code="label.personalArea"/>
                         </a>
                     </li>
                     <li>
@@ -73,6 +71,20 @@
                         </a>
                     </li>
                 </ul>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <li>
+                        <a href="<c:url value="/login"/>">
+                            <local:message code="label.enter"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/registration"/>">
+                            <local:message code="label.registration"/>
+                        </a>
+                    </li>
+                    </ul>
+                </c:if>
                 <%--<form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
@@ -85,37 +97,38 @@
 </header>
 <%--------------------------------------------------------------------------------------------------------------------%>
 
+
+<%---------------------------------------------CATALOG-WINDOW---------------------------------------------------------%>
 <div class="row">
-    <div class="container">
-        <%--<div class="col-md-2">
-            <div class="">
-                <button>wwdawd</button>
-                <br>
-                <button>wwdawd</button>
-                <br>
-                <button>wwdawd</button>
-                <br>
-                <button>wwdawd</button>
-                <br>
-                <button>wwdawd</button>
-                <br>
-                <button>wwdawd</button>
-            </div>
-        </div>--%>
-        <div class=" col-md-6">
-            <div class="catalog">
-                <c:forEach var="x" items="${listProduct}" varStatus="status">
-                    <div class="item">
-                        <img src="${pageContext.request.contextPath}/resources/images/${x.materialsPicturesList[0].photo}.png"
-                             class="images">
-                        <br>
-                        <c:out value="${x.productId}"/>
-                        <br>
-                        <span style="color: orange"><c:out value="${x.price}"/> $</span>
-                        <a href="/addtobasket/${x.productId}">Добавить в коорзину</a>
-                    </div>
-                </c:forEach>
-            </div>
+    <%--<div class="col-md-2">
+    <div class="">
+        <button>wwdawd</button>
+        <br>
+        <button>wwdawd</button>
+        <br>
+        <button>wwdawd</button>
+        <br>
+        <button>wwdawd</button>
+        <br>
+        <button>wwdawd</button>
+        <br>
+        <button>wwdawd</button>
+    </div>
+</div>--%>
+    <div class=" col-md-6">
+        <div class="catalog">
+            <%--@elvariable id="listProduct" type="java.util.List"--%>
+            <c:forEach var="x" items="${listProduct}" varStatus="status">
+                <div class="item">
+                    <img src="${pageContext.request.contextPath}/resources/images/${x.materialsPicturesList[0].photo}.png"
+                         class="images">
+                    <br>
+                    <c:out value="${x.productId}"/>
+                    <br>
+                    <span style="color: orange"><c:out value="${x.price}"/> $</span>
+                    <a href="/addtobasket/${x.productId}">Добавить в коорзину</a>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>

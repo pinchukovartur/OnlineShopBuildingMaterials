@@ -7,7 +7,8 @@
     <title><local:message code="label.accessDenied"/></title>
 </head>
 <body>
-<h1><local:message code="label.accessDenied"/></h1>
-<h2>${errorMsg}</h2>
+    <h2>
+     ${errorMsg}
+    </h2>
 </body>
 </html>

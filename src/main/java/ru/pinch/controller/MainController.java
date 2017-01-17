@@ -37,7 +37,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main(ModelAndView modelAndView) {
         modelAndView.addObject("listProduct", materialService.getAllMaterialsOfTheDataBase());
-        materialService.getPDFwithMaterialsData();
+        materialService.getPDFWithMaterialsData(materialService.getAllMaterialsOfTheDataBase());
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }

@@ -2,30 +2,31 @@
     font-family: OpenSans;
     src: url(../../fonts/OpenSans.ttf);
 }
+
 body {
+    width: 100%;
     font-size: 16px;
     font-family: "PT Sans", sans-serif;
-    background-color: #9ba9dd;
+    background: lightcyan;
 }
 
-h1 {
-    margin: 0;
-    margin-bottom: 0.5em;
-    font-size: 18px;
-}
 
 /*------------top_header--------*/
 .top_header_color {
     color: white;
     margin-left: 4%;
-    font-size: 9px;
+    font-size: 11px;
 }
 .top_header {
     background: rgb(90, 146, 220);
     height: 20px;
 }
-.margin_13 {
+.margin_left_18 {
     margin-left: 18%;
+}
+
+.margin_right_18 {
+    margin-right: 18%;
 }
 .lng_btn {
     background: rgba(151, 219, 244, 0.96);

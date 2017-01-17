@@ -13,7 +13,13 @@
         <access-denied-handler error-page="/accessDenied" />
 
         <intercept-url pattern="/basket" access="isAuthenticated()" />
+        <intercept-url pattern="/addtobasket/*" access="isAuthenticated()" />
+        <intercept-url pattern="/buymaterial/*" access="isAuthenticated()" />
+
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/dProduct" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/newProduct" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/uploadFile" access="hasRole('ROLE_ADMIN')" />
 
         <form-login
             login-page="/login"
@@ -22,7 +28,7 @@
             username-parameter="user_login"
             password-parameter="password_login"/>
 
-        <logout logout-success-url="/login.jsp" />
+        <logout logout-success-url="/" />
     </http>
 
     <authentication-manager>

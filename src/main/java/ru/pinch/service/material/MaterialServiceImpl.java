@@ -1,24 +1,21 @@
 package ru.pinch.service.material;
 
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfPTable;
-import ru.pinch.entity.Material;
-import ru.pinch.entity.MaterialsPictures;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.pinch.dao.constmaterials.MaterialDAO;
+import ru.pinch.entity.Material;
+import ru.pinch.entity.MaterialsPictures;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class MaterialServiceImpl implements MaterialService {
@@ -30,28 +27,36 @@ public class MaterialServiceImpl implements MaterialService {
     public void addMaterialInDataBase(Material material) {
         shopDataBase.addMaterial(material);
     }
+
     public List<Material> getAllMaterialsOfTheDataBase() {
         return shopDataBase.getMaterials();
     }
+
     public void deleteAllMaterialsOfTheDataBase(List<Material> result) {
         shopDataBase.deleteMaterials(result);
     }
+
     public void deleteMaterialByIDOfTheDataBase(String id) {
         shopDataBase.deleteMaterial(id);
     }
+
     public boolean addPhotoInDataBase(MaterialsPictures materialsPictures) {
         return shopDataBase.addPhoto(materialsPictures);
     }
+
     public List<MaterialsPictures> getAllPhotosOfTheDataBase() {
         return shopDataBase.getPhotos();
     }
+
     public void deletePhotoByIDOfTheDataBase(String id) {
         shopDataBase.deleteMaterial(id);
     }
+
     public Material getMaterialsByIDOfTheDataBase(String productID) {
         return shopDataBase.getMaterialsByID(productID);
     }
-    public void saveTheImageOnDataBase(MaterialsPictures materialsPictures){
+
+    public void saveTheImageOnDataBase(MaterialsPictures materialsPictures) {
         shopDataBase.addPhoto(materialsPictures);
     }
 
@@ -66,22 +71,21 @@ public class MaterialServiceImpl implements MaterialService {
             stream.write(bytes);
             stream.close();
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
-    public void getPDFwithMaterialsData(){
+
+    public void getPDFWithMaterialsData(List<Material> materialList) {
         String RESULT
-                = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\test.pdf";
+                = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\test2.pdf";
 
-        Document document = new Document();
-
+        Document document = new Document(PageSize.A5.rotate());
+        document.open();
         try {
             PdfWriter.getInstance(document, new FileOutputStream(RESULT));
             document.open();
-            PdfPTable table = new PdfPTable(3);
-            // the cell object
+            /*// the cell object
             PdfPCell cell;
             // we add a cell with colspan 3
             cell = new PdfPCell(new Phrase("Cell with colspan 3"));
@@ -89,18 +93,34 @@ public class MaterialServiceImpl implements MaterialService {
             table.addCell(cell);
             // now we add a cell with rowspan 2
             cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
-            cell.setRowspan(2);
-            table.addCell(cell);
-            // we add the four remaining cells with addCell()
-            table.addCell("row 1; cell 1");
-            table.addCell("row 1; cell 2");
-            table.addCell("row 2; cell 1");
-            table.addCell("row 2; cell 2");
-            document.add(table);
+            cell.setRowspan(2);*/
+            /*table.addCell(cell);*/
+
+            for (int i = 0; i < materialList.size(); i++) {
+                document.newPage();
+                PdfPTable table = new PdfPTable(5);
+
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(String.valueOf(materialList.get(i).getPrice()));
+                table.addCell(String.valueOf(materialList.get(i).getLength()));
+                table.addCell(String.valueOf(materialList.get(i).getWeight()));
+                table.addCell(materialList.get(i).getType());
+/*                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());
+                table.addCell(materialList.get(i).getProductId());*/
+                document.add(table);
+
+            }
         } catch (DocumentException e) {
             e.printStackTrace();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         document.close();

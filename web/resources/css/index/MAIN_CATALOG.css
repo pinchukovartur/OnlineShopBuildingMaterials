@@ -1,15 +1,14 @@
-
-
-.container {
-    width: 900px;
-    margin: 20px auto;
+.catalog {
+    margin-top: 3%;
+    margin-left: 50%;
+    border-radius: 25px;
+    width: 770px;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0 0 3px #999999;
 }
 
-.catalog {
-    border-radius: 25px;
-    width: 900px;
-    background: #ecf0f1;
-    box-shadow: 0 0 3px #999999;
+.row{
+    margin: 0;
 }
 
 .item {

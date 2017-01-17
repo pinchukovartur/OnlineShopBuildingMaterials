@@ -106,7 +106,6 @@
                     NumberOfPackages: <spring:input path="numberOfPackages"/><br/>
                     MachineDescription: <spring:input path="machineDescription"/><br/>
                     Сolor: <spring:input path="color"/><br/>
-                    Photo_id: <spring:input path="idPhoto"/><br/>
                     <spring:button class="btn btn-info btn-lg">Добавить</spring:button>
                 </spring:form>
             </div>
