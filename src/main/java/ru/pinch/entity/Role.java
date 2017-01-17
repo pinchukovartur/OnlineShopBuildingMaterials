@@ -15,7 +15,6 @@ import java.util.List;
 public class Role {
     private String username;
     private String authority;
-    private Material material;
 
     @Id
     @Column(name = "username", nullable = false, length = 45)

@@ -10,6 +10,7 @@ import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
@@ -68,6 +69,10 @@ public class MaterialDAOImpl implements MaterialDAO {
         }
         else {
             System.err.println(entity.getPhoto());
+            System.err.println(entity.getMaterial().getProductId());
+            System.err.println(entity.getMaterial().getType());
+            /*System.err.println(entity.getMaterial().getIdPhoto());*/
+
             session.save(entity);
             session.getTransaction().commit();
             return true;

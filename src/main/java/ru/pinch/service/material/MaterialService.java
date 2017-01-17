@@ -15,5 +15,6 @@ public interface MaterialService {
     Material getMaterialsByIDOfTheDataBase(String productID);
     boolean saveTheImageOnServer(String filename, byte[] bytes);
     void saveTheImageOnDataBase(MaterialsPictures materialsPictures);
+    void getPDFwithMaterialsData();
 
 }

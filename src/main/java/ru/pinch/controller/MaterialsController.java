@@ -33,12 +33,13 @@ public class MaterialsController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("material") String material) {
-        /*if (!file.isEmpty()) {
+        if (!file.isEmpty()) {
             try {
                 Date date = new Date();
                 MaterialsPictures materialsPictures = new MaterialsPictures();
                 String imageName = date.toString().replaceAll(":",",");
                 materialService.saveTheImageOnServer(imageName, file.getBytes());
+
                 materialsPictures.setMaterial(materialService.getMaterialsByIDOfTheDataBase(material));
                 materialsPictures.setPhoto(imageName);
                 materialService.saveTheImageOnDataBase(materialsPictures);
@@ -48,6 +49,6 @@ public class MaterialsController {
                 return "redirect:/admin";
             }
         }
-        else*/ return "redirect:/admin";
+        else return "redirect:/admin";
     }
 }

@@ -11,6 +11,7 @@ import ru.pinch.entity.User;
 import ru.pinch.service.material.MaterialService;
 import ru.pinch.service.user.UserService;
 
+import java.io.File;
 import java.security.Principal;
 
 @Controller
@@ -36,6 +37,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main(ModelAndView modelAndView) {
         modelAndView.addObject("listProduct", materialService.getAllMaterialsOfTheDataBase());
+        materialService.getPDFwithMaterialsData();
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }

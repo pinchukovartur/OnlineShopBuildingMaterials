@@ -1,8 +1,8 @@
 package ru.pinch.entity;
 
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +28,7 @@ public class Material {
     private String machineDescription;
     private String color;
     private int idPhoto;
-    /*private List<MaterialsPictures> materialsPicturesList;*/
+    private List<MaterialsPictures> materialsPicturesList;
 
     @Id
     @Column(name = "ProductID", nullable = false, length = 45)
@@ -170,14 +170,14 @@ public class Material {
         this.idPhoto = idPhoto;
     }
 
-   /* @OneToMany(mappedBy = "material", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-        public List<MaterialsPictures> getUserList() {
-            return userList;
-        }
+    @OneToMany(mappedBy = "material", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    public List<MaterialsPictures> getMaterialsPicturesList() {
+        return materialsPicturesList;
+    }
 
-        public void setUserList(List<User> userList) {
-            this.userList = userList;
-        }*/
+    public void setMaterialsPicturesList(List<MaterialsPictures> materialsPicturesList) {
+        this.materialsPicturesList = materialsPicturesList;
+    }
 
     @Override
     public boolean equals(Object o) {
