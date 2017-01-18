@@ -43,13 +43,13 @@ CREATE TABLE `buildingonlineshop`.`basket` (
   PRIMARY KEY (`ProductID`));
   
   CREATE TABLE `buildingonlineshop`.`photoconstructionmaterials` (
-  `id_photo` int  NOT NULL,
+  `id_photo` varchar(45)  NOT NULL,
   `Photo` varchar(45) NOT NULL,
   PRIMARY KEY (`Photo`));
   
   CREATE INDEX `Photo` ON `buildingonlineshop`.`constructionmaterials` (`id_photo`);
   
   ALTER TABLE `buildingonlineshop`.`photoconstructionmaterials` ADD CONSTRAINT `materials_fk1` FOREIGN KEY (`id_photo`) 
-  REFERENCES `buildingonlineshop`.`constructionmaterials`(`id_photo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  REFERENCES `buildingonlineshop`.`constructionmaterials`(`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 

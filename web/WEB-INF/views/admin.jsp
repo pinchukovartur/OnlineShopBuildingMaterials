@@ -65,6 +65,7 @@
         <th><local:message code="label.numberOfPackages"/></th>
         <th><local:message code="label.machineDescription"/></th>
     </tr>
+    <%--@elvariable id="listProduct" type="java.util.List"--%>
     <c:forEach var="elem" items="${listProduct}" varStatus="status">
         <tr>
             <td><c:out value="${ elem.productId }"/></td>

@@ -2,7 +2,10 @@ package ru.pinch.service.material;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,34 +81,33 @@ public class MaterialServiceImpl implements MaterialService {
 
     public void getPDFWithMaterialsData(List<Material> materialList) {
         String RESULT
-                = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\test2.pdf";
+                = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\test.pdf";
 
-        Document document = new Document(PageSize.A5.rotate());
+        Document document = new Document(PageSize.A4.rotate());
         document.open();
         try {
             PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+            System.out.println(new FileOutputStream(RESULT));
             document.open();
-            /*// the cell object
-            PdfPCell cell;
-            // we add a cell with colspan 3
-            cell = new PdfPCell(new Phrase("Cell with colspan 3"));
-            cell.setColspan(3);
-            table.addCell(cell);
-            // now we add a cell with rowspan 2
-            cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
-            cell.setRowspan(2);*/
-            /*table.addCell(cell);*/
+            PdfPTable table = new PdfPTable(5);
+
+            //подключаем файл шрифта, который поддерживает кириллицу
+            BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font = new Font(bf);
+
+            table.addCell(new Paragraph("Наименование", font));
+            table.addCell(new Paragraph("Цена", font));
+            table.addCell(new Paragraph("Высота", font));
+            table.addCell(new Paragraph("Ширина", font));
+            table.addCell(new Paragraph("Тип", font));
 
             for (int i = 0; i < materialList.size(); i++) {
-                document.newPage();
-                PdfPTable table = new PdfPTable(5);
-
                 table.addCell(materialList.get(i).getProductId());
                 table.addCell(String.valueOf(materialList.get(i).getPrice()));
                 table.addCell(String.valueOf(materialList.get(i).getLength()));
                 table.addCell(String.valueOf(materialList.get(i).getWeight()));
                 table.addCell(materialList.get(i).getType());
-/*                table.addCell(materialList.get(i).getProductId());
+              /*table.addCell(materialList.get(i).getProductId());
                 table.addCell(materialList.get(i).getProductId());
                 table.addCell(materialList.get(i).getProductId());
                 table.addCell(materialList.get(i).getProductId());
@@ -115,9 +117,8 @@ public class MaterialServiceImpl implements MaterialService {
                 table.addCell(materialList.get(i).getProductId());
                 table.addCell(materialList.get(i).getProductId());
                 table.addCell(materialList.get(i).getProductId());*/
-                document.add(table);
-
             }
+            document.add(table);
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {
