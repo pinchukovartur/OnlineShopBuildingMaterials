@@ -25,10 +25,8 @@ public class MainController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView modelAndView) {
-        String idProduct = "";
         modelAndView.setViewName("WEB-INF/views/" + "admin");
         modelAndView.addObject("addProduct", new Material());
-        modelAndView.addObject("delProduct", idProduct);
         modelAndView.addObject("listProduct", materialService.getAllMaterialsOfTheDataBase());
         modelAndView.addObject("listUsers", userService.getUsers());
         return modelAndView;
@@ -38,7 +36,7 @@ public class MainController {
     public ModelAndView main(ModelAndView modelAndView) {
         modelAndView.addObject("listProduct", materialService.getAllMaterialsOfTheDataBase());
         materialService.getPDFWithMaterialsData(materialService.getAllMaterialsOfTheDataBase());
-        modelAndView.setViewName("WEB-INF/views/" + "index");
+        modelAndView.setViewName("WEB-INF/views/" + "ru_all_iphone");
         return modelAndView;
     }
 

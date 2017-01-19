@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="local" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -26,6 +27,12 @@
 
 <%------------------------------------------------------NAVBAR--------------------------------------------------------%>
 <header>
+
+    <sec:authorize access="hasRole('ROLE_USER')">
+        бля бля бля
+    </sec:authorize>
+
+
     <div class="top_header">
         <p class="glyphicon glyphicon-envelope top_header_color margin_left_18">
             <spam class="contact_s"> EfTech@mail.ru</spam>

@@ -3,6 +3,7 @@ package ru.pinch.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +26,8 @@ public class MaterialsController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/dProduct", method = RequestMethod.POST)
-    public String deleteContact(@ModelAttribute("idProduct") String idProduct) {
+    @RequestMapping(value = "/dProduct/{id}", method = RequestMethod.GET)
+    public String deleteContact(@PathVariable("id") String idProduct) {
         materialService.deleteMaterialByIDOfTheDataBase(idProduct);
         return "redirect:/admin";
     }
