@@ -1,143 +1,195 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="local" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <%--------------------------------------------------LIBRARIES-----------------------------------------------------%>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="Apple, IPhone 5 , IPhone 6 ">
+    <meta name="robots" content="all">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/css/bootstrap.css">
-    <%----------------------------------------------------------------------------------------------------------------%>
+    <title>Apple, IPhone</title>
 
-    <%--------------------------------------------------STYLES--------------------------------------------------------%>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/MAIN_CATALOG.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/NAVBAR.css"/>
-    <%----------------------------------------------------------------------------------------------------------------%>
+    <!-- Customizable CSS -->
+    <link rel="stylesheet" href="resources/assets/css/main.css">
+    <link rel="stylesheet" href="resources/assets/css/green.css">
+    <link rel="stylesheet" href="resources/assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="resources/assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
 
-    <title>EfTech</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/ico/eftech.ico" type="image/x-icon">
+    <!-- Demo Purpose Only. Should be removed in production -->
+    <link rel="stylesheet" href="resources/assets/css/config.css">
+
+    <link href="resources/assets/css/green.css" rel="alternate stylesheet" title="Green color">
+    <link href="resources/assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
+    <link href="resources/assets/css/red.css" rel="alternate stylesheet" title="Red color">
+    <link href="resources/assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
+    <link href="resources/assets/css/navy.css" rel="alternate stylesheet" title="Navy color">
+    <link href="resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
+    <!-- Demo Purpose Only. Should be removed in production : END -->
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Icons/Glyphs -->
+    <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="resources/assets/images/favicon.ico">
+    <script src="resources/assets/js/html5shiv.js"></script>
+    <script src="resources/assets/js/respond.min.js"></script>
 </head>
+<body>
 
-<%------------------------------------------------------NAVBAR--------------------------------------------------------%>
-<header>
+<div class="wrapper">
 
-    <sec:authorize access="hasRole('ROLE_USER')">
-        бля бля бля
-    </sec:authorize>
+    <%@include file="includes/nav.jsp" %>
+    <%@include file="includes/header.jsp" %>
 
+    <div class="container">
 
-    <div class="top_header">
-        <p class="glyphicon glyphicon-envelope top_header_color margin_left_18">
-            <spam class="contact_s"> EfTech@mail.ru</spam>
-        </p>
-        <p class="glyphicon glyphicon-earphone top_header_color">
-            <spam class="contact_s"> +12 345 67 89</spam>
-        </p>
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <spam class="top_header_color margin_left_18 ">
-                <local:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name}
-            </spam>
-        </c:if>
-        <p class="glyphicon glyphicon-cog top_header_color"></p>
-        <a class="lng_btn" href="?lang=ru">ru</a>
-        <a class="lng_btn" href="?lang=en">en</a>
-    </div>
-
-    <nav class="navbar navbar-default">
-        <div class="container-fluid margin_left_18">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<c:url value="/"/>">
-                    <local:message code="label.hardwareStore"/>
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right margin_right_18">
-                    <c:if test="${pageContext.request.userPrincipal.name != null}">
-                    <li>
-                        <a href="<c:url value="/basket"/>">
-                            <local:message code="label.basket"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/j_spring_security_logout"/>">
-                            <local:message code="label.exit"/>
-                        </a>
-                    </li>
-                </ul>
-                </c:if>
-                <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <li>
-                        <a href="<c:url value="/login"/>">
-                            <local:message code="label.enter"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/registration"/>">
-                            <local:message code="label.registration"/>
-                        </a>
-                    </li>
+        <div class="col-xs-12 col-sm-4 col-md-3 sidemenu-holder">
+            <div class="side-menu animate-dropdown">
+                <div class="head"><i class="fa fa-list"></i> Разделы</div>
+                <nav class="yamm megamenu-horizontal" role="navigation">
+                    <ul class="nav">
+                        <li><a href="/1">Станки</a></li>
+                        <li><a href="#">Еще что нить</a></li>
                     </ul>
-                </c:if>
-                <%--<form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>--%>
+                </nav>
             </div>
         </div>
-    </nav>
-</header>
-<%--------------------------------------------------------------------------------------------------------------------%>
 
+        <div class="col-xs-12 col-sm-8 col-md-9 homebanner-holder">
+            <div id="hero">
+                <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
 
-<%---------------------------------------------CATALOG-WINDOW---------------------------------------------------------%>
-<div class="row">
-    <%--<div class="col-md-2">
-    <div class="">
-        <button>wwdawd</button>
-        <br>
-        <button>wwdawd</button>
-        <br>
-        <button>wwdawd</button>
-        <br>
-        <button>wwdawd</button>
-        <br>
-        <button>wwdawd</button>
-        <br>
-        <button>wwdawd</button>
-    </div>
-</div>--%>
-    <div class=" col-md-6">
-        <div class="catalog">
-            <%--@elvariable id="listProduct" type="java.util.List"--%>
-            <c:forEach var="x" items="${listProduct}" varStatus="status">
-                <div class="item">
-                    <img src="${pageContext.request.contextPath}/resources/images/${x.materialsPicturesList[0].photo}.png"
-                         class="images">
-                    <br>
-                    <c:out value="${x.productId}"/>
-                    <br>
-                    <span style="color: orange"><c:out value="${x.price}"/> $</span>
-                    <a href="/addtobasket/${x.productId}">Добавить в коорзину</a>
+                    <div class="item" style="background-image: url(/resources/jpg/EfTech-1530.jpg);">
+                        <div class="container-fluid">
+                            <div class="caption vertical-center text-left">
+                                <div class="big-text fadeInDown-1">
+                                    <span class="big"><span class="sign"></span></span>EfTech-1530
+                                </div>
+                                <div class="excerpt fadeInDown-2">
+                                    <br>Stanochek<br>
+                                </div>
+                                <div class="small fadeInDown-2">
+                                    RU
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(/resources/jpg/MP7-30.jpg);">
+                        <div class="container-fluid">
+                            <div class="caption vertical-center text-left">
+                                <div class="big-text fadeInDown-1">
+                                    <span class="big"><span class="sign"></span> </span>MP7-30
+                                </div>
+
+                                <div class="excerpt fadeInDown-2">
+                                    <br>sTANOCHEK<br>
+                                </div>
+                                <div class="small fadeInDown-2">
+                                    BY
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item" style="background-image: url(/resources/jpg/OMNI6090.jpg);">
+                        <div class="container-fluid">
+                            <div class="caption vertical-center text-left">
+                                <div class="big-text fadeInDown-1">
+                                    <span class="big"><span class="sign"></span></span>OMNI6090
+                                </div>
+
+                                <div class="excerpt fadeInDown-2">
+                                    <br>sTANOchka<br>
+                                </div>
+                                <div class="small fadeInDown-2">
+                                    CH
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </c:forEach>
-        </div>
-    </div>
-</div>
+            </div>
+
+
+            <section id="top-brands" class="wow fadeInUp">
+                <div class="container">
+                    <div class="carousel-holder">
+
+                        <div class="title-nav">
+                            <h1>Top Brands</h1>
+                            <div class="nav-holder">
+                                <a href="#prev" data-target="#owl-brands"
+                                   class="slider-prev btn-prev fa fa-angle-left"></a>
+                                <a href="#next" data-target="#owl-brands"
+                                   class="slider-next btn-next fa fa-angle-right"></a>
+                            </div>
+                        </div>
+                        <div id="owl-brands" class="owl-carousel brands-carousel">
+                            <div class="carousel-item">
+                                <img alt="" src="resources/jpg/000.jpg"/>
+                            </div>
+                            <div class="carousel-item">
+                                <img alt="" src="resources/jpg/Akor-1530.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <%@include file="includes/footer.jsp" %>
+
+                <script src="resources/assets/js/jquery-1.10.2.min.js"></script>
+                <script src="resources/assets/js/jquery-migrate-1.2.1.js"></script>
+                <script src="resources/assets/js/bootstrap.min.js"></script>
+                <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+                <script src="resources/assets/js/gmap3.min.js"></script>
+                <script src="resources/assets/js/bootstrap-hover-dropdown.min.js"></script>
+                <script src="resources/assets/js/owl.carousel.min.js"></script>
+                <script src="resources/assets/js/css_browser_selector.min.js"></script>
+                <script src="resources/assets/js/echo.min.js"></script>
+                <script src="resources/assets/js/jquery.easing-1.3.min.js"></script>
+                <script src="resources/assets/js/bootstrap-slider.min.js"></script>
+                <script src="resources/assets/js/jquery.raty.min.js"></script>
+                <script src="resources/assets/js/jquery.prettyPhoto.min.js"></script>
+                <script src="resources/assets/js/jquery.customSelect.min.js"></script>
+                <script src="resources/assets/js/wow.min.js"></script>
+                <script src="resources/assets/js/scripts.js"></script>
+
+                <!-- For demo purposes â can be removed on production -->
+
+                <script src="resources/assets/switchstylesheet/switchstylesheet.js"></script>
+
+                <script>
+                    $(document).ready(function () {
+                        $(".changecolor").switchstylesheet({seperator: "color"});
+                        $('.show-theme-options').click(function () {
+                            $(this).parent().toggleClass('open');
+                            return false;
+                        });
+                    });
+
+                    $(window).bind("load", function () {
+                        $('.show-theme-options').delay(2000).trigger('click');
+                    });
+                </script>
+                <!-- For demo purposes â can be removed on production : End -->
+
+                <script src="http://w.sharethis.com/button/buttons.js"></script>
+
 </body>
 </html>

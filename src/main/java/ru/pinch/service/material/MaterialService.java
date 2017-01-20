@@ -16,5 +16,6 @@ public interface MaterialService {
     boolean saveTheImageOnServer(String filename, byte[] bytes);
     void saveTheImageOnDataBase(MaterialsPictures materialsPictures);
     void getPDFWithMaterialsData(List<Material> materialList);
-
+    List<Material> getListMaterialsOnPage(int pageNumber, int amountOnThePage);
+    Integer getNumberPages(int amountOnThePage);
 }

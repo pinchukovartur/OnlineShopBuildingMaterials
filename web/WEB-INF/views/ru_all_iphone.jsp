@@ -63,9 +63,9 @@
         <!-- ============================================================= TOP NAVIGATION ============================================================= -->
 
 <!-- ============================================================= TOP NAVIGATION ============================================================= -->
-<%@include file="in_iphone/nav.jsp" %>        
+<%@include file="includes/nav.jsp" %>
 <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->       <!-- ============================================================= HEADER ============================================================= -->
-<%@include file="in_iphone/header.jsp" %>
+<%@include file="includes/header.jsp" %>
 <!-- ============================================================= HEADER : END ============================================================= --><div class="animate-dropdown"><!-- ========================================= BREADCRUMB ========================================= -->
   
         
@@ -84,7 +84,7 @@
                         <li><a href="#">CPUs, Processors</a></li>
                     </ul>-->
                 <!--</li>-->
-                      <%@include file="in_iphone/dropdown le-dropdown.jsp" %>
+                      <%@include file="includes/dropdown le-dropdown.jsp" %>
 
                 <li class="breadcrumb-nav-holder"> 
                     <ul>
@@ -876,12 +876,6 @@
                 
                 <div class="product-grid-holder">
                     <div class="row no-margin">
-                       
-                
-                        
-
-          <!------------***************--------------**********-->   
-          
                                 <c:forEach items="${listProduct}" var="iphone">
                         <div class="col-xs-12 col-sm-4 no-margin product-item-holder hover">
                             <div class="product-item">
@@ -892,81 +886,46 @@
                                     <img alt="" src="resources/assets/images/blank.gif" data-echo="resources/assets/images/products/${iphone.productId}" width="246" height="186" />
                                 </div>
                                 <div class="body">
-                                    <!--<div class="label-discount green">-10 % sale</div>-->
                                     <div class="title">
                                         <a href="iphone-${iphone.productId}.htm">${iphone.productId} ${iphone.productId}</a>
                                     </div>
                                     <div class="brand">${iphone.type} </div>
-                                    <div class="brand">X*Y*Z: </div>
-                                 
                                 </div>
-<!--                                <div class="prices">
+                               <div class="prices">
                                     <div class="price-prev">${iphone.price}</div>
-                                    <div class="price-current pull-right">$1199.00</div>
-                                </div>-->
+                                </div>
                                 <div class="hover-area">
                                     <div class="add-cart-button">
                                         <a href="add-product-to-customer-basket.htm?id=${iphone.productId}" class="le-button">в корзину</a>
                                     </div>
                                     <div class="wish-compare">
-                                        <!--<a class="btn-add-to-wishlist" href="add-product-to-wish-list.htm?id=${iphone.productId}">в понравившиеся</a>-->
                                         <a class="btn-add-to-compare" href="add-product-to-compare-list.htm?id=${iphone.productId}">сравнить</a>
                                     </div>
                                 </div>
-                                
-                                
-                            </div><!-- /.product-item -->
-                        </div><!-- /.product-item-holder -->
+                            </div>
+                        </div>
                                 </c:forEach>
-                        
- <!----------------------End ----------------->
-                        
-                        
-                        
-  
+                    </div>
+                </div>
 
 
-                    </div><!-- /.row -->
-                </div><!-- /.product-grid-holder -->
-                
                 <div class="pagination-holder">
                     <div class="row">
                         
                         <div class="col-xs-12 col-sm-6 text-left">
                             <ul class="pagination ">  
                                
-                                <c:forEach var="i" begin="1" end="${kol_vo_page}">
-                                                <c:choose>
-                                                    <c:when test="${i == page}">
-                                                        <li class="current" ><a href="iphones_from_any_page.htm?page_nomber=${i}"><c:out value="${i}"/></a></li>
-                                                    </c:when>                                                  
-                                                    <c:otherwise>
-                                                        <li><a href="iphones_from_any_page?page_nomber=${i}"><c:out value="${i}"/></a></li>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                     
-                                </c:forEach>   
-                                
-<!--                                <li class="current" ><a href="index.htm?page=1">1</a></li>
-                                <li><a href="index.htm?page=2">2</a></li>
-                                <li><a href="index.htm?page=3">3</a></li>
-                                <li><a href="index.htm?page=4">4</a></li>
-                                <li><a href="index.htm?page=5">5</a></li>-->
-                                <!--<li><a href="#">next</a></li>-->
+                                <c:forEach var="i" begin="1" end="${numberOfPages}">
+                                    <li class="current">
+                                    <li><a href="/${i}">${i}</a></li>
+                                </c:forEach>
                             </ul>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="result-counter">
-                                tt<!--Показано <span> ${kol_vo_on_page*page_nomber-kol_vo_on_page+1} - ${kol_vo_on_page*page_nomber} </span> из <span>${kol_vo_prod}</span> найденых.-->
-                            </div>
-                        </div>
-
                     </div> 
-                            <!--/.row--> 
+
                 </div>
-                <!-- /.pagination-holder -->
-            </div><!-- /.products-grid #grid-view -->
+            </div>
 
             <div id="list-view" class="products-grid fade tab-pane ">
                 <div class="products-list">
@@ -974,7 +933,7 @@
                     
        
                     
-                    <c:forEach items="${listIphone}" var="iphone">
+                    <c:forEach items="${listProduct}" var="iphone">
                         
                   
                     <div class="product-item product-item-holder">
@@ -983,127 +942,60 @@
                         <div class="row">
                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                 <div class="image">
+<%--
                                     <img alt="" src="resources/assets/images/blank.gif" data-echo="resources/assets/images/products/${iphone.photo1}"  width="246" height="186"/>
+--%>
                                 </div>
                             </div><!-- /.image-holder -->
                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
                                 <div class="body">
                                     <div class="label-discount green">-10% sale</div>
                                     <div class="title">
-                                        <a href="iphone-${iphone.id}.htm">${iphone.manufacturer} ${iphone.model}</a>
+                                        <a href="iphone-${iphone.productId}.htm">${iphone.productId} ${iphone.productId}</a>
                                     </div>
-                                        <div class="brand">${iphone.year}
+                                        <div class="brand">${iphone.productId}
                                         <br> X*Y*Z: 
                                         </div>
                                         <!--<div class="brand"></div>-->
                                     <div class="excerpt">
-                                        <p>${iphone.description}</p>
+                                        <p>${iphone.productId}</p>
                                     </div>
                                     <div class="addto-compare">
-                                        <a class="btn-add-to-compare" href="add-product-to-compare-list.htm?id=${iphone.id}">add to compare list</a>
+                                        <a class="btn-add-to-compare" href="add-product-to-compare-list.htm?id=${iphone.productId}">add to compare list</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="no-margin col-xs-12 col-sm-3 price-area">
                                 <div class="right-clmn">
-<!--                                    <div class="price-current">$1199.00</div>
-                                    <div class="price-prev">$1399.00</div>-->
+
                                     <div class="availability"><label>availability:</label><span class="available">  in stock</span></div>
-                                    <a class="le-button" href="add-product-to-customer-basket.htm?id=${iphone.id}">add to cart</a>
-                                    <a class="btn-add-to-wishlist" href="add-product-to-wish-list.htm?id=${iphone.id}">add to wishlist</a>
+                                    <a class="le-button" href="add-product-to-customer-basket.htm?id=${iphone.productId}">add to cart</a>
+                                    <a class="btn-add-to-wishlist" href="add-product-to-wish-list.htm?id=${iphone.productId}">add to wishlist</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                      </c:forEach> 
-
-                    
+                      </c:forEach>
                     </div>
                 <!-- /.products-list -->
-                    
-         
-
             </div>
             <!-- /.products-grid #list-view -->
-
         </div><!-- /.tab-content -->
     </div><!-- /.grid-list-products -->
-
-</section><!-- /#gaming -->            
-        </div><!-- /.col -->
-        <!-- ========================================= CONTENT : END ========================================= -->    
-    </div><!-- /.container -->
-    
-    
-    
-    
-    
-    
-    
-</section><!-- /#category-grid -->      <!-- ============================================================= FOOTER ============================================================= -->
-
-
-<!--f-->
-
-
-<%@include file="in_iphone/footer.jsp" %>
-
-
-<!-- ============================================================= FOOTER : END ============================================================= -->   </div><!-- /.wrapper -->
-
-    <!-- For demo purposes â can be removed on production -->
-    
-<!--    <div class="config open">
-        <div class="config-options">
-            <h4>Pages</h4>
-            <ul class="list-unstyled animate-dropdown">
-                <li class="dropdown">
-                    <button class="dropdown-toggle btn le-button btn-block" data-toggle="dropdown">View Pages</button>
-                    <ul class="dropdown-menu">
-                                                <li><a href="#">Home</a></li>
-                                                <li><a href="#">Home Alt</a></li>
-                                                <li><a href="category-grid.html">Category - Grid/List</a></li>
-                                                <li><a href="category-grid-2.html">Category 2 - Grid/List</a></li>
-                                                <li><a href="single-product.html">Single Product</a></li>
-                                                <li><a href="single-product-sidebar.html">Single Product with Sidebar</a></li>
-                                                <li><a href="cart.html">Shopping Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="#">About Us</a></li>
-                                                <li><a href="#">Contact Us</a></li>
-                                                <li><a href="#">Blog</a></li>
-                                                <li><a href="#">Blog Full Width</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="faq.html">FAQ</a></li>
-                                                <li><a href="terms.html">Terms & Conditions</a></li>
-                                                <li><a href="authentication.html">Login/Register</a></li>
-                                                <li><a href="404.html">404</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="compare.html">Product Comparison</a></li>
-                                                <li><a href="track-your-order.html">Track your Order</a></li>
-                                            </ul>   
-                </li>
-            </ul>
-            <h4>Header Styles</h4>
-            <ul class="list-unstyled">
-                <li><a href="category-grid.html&amp;style=alt1">Header 1</a></li>
-                <li><a href="category-grid.html&amp;style=alt">Header 2</a></li>
-            </ul>
-            <h4>Colors</h4>
-            <ul class="list-unstyled">
-                <li><a class="changecolor green-text" href="#" title="Green color">Green</a></li>
-                <li><a class="changecolor blue-text" href="#" title="Blue color">Blue</a></li>
-                <li><a class="changecolor red-text" href="#" title="Red color">Red</a></li>
-                <li><a class="changecolor orange-text" href="#" title="Orange color">Orange</a></li>
-                <li><a class="changecolor navy-text" href="#" title="Navy color">Navy</a></li>
-                <li><a class="changecolor dark-green-text" href="#" title="Darkgreen color">Dark Green</a></li>
-            </ul>
+</section>
         </div>
-        <a class="show-theme-options" href="#"><i class="fa fa-wrench"></i></a>
-    </div>-->
-    <!-- For demo purposes â can be removed on production : End -->
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</section>
 
-    <!-- JavaScripts placed at the end of the document so the pages load faster -->
+<%@include file="includes/footer.jsp" %>
     <script src="resources/assets/js/jquery-1.10.2.min.js"></script>
     <script src="resources/assets/js/jquery-migrate-1.2.1.js"></script>
     <script src="resources/assets/js/bootstrap.min.js"></script>

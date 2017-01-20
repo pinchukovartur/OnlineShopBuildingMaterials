@@ -32,6 +32,7 @@ public class MaterialDAOImpl implements MaterialDAO {
     public List<Material> getMaterials() {
         openSession();
         List result = session.createQuery("from Material").list();
+        session.close();
         return result;
     }
 

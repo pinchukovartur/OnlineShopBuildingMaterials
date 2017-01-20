@@ -18,6 +18,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -125,6 +126,30 @@ public class MaterialServiceImpl implements MaterialService {
             e.printStackTrace();
         }
         document.close();
+    }
+
+    public List<Material> getListMaterialsOnPage(int pageNumber, int amountOnThePage) {
+        List<Material> materialListOnPage = new ArrayList<Material>();
+        for (int i = pageNumber *amountOnThePage-amountOnThePage; i < pageNumber * amountOnThePage; i++) {
+            try {
+                if (shopDataBase.getMaterials().get(i) != null) {
+                    materialListOnPage.add(shopDataBase.getMaterials().get(i));
+                }
+            }
+            catch (Exception e){
+                System.err.println(e.getMessage());
+            }
+        }
+        return materialListOnPage;
+    }
+
+    public Integer getNumberPages(int amountOnThePage) {
+        int sizeBase = shopDataBase.getMaterials().size();
+        int numberOfPages = sizeBase/amountOnThePage;
+        if(sizeBase%amountOnThePage!=0){
+            numberOfPages++;
+        }
+        return numberOfPages;
     }
 
 }
