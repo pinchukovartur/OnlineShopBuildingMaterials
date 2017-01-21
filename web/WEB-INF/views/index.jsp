@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="keywords" content="Apple, IPhone 5 , IPhone 6 ">
+    <meta name="keywords" content="Laser, VMC , HMC">
     <meta name="robots" content="all">
 
-    <title>Apple, IPhone</title>
+    <title>PMarket</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="resources/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="resources/assets/images/eftech.ico">
     <script src="resources/assets/js/html5shiv.js"></script>
     <script src="resources/assets/js/respond.min.js"></script>
 </head>
@@ -60,7 +60,7 @@
 
         <div class="col-xs-12 col-sm-4 col-md-3 sidemenu-holder">
             <div class="side-menu animate-dropdown">
-                <div class="head"><i class="fa fa-list"></i> Разделы</div>
+                <div class="head"><i class="fa fa-list"></i>Разделы</div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
                         <li><a href="/1">Станки</a></li>
@@ -73,15 +73,14 @@
         <div class="col-xs-12 col-sm-8 col-md-9 homebanner-holder">
             <div id="hero">
                 <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-
-                    <div class="item" style="background-image: url(/resources/jpg/EfTech-1530.jpg);">
+                    <div class="item" style="background-image: url(/resources/photoProduct/DMC-80.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>EfTech-1530
+                                    <span class="big"><span class="sign"></span></span>DMC
                                 </div>
                                 <div class="excerpt fadeInDown-2">
-                                    <br>Stanochek<br>
+                                    <br>DMC 80 FD<br>
                                 </div>
                                 <div class="small fadeInDown-2">
                                     RU
@@ -89,15 +88,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item" style="background-image: url(/resources/jpg/MP7-30.jpg);">
+                    <div class="item" style="background-image: url(/resources/photoProduct/DMC-55.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span> </span>MP7-30
+                                    <span class="big"><span class="sign"></span> </span>HMC
                                 </div>
 
                                 <div class="excerpt fadeInDown-2">
-                                    <br>sTANOCHEK<br>
+                                    <br>DMC 55<br>
                                 </div>
                                 <div class="small fadeInDown-2">
                                     BY
@@ -105,16 +104,15 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="item" style="background-image: url(/resources/jpg/OMNI6090.jpg);">
+                    <div class="item" style="background-image: url(/resources/photoProduct/ctx-1250.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>OMNI6090
+                                    <span class="big"><span class="sign"></span></span>Lather
                                 </div>
 
                                 <div class="excerpt fadeInDown-2">
-                                    <br>sTANOchka<br>
+                                    <br>CTX 1250 TC<br>
                                 </div>
                                 <div class="small fadeInDown-2">
                                     CH
@@ -124,32 +122,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <section id="top-brands" class="wow fadeInUp">
-                <div class="container">
-                    <div class="carousel-holder">
-
-                        <div class="title-nav">
-                            <h1>Top Brands</h1>
-                            <div class="nav-holder">
-                                <a href="#prev" data-target="#owl-brands"
-                                   class="slider-prev btn-prev fa fa-angle-left"></a>
-                                <a href="#next" data-target="#owl-brands"
-                                   class="slider-next btn-next fa fa-angle-right"></a>
-                            </div>
-                        </div>
-                        <div id="owl-brands" class="owl-carousel brands-carousel">
-                            <div class="carousel-item">
-                                <img alt="" src="resources/jpg/000.jpg"/>
-                            </div>
-                            <div class="carousel-item">
-                                <img alt="" src="resources/jpg/Akor-1530.jpg"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
                 <%@include file="includes/footer.jsp" %>
 
@@ -169,11 +141,7 @@
                 <script src="resources/assets/js/jquery.customSelect.min.js"></script>
                 <script src="resources/assets/js/wow.min.js"></script>
                 <script src="resources/assets/js/scripts.js"></script>
-
-                <!-- For demo purposes â can be removed on production -->
-
                 <script src="resources/assets/switchstylesheet/switchstylesheet.js"></script>
-
                 <script>
                     $(document).ready(function () {
                         $(".changecolor").switchstylesheet({seperator: "color"});
@@ -187,9 +155,6 @@
                         $('.show-theme-options').delay(2000).trigger('click');
                     });
                 </script>
-                <!-- For demo purposes â can be removed on production : End -->
-
                 <script src="http://w.sharethis.com/button/buttons.js"></script>
-
 </body>
 </html>

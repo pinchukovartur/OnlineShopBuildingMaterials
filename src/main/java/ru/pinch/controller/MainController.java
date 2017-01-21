@@ -20,7 +20,8 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    public static final int AMOUNT_ON_THE_PAGE = 9;
+    private static final int AMOUNT_ON_THE_PAGE = 9;
+
     @Autowired
     private MaterialService materialService;
 
@@ -42,15 +43,12 @@ public class MainController {
         modelAndView.addObject("listProduct", materialService.getListMaterialsOnPage(pageNumber,AMOUNT_ON_THE_PAGE));
         modelAndView.addObject("numberOfPages", materialService.getNumberPages(AMOUNT_ON_THE_PAGE));
         materialService.getPDFWithMaterialsData(materialService.getAllMaterialsOfTheDataBase());
-        modelAndView.setViewName("WEB-INF/views/" + "ru_all_iphone");
+        modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main(ModelAndView modelAndView) {
-        /*modelAndView.addObject("listProduct",  materialService.getListMaterialsOnPage(1,9));
-        modelAndView.addObject("numberOfPages", materialService.getNumberPages(9));*/
-        materialService.getPDFWithMaterialsData(materialService.getAllMaterialsOfTheDataBase()); /////////////
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }

@@ -6,7 +6,7 @@
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
             <div class="logo">
                 <a href="/1">
-                    <img alt="vmc_and_hmc" src="/resources/jpg/eftech.png" width="233" height="54"/>
+                    <img alt="vmc_and_hmc" src="/resources/jpg/eftech.png" width="200" height="70"/>
                 </a>
             </div>
         </div>
@@ -23,6 +23,7 @@
 
         </div>
 
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
         <div class="col-xs-12 col-sm-12 col-md-3 top-cart-row no-margin">
             <div class="top-cart-row-container">
                 <div class="top-cart-holder dropdown animate-dropdown">
@@ -37,5 +38,6 @@
                 </div>
             </div>
         </div>
+        </c:if>
     </div>
 </header>
