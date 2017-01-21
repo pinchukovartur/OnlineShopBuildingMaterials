@@ -56,7 +56,6 @@
         <div class="container">
             <nav>
                 <ul class="inline">
-                    <%@include file="includes/dropdown le-dropdown.jsp" %>
                     <li class="breadcrumb-nav-holder">
                         <ul>
                             <li class="breadcrumb-item">
@@ -78,73 +77,41 @@
             <div class="widget">
                 <h1>Фильтр Телефонов</h1>
                 <form action="product_select" method="GET">
-                    <input type="hidden" name="page" value="ru-allmachine">
                     <div class="body bordered">
                         <div class="category-filter">
                             <h2>Тип</h2>
                             <hr>
                             <ul>
                                 <c:choose>
-                                    <c:when test="${chIphone5c==1}">
+                                    <c:when test="${HMC==1}">
                                         <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone5c' value='1'/> <label>iPhone 5c</label></li>
+                                                   name='checkbox_HMC' value='1'/> <label>HMC</label></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone5c'
-                                                   value='1'/> <label>iPhone 5c</label></li>
+                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_HMC'
+                                                   value='1'/> <label>HMC</label></li>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <c:choose>
-                                    <c:when test="${chIphone5s==1}">
+                                    <c:when test="${Lather==1}">
                                         <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone5s' value='1'/> <label>iPhone 5s</label></li>
+                                                   name='checkbox_Lather' value='1'/> <label>Lather</label></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone5s'
-                                                   value='1'/> <label>iPhone 5s</label></li>
+                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_Lather'
+                                                   value='1'/> <label>Lather</label></li>
                                     </c:otherwise>
                                 </c:choose>
+
                                 <c:choose>
-                                    <c:when test="${chIphone6==1}">
+                                    <c:when test="${VMC==1}">
                                         <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone6' value='1'/> <label>iPhone 6</label></li>
+                                                   name='checkbox_VMC' value='1'/> <label>VMC</label></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone6'
-                                                   value='1'/> <label>iPhone 6</label></li>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${chIphone6plus==1}">
-                                        <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone6plus' value='1'/> <label>iPhone 6 Plus</label>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone6plus'
-                                                   value='1'/> <label>iPhone 6 Plus</label></li>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${chIphone6s==1}">
-                                        <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone6s' value='1'/> <label>iPhone 6 s</label></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone6s'
-                                                   value='1'/> <label>iPhone 6 s</label></li>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${chIphone6splus==1}">
-                                        <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_iphone6splus' value='1'/> <label>iPhone 6s
-                                            Plus</label></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_iphone6splus'
-                                                   value='1'/> <label>iPhone 6s Plus</label></li>
+                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_VMC'
+                                                   value='1'/> <label>VMC</label></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
@@ -266,7 +233,7 @@
                             </div>
                         </div>
                         <hr>
-                        <input type="submit" name="register" value="Выбрать телефон"/>
+                        <input type="submit" name="register" value="Выбрать станок"/>
                     </div><!-- /.body -->
                 </form>
             </div>
@@ -289,32 +256,32 @@
                         <div id="grid-view" class="products-grid fade tab-pane in active">
                             <div class="product-grid-holder">
                                 <div class="row no-margin">
-                                    <c:forEach items="${listProduct}" var="iphone">
+                                    <c:forEach items="${listProduct}" var="product">
                                         <div class="col-xs-12 col-sm-4 no-margin product-item-holder hover">
                                             <div class="product-item">
                                                 <div class="ribbon red"><span>В продаже</span></div>
                                                 <div class="image">
-                                                    <img alt="" src="resources/assets/images/blank.gif"
-                                                         data-echo="resources/assets/images/products/${iphone.productId}"
+                                                    <img alt=""
+                                                         src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                                 <div class="body">
                                                     <div class="title">
-                                                        <a href="iphone-${iphone.productId}.htm">${iphone.productId} ${iphone.productId}</a>
+                                                        <a href="product/${product.productId}">${product.productId} ${product.type}</a>
                                                     </div>
-                                                    <div class="brand">${iphone.type} </div>
+                                                    <div class="brand">${product.type} </div>
                                                 </div>
                                                 <div class="prices">
-                                                    <div class="price-prev">${iphone.price}</div>
+                                                    <div class="price-prev">${product.price}</div>
                                                 </div>
                                                 <div class="hover-area">
                                                     <div class="add-cart-button">
-                                                        <a href="add-product-to-customer-basket.htm?id=${iphone.productId}"
+                                                        <a href="add-product-to-customer-basket.htm?id=${product.productId}"
                                                            class="le-button">в корзину</a>
                                                     </div>
                                                     <div class="wish-compare">
                                                         <a class="btn-add-to-compare"
-                                                           href="add-product-to-compare-list.htm?id=${iphone.productId}">сравнить</a>
+                                                           href="add-product-to-compare-list.htm?id=${product.productId}">сравнить</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -329,42 +296,40 @@
 
                                             <c:forEach var="i" begin="1" end="${numberOfPages}">
                                                 <li class="current">
-                                                <li><a href="/${i}">${i}</a></li>
+                                                <li><a href="/page_${i}">${i}</a></li>
                                             </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            <div id="list-view" class="products-grid fade tab-pane ">
+                        <div id="list-view" class="products-grid fade tab-pane ">
                             <div class="products-list">
-                                <c:forEach items="${listProduct}" var="iphone">
+                                <c:forEach items="${listProduct}" var="product">
                                     <div class="product-item product-item-holder">
                                         <div class="ribbon red"><span>sale</span></div>
                                         <div class="ribbon blue"><span>new!</span></div>
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                        <%--
-                                                                                            <img alt="" src="resources/assets/images/blank.gif" data-echo="resources/assets/images/products/${iphone.photo1}"  width="246" height="186"/>
-                                                        --%>
+                                                  <img src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"  width="246" height="186"/>
                                                 </div>
                                             </div>
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
                                                 <div class="body">
                                                     <div class="label-discount green">-10% sale</div>
                                                     <div class="title">
-                                                        <a href="iphone-${iphone.productId}.htm">${iphone.productId} ${iphone.productId}</a>
+                                                        <a href="product/${product.productId}">${product.productId} ${product.productId}</a>
                                                     </div>
-                                                    <div class="brand">${iphone.productId}
+                                                    <div class="brand">${product.productId}
                                                         <br>
                                                     </div>
                                                     <div class="excerpt">
-                                                        <p>${iphone.productId}</p>
+                                                        <p>${product.productId}</p>
                                                     </div>
                                                     <div class="addto-compare">
                                                         <a class="btn-add-to-compare"
-                                                           href="add-product-to-compare-list.htm?id=${iphone.productId}">add
+                                                           href="add-product-to-compare-list.htm?id=${product.productId}">add
                                                             to compare list</a>
                                                     </div>
                                                 </div>
@@ -375,10 +340,11 @@
                                                     <div class="availability"><label>availability:</label><span
                                                             class="available">  in stock</span></div>
                                                     <a class="le-button"
-                                                       href="add-product-to-customer-basket.htm?id=${iphone.productId}">add
+                                                       href="add-product-to-customer-basket.htm?id=${product.productId}">add
                                                         to cart</a>
                                                     <a class="btn-add-to-wishlist"
-                                                       href="add-product-to-wish-list.htm?id=${iphone.productId}">add to
+                                                       href="add-product-to-wish-list.htm?id=${product.productId}">add
+                                                        to
                                                         wishlist</a>
                                                 </div>
                                             </div>

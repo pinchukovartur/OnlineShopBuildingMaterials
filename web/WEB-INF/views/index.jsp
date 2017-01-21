@@ -63,8 +63,10 @@
                 <div class="head"><i class="fa fa-list"></i>Разделы</div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
-                        <li><a href="/1">Станки</a></li>
+                        <li><a href="/page_1">Станки</a></li>
+<%--
                         <li><a href="#">Еще что нить</a></li>
+--%>
                     </ul>
                 </nav>
             </div>
@@ -73,49 +75,49 @@
         <div class="col-xs-12 col-sm-8 col-md-9 homebanner-holder">
             <div id="hero">
                 <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-                    <div class="item" style="background-image: url(/resources/photoProduct/DMC-80.jpg);">
+                    <div class="item" style="background-image: url(/resources/initialData/jpg/dsp.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>DMC
+                                    <span class="big"><span class="sign"></span></span>DSP
                                 </div>
                                 <div class="excerpt fadeInDown-2">
-                                    <br>DMC 80 FD<br>
+                                    <%--<br>DMC 80 FD<br>--%>
                                 </div>
                                 <div class="small fadeInDown-2">
-                                    RU
+                                    <%--RU--%>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" style="background-image: url(/resources/photoProduct/DMC-55.jpg);">
+                    <div class="item" style="background-image: url(/resources/initialData/jpg/particleboard.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span> </span>HMC
+                                    <span class="big"><span class="sign"></span> </span>DSP
                                 </div>
 
                                 <div class="excerpt fadeInDown-2">
-                                    <br>DMC 55<br>
+                                    <%--<br>DMC 55<br>--%>
                                 </div>
                                 <div class="small fadeInDown-2">
-                                    BY
+                                    <%--BY--%>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" style="background-image: url(/resources/photoProduct/ctx-1250.jpg);">
+                    <div class="item" style="background-image: url(/resources/initialData/jpg/plywood1.jpg);">
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>Lather
+                                    <span class="big"><span class="sign"></span></span>FANERA
                                 </div>
 
                                 <div class="excerpt fadeInDown-2">
-                                    <br>CTX 1250 TC<br>
+                                    <%--<br>CTX 1250 TC<br>--%>
                                 </div>
                                 <div class="small fadeInDown-2">
-                                    CH
+                                    <%--CH--%>
                                 </div>
                             </div>
                         </div>

@@ -27,7 +27,6 @@ public class Material {
     private Integer numberOfPackages;
     private String machineDescription;
     private String color;
-    private int idPhoto;
     private List<MaterialsPictures> materialsPicturesList;
 
     @Id
@@ -160,17 +159,7 @@ public class Material {
         this.color = color;
     }
 
-    @Basic
-    @Column(name = "id_photo", nullable = false)
-    public int getIdPhoto() {
-        return idPhoto;
-    }
-
-    public void setIdPhoto(int idPhoto) {
-        this.idPhoto = idPhoto;
-    }
-
-    @OneToMany(mappedBy = "material", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "material", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     public List<MaterialsPictures> getMaterialsPicturesList() {
         return materialsPicturesList;
     }
@@ -185,8 +174,6 @@ public class Material {
         if (o == null || getClass() != o.getClass()) return false;
 
         Material that = (Material) o;
-
-        if (idPhoto != that.idPhoto) return false;
         if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (length != null ? !length.equals(that.length) : that.length != null) return false;
@@ -223,7 +210,6 @@ public class Material {
         result = 31 * result + (numberOfPackages != null ? numberOfPackages.hashCode() : 0);
         result = 31 * result + (machineDescription != null ? machineDescription.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
-        result = 31 * result + idPhoto;
         return result;
     }
 }

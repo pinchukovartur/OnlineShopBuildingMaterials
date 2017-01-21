@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
+    public static final String COMPUPER_PATH = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\jpg\\";
     @Autowired
     private MaterialDAO shopDataBase;
 
@@ -68,8 +69,8 @@ public class MaterialServiceImpl implements MaterialService {
         try {
             /*String rootPath = System.getProperty("catalina.properties");*/
 
-            File serverFile = new File("E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\images\\"
-                    + fileName + ".png");
+            File serverFile = new File(COMPUPER_PATH
+                    + fileName + ".jpg");
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));
             stream.write(bytes);
@@ -82,7 +83,7 @@ public class MaterialServiceImpl implements MaterialService {
 
     public void getPDFWithMaterialsData(List<Material> materialList) {
         String RESULT
-                = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\test.pdf";
+                = COMPUPER_PATH+"test.pdf";
 
         Document document = new Document(PageSize.A4.rotate());
         document.open();

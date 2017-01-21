@@ -37,7 +37,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/{pageNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/page_{pageNumber}", method = RequestMethod.GET)
     public ModelAndView main(@PathVariable("pageNumber") int pageNumber, ModelAndView modelAndView) {
 
         modelAndView.addObject("listProduct", materialService.getListMaterialsOnPage(pageNumber,AMOUNT_ON_THE_PAGE));
@@ -49,6 +49,8 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main(ModelAndView modelAndView) {
+        System.out.println(materialService.getAllMaterialsOfTheDataBase().get(0).getMaterialsPicturesList().get(0).getPhoto());
+        System.out.println(materialService.getAllMaterialsOfTheDataBase().get(1).getMaterialsPicturesList().get(0).getPhoto());
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }

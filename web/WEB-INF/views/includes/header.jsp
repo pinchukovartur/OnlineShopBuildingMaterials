@@ -5,7 +5,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
             <div class="logo">
-                <a href="/1">
+                <a href="/page_1">
                     <img alt="vmc_and_hmc" src="/resources/jpg/eftech.png" width="200" height="70"/>
                 </a>
             </div>

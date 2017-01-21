@@ -4,7 +4,7 @@
     <div class="container">
         <div class="col-xs-12 col-sm-6 no-margin">
             <ul>
-                <li><a href="/1">Home</a></li>
+                <li><a href="/page_1">Home</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle"  data-toggle="dropdown" href="#change-colors">Change Colors</a>
 

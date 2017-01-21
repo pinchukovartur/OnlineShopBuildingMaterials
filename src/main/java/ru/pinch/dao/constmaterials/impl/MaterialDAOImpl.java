@@ -27,6 +27,7 @@ public class MaterialDAOImpl implements MaterialDAO {
         openSession();
         session.save(material);
         session.getTransaction().commit();
+        session.close();
     }
 
     public List<Material> getMaterials() {
@@ -46,12 +47,14 @@ public class MaterialDAOImpl implements MaterialDAO {
             session.delete(p);
         }
         session.getTransaction().commit();
+        session.close();
     }
 
     public void deleteMaterial(String id) {
         openSession();
         session.delete(session.get(Material.class, id));
         session.getTransaction().commit();
+        session.close();
     }
 
     public Material getMaterialsByID(String productID) {
@@ -59,6 +62,7 @@ public class MaterialDAOImpl implements MaterialDAO {
         Query query = session.createQuery("from Material where productId = :productId");
         query.setParameter("productId", productID);
         List<Material> result = query.list();
+        session.close();
         return result.get(0);
     }
 
@@ -69,13 +73,9 @@ public class MaterialDAOImpl implements MaterialDAO {
             return false;
         }
         else {
-            System.err.println(entity.getPhoto());
-            System.err.println(entity.getMaterial().getProductId());
-            System.err.println(entity.getMaterial().getType());
-            /*System.err.println(entity.getMaterial().getIdPhoto());*/
-
             session.save(entity);
             session.getTransaction().commit();
+            session.close();
             return true;
         }
     }
@@ -83,6 +83,7 @@ public class MaterialDAOImpl implements MaterialDAO {
     public List<MaterialsPictures> getPhotos() {
         openSession();
         List result = session.createQuery("from MaterialsPictures ").list();
+        session.close();
         return result;
     }
 
@@ -90,5 +91,6 @@ public class MaterialDAOImpl implements MaterialDAO {
         openSession();
         session.delete(session.get(MaterialsPictures.class, id));
         session.getTransaction().commit();
+        session.close();
     }
 }
