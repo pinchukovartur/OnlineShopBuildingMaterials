@@ -38,8 +38,8 @@
     <link href="resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
     <!-- Demo Purpose Only. Should be removed in production : END -->
 
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <%--<!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>--%>
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
@@ -60,13 +60,13 @@
 
         <div class="col-xs-12 col-sm-4 col-md-3 sidemenu-holder">
             <div class="side-menu animate-dropdown">
-                <div class="head"><i class="fa fa-list"></i>Разделы</div>
+                <div class="head"><i class="fa fa-list"></i>
+                    <local:message code="index.label.sections"/>
+                </div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
-                        <li><a href="/page_1">Станки</a></li>
-<%--
-                        <li><a href="#">Еще что нить</a></li>
---%>
+                        <li><a href="/page_1"><local:message code="index.label.particleBoard"/></a></li>
+                        <li><a href="/page_1"><local:message code="index.label.plywood"/></a></li>
                     </ul>
                 </nav>
             </div>
@@ -79,7 +79,11 @@
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>DSP
+                                    <span class="big">
+                                        <span class="sign">
+                                            <local:message code="index.label.particleBoard"/>
+                                        </span>
+                                    </span>
                                 </div>
                                 <div class="excerpt fadeInDown-2">
                                     <%--<br>DMC 80 FD<br>--%>
@@ -94,9 +98,12 @@
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span> </span>DSP
+                                    <span class="big">
+                                        <span class="sign">
+                                            <local:message code="index.label.particleBoard"/>
+                                        </span>
+                                    </span>
                                 </div>
-
                                 <div class="excerpt fadeInDown-2">
                                     <%--<br>DMC 55<br>--%>
                                 </div>
@@ -110,9 +117,12 @@
                         <div class="container-fluid">
                             <div class="caption vertical-center text-left">
                                 <div class="big-text fadeInDown-1">
-                                    <span class="big"><span class="sign"></span></span>FANERA
+                                    <span class="big">
+                                        <span class="sign">
+                                            <local:message code="index.label.plywood"/>
+                                        </span>
+                                    </span>
                                 </div>
-
                                 <div class="excerpt fadeInDown-2">
                                     <%--<br>CTX 1250 TC<br>--%>
                                 </div>
@@ -125,38 +135,38 @@
                 </div>
             </div>
 
-                <%@include file="includes/footer.jsp" %>
+            <%@include file="includes/footer.jsp" %>
 
-                <script src="resources/assets/js/jquery-1.10.2.min.js"></script>
-                <script src="resources/assets/js/jquery-migrate-1.2.1.js"></script>
-                <script src="resources/assets/js/bootstrap.min.js"></script>
-                <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-                <script src="resources/assets/js/gmap3.min.js"></script>
-                <script src="resources/assets/js/bootstrap-hover-dropdown.min.js"></script>
-                <script src="resources/assets/js/owl.carousel.min.js"></script>
-                <script src="resources/assets/js/css_browser_selector.min.js"></script>
-                <script src="resources/assets/js/echo.min.js"></script>
-                <script src="resources/assets/js/jquery.easing-1.3.min.js"></script>
-                <script src="resources/assets/js/bootstrap-slider.min.js"></script>
-                <script src="resources/assets/js/jquery.raty.min.js"></script>
-                <script src="resources/assets/js/jquery.prettyPhoto.min.js"></script>
-                <script src="resources/assets/js/jquery.customSelect.min.js"></script>
-                <script src="resources/assets/js/wow.min.js"></script>
-                <script src="resources/assets/js/scripts.js"></script>
-                <script src="resources/assets/switchstylesheet/switchstylesheet.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        $(".changecolor").switchstylesheet({seperator: "color"});
-                        $('.show-theme-options').click(function () {
-                            $(this).parent().toggleClass('open');
-                            return false;
-                        });
+            <script src="resources/assets/js/jquery-1.10.2.min.js"></script>
+            <script src="resources/assets/js/jquery-migrate-1.2.1.js"></script>
+            <script src="resources/assets/js/bootstrap.min.js"></script>
+            <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+            <script src="resources/assets/js/gmap3.min.js"></script>
+            <script src="resources/assets/js/bootstrap-hover-dropdown.min.js"></script>
+            <script src="resources/assets/js/owl.carousel.min.js"></script>
+            <script src="resources/assets/js/css_browser_selector.min.js"></script>
+            <script src="resources/assets/js/echo.min.js"></script>
+            <script src="resources/assets/js/jquery.easing-1.3.min.js"></script>
+            <script src="resources/assets/js/bootstrap-slider.min.js"></script>
+            <script src="resources/assets/js/jquery.raty.min.js"></script>
+            <script src="resources/assets/js/jquery.prettyPhoto.min.js"></script>
+            <script src="resources/assets/js/jquery.customSelect.min.js"></script>
+            <script src="resources/assets/js/wow.min.js"></script>
+            <script src="resources/assets/js/scripts.js"></script>
+            <script src="resources/assets/switchstylesheet/switchstylesheet.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $(".changecolor").switchstylesheet({seperator: "color"});
+                    $('.show-theme-options').click(function () {
+                        $(this).parent().toggleClass('open');
+                        return false;
                     });
+                });
 
-                    $(window).bind("load", function () {
-                        $('.show-theme-options').delay(2000).trigger('click');
-                    });
-                </script>
-                <script src="http://w.sharethis.com/button/buttons.js"></script>
+                $(window).bind("load", function () {
+                    $('.show-theme-options').delay(2000).trigger('click');
+                });
+            </script>
+            <script src="http://w.sharethis.com/button/buttons.js"></script>
 </body>
 </html>

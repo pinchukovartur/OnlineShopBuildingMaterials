@@ -18,4 +18,5 @@ public interface MaterialService {
     void getPDFWithMaterialsData(List<Material> materialList);
     List<Material> getListMaterialsOnPage(int pageNumber, int amountOnThePage);
     Integer getNumberPages(int amountOnThePage);
+    List<Material> getSortListMaterials(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade);
 }

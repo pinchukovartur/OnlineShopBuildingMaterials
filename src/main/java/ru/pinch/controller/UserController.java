@@ -56,14 +56,14 @@ public class UserController {
     @RequestMapping(value = "/addtobasket/{productID}", method = RequestMethod.GET)
     public String addToBasket(@PathVariable("productID") String productID, Principal user) {
         userService.addToBasket(user.getName(), productID);
-        return "redirect:/";
+        return "redirect:/page_1";
     }
 
     @RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
     public String buyMaterial(@PathVariable("productID") String productID, Principal user) {
         userService.buyMaterialsUser(userService.getUserByID(user.getName()),
                 materialService.getMaterialsByIDOfTheDataBase(productID));
-        return "redirect:/";
+        return "redirect:/basket";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)

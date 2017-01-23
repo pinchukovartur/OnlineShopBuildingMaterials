@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.User;
@@ -48,9 +49,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView main(ModelAndView modelAndView) {
-        System.out.println(materialService.getAllMaterialsOfTheDataBase().get(0).getMaterialsPicturesList().get(0).getPhoto());
-        System.out.println(materialService.getAllMaterialsOfTheDataBase().get(1).getMaterialsPicturesList().get(0).getPhoto());
+    public ModelAndView main(ModelAndView modelAndView,Principal user) {
+        try {
+            modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
+        }
+        catch (Exception e){
+            System.err.println(e.getMessage());
+        }
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }
@@ -62,17 +67,26 @@ public class MainController {
         return modelAndView;
     }
 
-
-    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
-    public ModelAndView cabinet(ModelAndView modelAndView) {
-        modelAndView.setViewName("WEB-INF/views/" + "cabinet");
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
     public ModelAndView basket(ModelAndView modelAndView, Principal user) {
         modelAndView.setViewName("WEB-INF/views/" + "basket");
         modelAndView.addObject("basketList", userService.getAllTheMaterialsOfThisUser(user.getName()));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/product_select", method = RequestMethod.GET)
+    public ModelAndView select(
+            @RequestParam(value = "checkbox_particleBoard",   defaultValue = "0") int checkbox_particleBoard,
+            @RequestParam(value = "checkbox_plywood",   defaultValue = "0") int checkbox_plywood,
+            @RequestParam(value = "input_with", defaultValue = "0") int input_with,
+            @RequestParam(value = "input_before",  defaultValue = "0") int input_before,
+            @RequestParam(value = "grade",defaultValue = "0") int grade,
+            ModelAndView modelAndView)
+    {
+        modelAndView.addObject("listProduct", materialService.getSortListMaterials(checkbox_particleBoard,
+                checkbox_plywood, input_with,input_before,grade));
+        modelAndView.addObject("numberOfPages", materialService.getNumberPages(AMOUNT_ON_THE_PAGE));
+        modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
 

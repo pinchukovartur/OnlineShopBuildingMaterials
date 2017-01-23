@@ -14,7 +14,7 @@
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
 
-    <title>MediaCenter - Responsive eCommerce Template</title>
+    <title>PMarket</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
@@ -44,9 +44,7 @@
     <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="resources/assets/images/favicon.ico">
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
+    <link rel="shortcut icon" href="resources/assets/images/eftech.ico">
 </head>
 <body>
 <div class="wrapper">
@@ -59,10 +57,14 @@
                     <li class="breadcrumb-nav-holder">
                         <ul>
                             <li class="breadcrumb-item">
-                                <a href="index.htm">Главная</a>
+                                <a href="${pageContext.request.contextPath}/">
+                                    <local:message code="catalog.label.main"/>
+                                </a>
                             </li>
                             <li class="breadcrumb-item current">
-                                <a href="#">IPhones</a>
+                                <a href="#">
+                                    <local:message code="catalog.label.catalog"/>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -75,166 +77,102 @@
     <div class="container">
         <div class="col-xs-12 col-sm-3 no-margin sidebar narrow">
             <div class="widget">
-                <h1>Фильтр Телефонов</h1>
+                <h1><local:message code="catalog.label.sort"/>:</h1>
                 <form action="product_select" method="GET">
                     <div class="body bordered">
                         <div class="category-filter">
-                            <h2>Тип</h2>
+                            <h2><local:message code="catalog.label.type"/></h2>
                             <hr>
                             <ul>
                                 <c:choose>
-                                    <c:when test="${HMC==1}">
+                                    <c:when test="${particleBoard==1}">
                                         <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_HMC' value='1'/> <label>HMC</label></li>
+                                                   name='checkbox_particleBoard' value='1'/>
+                                            <label>
+                                                <local:message code="index.label.particleBoard"/>
+                                            </label>
+                                        </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_HMC'
-                                                   value='1'/> <label>HMC</label></li>
+                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_particleBoard'
+                                                   value='1'/>
+                                            <label>
+                                                <local:message code="index.label.particleBoard"/>
+                                            </label>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <c:choose>
-                                    <c:when test="${Lather==1}">
+                                    <c:when test="${plywood==1}">
                                         <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_Lather' value='1'/> <label>Lather</label></li>
+                                                   name='checkbox_plywood' value='1'/>
+                                            <label>
+                                                <local:message code="index.label.plywood"/>
+                                            </label>
+                                        </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_Lather'
-                                                   value='1'/> <label>Lather</label></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${VMC==1}">
-                                        <li><input checked="checked" class="le-checkbox" type="checkbox"
-                                                   name='checkbox_VMC' value='1'/> <label>VMC</label></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_VMC'
-                                                   value='1'/> <label>VMC</label></li>
+                                        <li><input class="le-checkbox" type="checkbox" name='checkbox_plywood'
+                                                   value='1'/>
+                                            <label>
+                                                <local:message code="index.label.plywood"/>
+                                            </label>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
                         </div>
 
                         <div class="price-filter">
-                            <h2>Цвет</h2>
+                            <h2><local:message code="catalog.label.price"/></h2>
                             <hr>
-                            <div class="le-select">
-                                <select name="color">
-                                    <option disabled>Цвет</option>
-                                    <c:choose>
-                                        <c:when test="${color=='n'}">
-                                            <option selected value="n">Не выбрано</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="n">Не выбрано</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${color=='зелёный'}">
-                                            <option selected value="зелёный"> зелёный</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="зелёный"> зелёный</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${color=='золотой'}">
-                                            <option selected value="золотой"> золотой</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="золотой"> золотой</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${color=='розовый'}">
-                                            <option selected value="розовый"> розовый</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="розовый"> розовый</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${color=='серебристый'}">
-                                            <option selected value="серебристый"> серебристый</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="серебристый"> серебристый</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${color=='серый космос'}">
-                                            <option selected value="серый космос"> серый космос</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="серый космос"> серый космос</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </select>
-                            </div>
+                            <label>
+                                <local:message code="catalog.label.with"/>:
+                            </label><br>
+                            <input name='input_with'/><br>
+                            <label>
+                                <local:message code="catalog.label.before"/>:
+                            </label><br>
+                            <input name='input_before' type=""/>
                         </div>
 
                         <div class="price-filter">
-                            <h2>Объём памяти</h2>
+                            <h2><local:message code="catalog.label.grade"/>:</h2>
                             <hr>
                             <div class="le-select">
-                                <select name="memory">
-                                    <option disabled>Select Y</option>
+                                <select name="grade">
+                                    <option disabled><local:message code="catalog.label.grade"/></option>
                                     <c:choose>
-                                        <c:when test="${memory=='n'}">
+                                        <c:when test="${grade=='n'}">
                                             <option selected value="n">Not important</option>
                                         </c:when>
                                         <c:otherwise>
                                             <option value="n">Not important</option>
                                         </c:otherwise>
                                     </c:choose>
-                                    <c:choose>
-                                        <c:when test="${memory=='8'}">
-                                            <option selected value="8"> 8 ГБ</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="8"> 8 ГБ</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${memory=='16'}">
-                                            <option selected value="16"> 16 ГБ</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="16"> 16 ГБ</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${memory=='32'}">
-                                            <option selected value="32"> 32 ГБ</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="32"> 32 ГБ</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${memory=='64'}">
-                                            <option selected value="64"> 64 ГБ</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="64"> 64 ГБ</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${memory=='128'}">
-                                            <option selected value="128"> 128 ГБ</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="128"> 128 ГБ</option>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:forEach var="i" begin="1" end="5">
+                                        <c:choose>
+                                            <c:when test="${grade==i}">
+                                                <option selected value=${i}>
+                                                        ${i}
+                                                        <local:message code="catalog.label.grade"/>
+                                                </option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value=${i}>
+                                                        ${i}
+                                                        <local:message code="catalog.label.grade"/>
+                                                </option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <hr>
-                        <input type="submit" name="register" value="Выбрать станок"/>
-                    </div><!-- /.body -->
+                        <input type="submit" name="register" value="<local:message code="catalog.label.search"/>"/>
+                    </div>
                 </form>
             </div>
         </div>
@@ -276,7 +214,7 @@
                                                 </div>
                                                 <div class="hover-area">
                                                     <div class="add-cart-button">
-                                                        <a href="add-product-to-customer-basket.htm?id=${product.productId}"
+                                                        <a href="addtobasket/${product.productId}"
                                                            class="le-button">в корзину</a>
                                                     </div>
                                                     <div class="wish-compare">
@@ -312,7 +250,8 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                  <img src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"  width="246" height="186"/>
+                                                    <img src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"
+                                                         width="246" height="186"/>
                                                 </div>
                                             </div>
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">

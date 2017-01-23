@@ -153,4 +153,30 @@ public class MaterialServiceImpl implements MaterialService {
         return numberOfPages;
     }
 
+    public List<Material> getSortListMaterials(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade) {
+        List<Material> materialListOld = shopDataBase.getSortListMaterials(price_with,price_before);
+        List<Material> materialListNew = sortMaterialsByType(materialListOld, type_particleBoard, type_plywood);
+        return materialListNew;
+    }
+
+    private List<Material> sortMaterialsByType(List<Material> materialListOld, int type_particleBoard, int type_plywood){
+        List<Material> materialListNew = new ArrayList<Material>();
+        for (int i = 0; i < materialListOld.size(); i++) {
+            if(type_particleBoard==1 && materialListOld.get(i).getType().contains("article")) {
+                materialListNew.add(materialListOld.get(i));
+            }
+            if(type_plywood==1 && materialListOld.get(i).getType().contains("lywood")){
+                materialListNew.add(materialListOld.get(i));
+            }
+            if(type_plywood==1  && type_particleBoard==1){
+                if(materialListOld.get(i).getType().contains("lywood") || materialListOld.get(i).getType().contains("article")){
+                    materialListNew.add(materialListOld.get(i));
+                }
+            }
+            if(type_plywood==0 && type_particleBoard==0){
+                return materialListOld;
+            }
+        }
+        return materialListNew;
+    }
 }

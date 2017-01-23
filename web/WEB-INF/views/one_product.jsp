@@ -46,7 +46,6 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="resources/assets/images/favicon.ico">
 
-
 </head>
 <body>
 

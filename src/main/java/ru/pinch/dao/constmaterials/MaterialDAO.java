@@ -16,4 +16,5 @@ public interface MaterialDAO {
     boolean addPhoto(MaterialsPictures entity);
     List<MaterialsPictures> getPhotos();
     void deletePhoto(String id);
+    public List<Material> getSortListMaterials(double price_with, double price_before);
 }

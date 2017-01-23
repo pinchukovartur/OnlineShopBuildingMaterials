@@ -10,7 +10,6 @@ import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Repository
@@ -18,8 +17,8 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     private Session session;
 
-    private void openSession(){
-        session  = HibernateUtil.getSessionFactory().openSession();
+    private void openSession() {
+        session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
     }
 
@@ -40,10 +39,10 @@ public class MaterialDAOImpl implements MaterialDAO {
     public void deleteMaterials(List<Material> result) {
         openSession();
         Transaction tx = session.beginTransaction();
-        if(!tx.getStatus().equals(TransactionStatus.ACTIVE) ) {
+        if (!tx.getStatus().equals(TransactionStatus.ACTIVE)) {
             tx.commit();
         }
-        for(Material p : result) {
+        for (Material p : result) {
             session.delete(p);
         }
         session.getTransaction().commit();
@@ -69,10 +68,9 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     public boolean addPhoto(MaterialsPictures entity) {
         openSession();
-        if(entity.getPhoto().equals("")){
+        if (entity.getPhoto().equals("")) {
             return false;
-        }
-        else {
+        } else {
             session.save(entity);
             session.getTransaction().commit();
             session.close();
@@ -92,5 +90,35 @@ public class MaterialDAOImpl implements MaterialDAO {
         session.delete(session.get(MaterialsPictures.class, id));
         session.getTransaction().commit();
         session.close();
+    }
+
+    public List<Material> getSortListMaterials(double price_with, double price_before) {
+        openSession();
+        Query query;
+        if (price_before == 0 && price_with == 0) {
+            return getMaterials();
+        }
+        if (price_before == 0) {
+            query = session.createQuery("from Material where price > :price_with");
+            query.setParameter("price_with", price_with);
+            List<Material> result = query.list();
+            session.close();
+            return result;
+        }
+        if (price_with == 0) {
+            query = session.createQuery("from Material where price < :price_before");
+            query.setParameter("price_before", price_before);
+            List<Material> result = query.list();
+            session.close();
+            return result;
+        }
+
+        query = session.createQuery("from Material where price <= :price_before and price >= :price_with");
+        query.setParameter("price_before", price_before);
+        query.setParameter("price_with", price_with);
+        List<Material> result = query.list();
+        session.close();
+        return result;
+
     }
 }

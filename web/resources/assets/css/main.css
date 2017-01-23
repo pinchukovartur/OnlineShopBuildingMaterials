@@ -763,7 +763,7 @@ img[src="assets/images/blank.gif"] {
 /*  Header
 /*===================================================================================*/
 header {
-  padding: 40px 0 31px 0;
+  padding: 40px 0 0 0;
   border-bottom: 1px solid #e0e0e0;
 }
 header.ver2 {
