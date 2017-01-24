@@ -37,6 +37,14 @@
                         </li>
                     </ul>
                 </li>
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <li><a href="/basket"> <local:message code="nav.label.basket"/></a></li>
+                    <li><a href="/j_spring_security_logout"> <local:message code="nav.label.exit"/></a></li>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <li><a href="/login"> <local:message code="nav.label.enter"/></a></li>
+                    <li><a href="/registration"> <local:message code="nav.label.registration"/></a></li>
+                </c:if>
                 <li><a href="?lang=ru">ru</a></li>
                 <li><a href="?lang=en">en</a></li>
             </ul>

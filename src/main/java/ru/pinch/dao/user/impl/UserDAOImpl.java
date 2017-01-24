@@ -21,21 +21,23 @@ public class UserDAOImpl implements UserDAO {
         session.beginTransaction();
     }
 
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         try {
             openSession();
             session.save(user);
             session.getTransaction().commit();
+            session.close();
         }
         catch (Exception e){
             System.err.println("ERROR ADD USER");
+            session.close();
         }
-        return true;
     }
 
     public List<User> getUsers() {
         openSession();
         List result = session.createQuery("from User ").list();
+        session.close();
         return result;
     }
 
@@ -45,10 +47,12 @@ public class UserDAOImpl implements UserDAO {
             Query query = session.createQuery("from User where username = :username");
             query.setParameter("username", username);
             List<User> result = query.list();
+            session.close();
             return result.get(0);
         }
         catch (Exception e){
-            System.err.println(e);
+            System.err.println("Пользователь не был найден(getUserByID)");
+            session.close();
             return null;
         }
     }
@@ -57,6 +61,7 @@ public class UserDAOImpl implements UserDAO {
         openSession();
         session.delete(session.get(User.class, id));
         session.getTransaction().commit();
+        session.close();
     }
 
     public void addRole(Role role) {
@@ -64,9 +69,11 @@ public class UserDAOImpl implements UserDAO {
             openSession();
             session.save(role);
             session.getTransaction().commit();
+            session.close();
         }
         catch (Exception e){
             System.err.println("ERROR ADD ROLE");
+            session.close();
         }
     }
 
@@ -76,12 +83,14 @@ public class UserDAOImpl implements UserDAO {
         Query query = session.createQuery("delete Role where id = :id");
         query.setParameter("id", id);
         session.getTransaction().commit();
+        session.close();
     }
 
     public void addToBasket(Basket basket) {
         openSession();
         session.save(basket);
         session.getTransaction().commit();
+        session.close();
     }
 
     public List<String> getProductIDUsers(String username) {
@@ -89,6 +98,7 @@ public class UserDAOImpl implements UserDAO {
         Query query = session.createQuery("select distinct productId from Basket where username = :username");
         query.setParameter("username", username);
         List<String> result = query.list();
+        session.close();
         return result;
     }
 }

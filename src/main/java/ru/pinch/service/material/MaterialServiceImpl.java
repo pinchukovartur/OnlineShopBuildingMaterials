@@ -29,35 +29,35 @@ public class MaterialServiceImpl implements MaterialService {
     private MaterialDAO shopDataBase;
 
 
-    public void addMaterialInDataBase(Material material) {
+    public void addMaterial(Material material) {
         shopDataBase.addMaterial(material);
     }
 
-    public List<Material> getAllMaterialsOfTheDataBase() {
+    public List<Material> getAllMaterials() {
         return shopDataBase.getMaterials();
     }
 
-    public void deleteAllMaterialsOfTheDataBase(List<Material> result) {
+    public void deleteAllMaterials(List<Material> result) {
         shopDataBase.deleteMaterials(result);
     }
 
-    public void deleteMaterialByIDOfTheDataBase(String id) {
+    public void deleteMaterial(String id) {
         shopDataBase.deleteMaterial(id);
     }
 
-    public boolean addPhotoInDataBase(MaterialsPictures materialsPictures) {
+    public boolean addPhoto(MaterialsPictures materialsPictures) {
         return shopDataBase.addPhoto(materialsPictures);
     }
 
-    public List<MaterialsPictures> getAllPhotosOfTheDataBase() {
+    public List<MaterialsPictures> getAllPhotos() {
         return shopDataBase.getPhotos();
     }
 
-    public void deletePhotoByIDOfTheDataBase(String id) {
+    public void deletePhoto(String id) {
         shopDataBase.deleteMaterial(id);
     }
 
-    public Material getMaterialsByIDOfTheDataBase(String productID) {
+    public Material getMaterials(String productID) {
         return shopDataBase.getMaterialsByID(productID);
     }
 
@@ -129,23 +129,23 @@ public class MaterialServiceImpl implements MaterialService {
         document.close();
     }
 
-    public List<Material> getListMaterialsOnPage(int pageNumber, int amountOnThePage) {
+    public List<Material> getListMaterialsOnPage(List<Material> materialListOld, int pageNumber, int amountOnThePage) {
         List<Material> materialListOnPage = new ArrayList<Material>();
         for (int i = pageNumber *amountOnThePage-amountOnThePage; i < pageNumber * amountOnThePage; i++) {
             try {
-                if (shopDataBase.getMaterials().get(i) != null) {
-                    materialListOnPage.add(shopDataBase.getMaterials().get(i));
+                if (materialListOld.get(i) != null) {
+                    materialListOnPage.add(materialListOld.get(i));
                 }
             }
             catch (Exception e){
-                System.err.println(e.getMessage());
+                System.err.println("Обработка исключений в getListMaterialsOnPage:" + i);
             }
         }
         return materialListOnPage;
     }
 
-    public Integer getNumberPages(int amountOnThePage) {
-        int sizeBase = shopDataBase.getMaterials().size();
+    public Integer getNumberPages(List<Material> materialListOld, int amountOnThePage) {
+        int sizeBase = materialListOld.size();
         int numberOfPages = sizeBase/amountOnThePage;
         if(sizeBase%amountOnThePage!=0){
             numberOfPages++;
@@ -154,29 +154,48 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     public List<Material> getSortListMaterials(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade) {
-        List<Material> materialListOld = shopDataBase.getSortListMaterials(price_with,price_before);
-        List<Material> materialListNew = sortMaterialsByType(materialListOld, type_particleBoard, type_plywood);
-        return materialListNew;
+        List<Material> materialList = shopDataBase.getSortListMaterials(price_with,price_before);
+        materialList = sortMaterialsByType(materialList, type_particleBoard, type_plywood);
+        materialList = sortMaterialsByGrade(materialList,grade);
+        return materialList;
     }
 
     private List<Material> sortMaterialsByType(List<Material> materialListOld, int type_particleBoard, int type_plywood){
         List<Material> materialListNew = new ArrayList<Material>();
         for (int i = 0; i < materialListOld.size(); i++) {
-            if(type_particleBoard==1 && materialListOld.get(i).getType().contains("article")) {
-                materialListNew.add(materialListOld.get(i));
-            }
-            if(type_plywood==1 && materialListOld.get(i).getType().contains("lywood")){
-                materialListNew.add(materialListOld.get(i));
-            }
             if(type_plywood==1  && type_particleBoard==1){
                 if(materialListOld.get(i).getType().contains("lywood") || materialListOld.get(i).getType().contains("article")){
                     materialListNew.add(materialListOld.get(i));
                 }
+            }
+            if(type_particleBoard==1 && materialListOld.get(i).getType().contains("article") && type_plywood==0) {
+                materialListNew.add(materialListOld.get(i));
+            }
+            if(type_plywood==1 && materialListOld.get(i).getType().contains("lywood") && type_particleBoard==0){
+                materialListNew.add(materialListOld.get(i));
             }
             if(type_plywood==0 && type_particleBoard==0){
                 return materialListOld;
             }
         }
         return materialListNew;
+    }
+
+    private List<Material> sortMaterialsByGrade(List<Material> materialListOld, int grade){
+        if(grade>0){
+            List<Material> materialListNew = new ArrayList<Material>();
+            for (int i = 0; i < materialListOld.size(); i++) {
+                try {
+                    if(Integer.parseInt(materialListOld.get(i).getGrade().substring(0,1))==grade){
+                        materialListNew.add(materialListOld.get(i));
+                    }
+                }
+                catch (Exception e){
+                    System.err.println("В базе храниться сорт с ошибкой-" + materialListOld.get(i).getGrade());
+                }
+            }
+            return materialListNew;
+        }
+        else return materialListOld;
     }
 }

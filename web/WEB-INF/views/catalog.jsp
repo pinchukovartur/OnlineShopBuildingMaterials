@@ -144,11 +144,11 @@
                                 <select name="grade">
                                     <option disabled><local:message code="catalog.label.grade"/></option>
                                     <c:choose>
-                                        <c:when test="${grade=='n'}">
-                                            <option selected value="n">Not important</option>
+                                        <c:when test="${grade==0}">
+                                            <option selected value="0">Not important</option>
                                         </c:when>
                                         <c:otherwise>
-                                            <option value="n">Not important</option>
+                                            <option value="0">Not important</option>
                                         </c:otherwise>
                                     </c:choose>
                                     <c:forEach var="i" begin="1" end="5">

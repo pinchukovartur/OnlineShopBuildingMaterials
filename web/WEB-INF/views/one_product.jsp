@@ -373,8 +373,6 @@
         $('.show-theme-options').delay(2000).trigger('click');
     });
 </script>
-<!-- For demo purposes â can be removed on production : End -->
-
 <script src="http://w.sharethis.com/button/buttons.js"></script>
 
 </body>

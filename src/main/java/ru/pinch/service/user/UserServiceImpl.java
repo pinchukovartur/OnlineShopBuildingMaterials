@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService{
     private MaterialDAO materialDAO;
 
     @Transactional
-    public boolean addUser(User user) {
-        return userDAO.addUser(user);
+    public void addUser(User user) {
+        userDAO.addUser(user);
     }
 
     @Transactional

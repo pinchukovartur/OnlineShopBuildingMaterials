@@ -6,7 +6,7 @@ import ru.pinch.entity.MaterialsPictures;
 import java.util.List;
 
 public interface UserService {
-    boolean addUser(User user);
+    void addUser(User user);
     List<User> getUsers();
     User getUserByID(String username);
     void deleteUser(String id);

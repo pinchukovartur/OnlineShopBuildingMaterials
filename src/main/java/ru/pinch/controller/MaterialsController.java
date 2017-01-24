@@ -23,19 +23,19 @@ public class MaterialsController {
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.POST)
     public String addProduct(@ModelAttribute("addProduct") Material product) {
-        materialService.addMaterialInDataBase(product);
+        materialService.addMaterial(product);
         return "redirect:/admin";
     }
 
     @RequestMapping(value = "/dProduct/{id}", method = RequestMethod.GET)
     public String deleteContact(@PathVariable("id") String idProduct) {
-        materialService.deleteMaterialByIDOfTheDataBase(idProduct);
+        materialService.deleteMaterial(idProduct);
         return "redirect:/admin";
     }
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ModelAndView oneProduct(@PathVariable("id") String idProduct, ModelAndView modelAndView) {
-        modelAndView.addObject("product",materialService.getMaterialsByIDOfTheDataBase(idProduct));
+        modelAndView.addObject("product",materialService.getMaterials(idProduct));
         modelAndView.setViewName("WEB-INF/views/" + "one_product");
         return modelAndView;
     }
@@ -49,7 +49,7 @@ public class MaterialsController {
                 String imageName = date.toString().replaceAll(":",",");
                 materialService.saveTheImageOnServer(imageName, file.getBytes());
 
-                materialsPictures.setMaterial(materialService.getMaterialsByIDOfTheDataBase(material));
+                materialsPictures.setMaterial(materialService.getMaterials(material));
                 materialsPictures.setPhoto(imageName);
                 materialService.saveTheImageOnDataBase(materialsPictures);
                 return "redirect:/admin";
