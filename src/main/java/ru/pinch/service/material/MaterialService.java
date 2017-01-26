@@ -1,23 +1,23 @@
 package ru.pinch.service.material;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 public interface MaterialService {
 
     void addMaterial(Material material);
     List<Material> getAllMaterials();
-    void deleteAllMaterials(List<Material> result);
     void deleteMaterial(String id);
-
-    boolean addPhoto(MaterialsPictures materialsPictures);
-    List<MaterialsPictures> getAllPhotos();
-    void deletePhoto(String id);
     Material getMaterials(String productID);
+
+    List<MaterialsPictures> getAllPhotoMaterials(Material material);
 
     boolean saveTheImageOnServer(String filename, byte[] bytes);
     void saveTheImageOnDataBase(MaterialsPictures materialsPictures);
-    void getPDFWithMaterialsData(List<Material> materialList);
+    FileInputStream getPDFWithMaterialsData(Material material);
 
     List<Material> getListMaterialsOnPage(List<Material> materialListOld,int pageNumber, int amountOnThePage);
     Integer getNumberPages(List<Material> materialListOld,int amountOnThePage);

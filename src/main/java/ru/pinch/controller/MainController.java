@@ -41,8 +41,8 @@ public class MainController {
         List<Material> materialList = materialService.getAllMaterials();
         modelAndView.addObject("listProduct", materialService.getListMaterialsOnPage(materialList,pageNumber,AMOUNT_ON_THE_PAGE));
         modelAndView.addObject("numberOfPages", materialService.getNumberPages(materialList,AMOUNT_ON_THE_PAGE));
-        materialService.getPDFWithMaterialsData(materialService.getAllMaterials());
         modelAndView.setViewName("WEB-INF/views/" + "catalog");
+
         try {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
@@ -73,7 +73,7 @@ public class MainController {
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
     public ModelAndView basket(ModelAndView modelAndView, Principal user) {
-        modelAndView.setViewName("WEB-INF/views/" + "ru_cart");
+        modelAndView.setViewName("WEB-INF/views/" + "basket");
         modelAndView.addObject("basketList", userService.getAllTheMaterialsOfThisUser(user.getName()));
         try {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
@@ -105,5 +105,4 @@ public class MainController {
         modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
-
 }

@@ -1,119 +1,188 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="local" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<html>
-<head>
-    <%--------------------------------------------------LIBRARIES-----------------------------------------------------%>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="MediaCenter, Template, eCommerce">
+        <meta name="robots" content="all">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/css/bootstrap.css">
-    <%----------------------------------------------------------------------------------------------------------------%>
+        <title>MediaCenter - Responsive eCommerce Template</title>
 
-    <%--------------------------------------------------STYLES--------------------------------------------------------%>
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css">
+        
+        <!-- Customizable CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/green.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl.transitions.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/NAVBAR.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/basket/BASKET_TABLE.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/simple-little-table.css"/>
-    <%----------------------------------------------------------------------------------------------------------------%>
+        <!-- Demo Purpose Only. Should be removed in production -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/config.css">
 
-    <title>EfTech</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/ico/eftech.ico" type="image/x-icon">
-</head>
+        <link href="${pageContext.request.contextPath}/resources/assets/css/green.css" rel="alternate stylesheet" title="Green color">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/red.css" rel="alternate stylesheet" title="Red color">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/navy.css" rel="alternate stylesheet" title="Navy color">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
 
-<%------------------------------------------------------NAVBAR--------------------------------------------------------%>
-<header>
-    <div class="top_header">
-        <p class="glyphicon glyphicon-envelope top_header_color margin_left_18">
-            <spam class="contact_s"> EfTech@mail.ru</spam>
-        </p>
-        <p class="glyphicon glyphicon-earphone top_header_color">
-            <spam class="contact_s"> +12 345 67 89</spam>
-        </p>
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <spam class="top_header_color margin_left_18 ">
-                <local:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name}
-            </spam>
-        </c:if>
-        <p class="glyphicon glyphicon-cog top_header_color"></p>
-        <a class="lng_btn" href="?lang=ru">ru</a>
-        <a class="lng_btn" href="?lang=en">en</a>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css">
+
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/images/favicon.ico">
+    </head>
+<body>
+<div class="wrapper">
+<%@include file="includes/nav.jsp" %>
+
+<%@include file="includes/header.jsp" %>
+    <div id="top-mega-nav">
+    <div class="container">
+        <nav>
+            <ul class="inline">
+                <li class="breadcrumb-nav-holder"> 
+                    <ul>
+                        <li class="breadcrumb-item">
+                            <a href="page_1">Главная</a>
+                        </li>
+                        <li class="breadcrumb-item current gray">
+                            <a href="#">Корзина</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </div>
-
-    <nav class="navbar navbar-default">
-        <div class="container-fluid margin_left_18">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<c:url value="/"/>">
-                    <local:message code="label.hardwareStore"/>
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right margin_right_18">
-                    <li>
-                        <a href="<c:url value="/basket"/>">
-                            <local:message code="label.basket"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/j_spring_security_logout"/>">
-                            <local:message code="label.exit"/>
-                        </a>
-                    </li>
-                </ul>
-                <%--<form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>--%>
-            </div>
-        </div>
-    </nav>
-</header>
-<%--------------------------------------------------------------------------------------------------------------------%>
-
-<%-----------------------------------------------BASKET_TABLE----------------------------------------------------------%>
-<div class="basket_table">
-    <form method="post" action="getpdf">
-<table class="simple-little-table">
-    <caption>PRODUCTS</caption>
-    <tr>
-        <th><local:message code="label.productId"/></th>
-        <th><local:message code="label.number"/></th>
-        <th><local:message code="label.price"/></th>h>
-    </tr>
-    <%--@elvariable id="basketList" type="java.util.List"--%>
-    <c:forEach var="elem" items="${basketList}" varStatus="status">
-        <tr>
-            <td><c:out value="${ elem.productId }"/></td>
-            <td>
-                <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </td>
-            <td><c:out value="${ elem.price }"/></td>
-            <td><input type="checkbox"></td>
-            <td><a href="/buymaterial/${elem.productId}">Заказать товар</a></td>
-        </tr>
-    </c:forEach>
-</table>
-    <input type="submit" value="Отправить">
-    </form>
-</body>
 </div>
+</div>     <section id="cart-page">
+    <div class="container">
+        <div class="col-xs-12 col-md-9 items-holder no-margin">
+       <c:forEach var="item" items="${basketList}">
+            <div class="row no-margin cart-item">
+                <div class="col-xs-12 col-sm-2 no-margin">
+                    <a href="vmc${item.productId}.htm" class="thumb-holder">
+
+                        <img class="lazy" alt="" width="73" height="73" src="resources/initialData/jpg/${item.materialsPicturesList[0].photo}.jpg"/>
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-sm-5 ">
+                    <div class="title">
+                        <a href="#">${item.productId}</a>
+                    </div>
+                    <div class="brand">${item.price}</div>
+                </div> 
+
+                <div class="col-xs-12 col-sm-3 no-margin">
+                    <div class="quantity">
+                        <div class="le-quantity">
+                              <form>
+                                <input name="quantity" readonly="readonly" type="text"  value="1" /> </input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-2 no-margin">
+                    <div class="price">
+                        ${item.price}<br>
+                            <%--<input type="checkbox"/>--%>
+                            <a href="/buymaterial/${item.productId}">Заказать товар</a><br>
+                            <a href="/files/${item.productId}">Скачать pdf</a>
+                    </div>
+                    <a class="close-btn" href="deleteBasketProduct/${item.productId}"></a>
+                </div>
+            </div>
+         </c:forEach>
+        </div>
+
+        <%--<div class="col-xs-12 col-md-3 no-margin sidebar ">
+            <div class="widget cart-summary">
+                <h1 class="border">shopping cart</h1>
+                <div class="body">
+                    <ul class="tabled-data no-border inverse-bold">
+                        <li>
+                            <label>cart subtotal</label>
+                            <div class="value pull-right">{cart.subtotal}</div>
+                        </li>
+                        <li>
+                            <label>VAT</label>
+                            <div class="value pull-right">not included</div>
+                        </li>
+                        <li>
+                            <label>shipping</label>
+                            <div class="value pull-right">not included</div>
+                        </li>
+                    </ul>
+                    <ul id="total-price" class="tabled-data inverse-bold no-border">
+                        <li>
+                            <label>order total</label>
+                            <div class="value pull-right">{cart.total}</div>
+                        </li>
+                    </ul>
+                    <div class="buttons-holder">
+                        <!--<a class="le-button big" href="#" >checkout</a>-->
+                        <a class="simple-link block" href="index.htm" >continue shopping</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>--%>
+    </div>
+</section>      
+                        
+                        
+                
+                        
+                        
+
+
+<%@include file="includes/footer.jsp" %>
+
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-migrate-1.2.1.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/gmap3.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-hover-dropdown.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/css_browser_selector.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/echo.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.easing-1.3.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-slider.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.raty.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.prettyPhoto.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.customSelect.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/scripts.js"></script>
+
+    <script src="resources/assets/switchstylesheet/switchstylesheet.js"></script>
+    
+    <script>
+        $(document).ready(function(){ 
+            $(".changecolor").switchstylesheet( { seperator:"color"} );
+            $('.show-theme-options').click(function(){
+                $(this).parent().toggleClass('open');
+                return false;
+            });
+        });
+
+        $(window).bind("load", function() {
+           $('.show-theme-options').delay(2000).trigger('click');
+        });
+    </script>
+
+    <script src="http://w.sharethis.com/button/buttons.js"></script>
+
+</body>
 </html>

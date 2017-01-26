@@ -160,8 +160,8 @@
                 <%--<a href="#help" class="help"></a>--%>
             </div>
             <div class="box-content">
-                ((( <p>${result}</p>)))
-                <h2>Загрузка цен с файла (For User 2)</h2>
+                <p>${error}</p>
+                <h2>Загрузка картинки товара</h2>
                 <form class="formBox" method="post" action="uploadFile"
                       enctype="multipart/form-data">
                     <fieldset>
@@ -169,9 +169,6 @@
                         <div class="form">
                             <div class="col1">
                                 <div class="clearfix file">
-                                    <div class="lab">
-                                        <label for="inputFile">Файл с ценами:</label>
-                                    </div>
                                     <div class="con">
                                         <input type="file" class="upload-file" id="inputFile"
                                                name="file"/>

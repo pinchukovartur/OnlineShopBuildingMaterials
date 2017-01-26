@@ -13,11 +13,14 @@ import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 import ru.pinch.service.material.MaterialService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
 
 @Controller
 public class MaterialsController {
+
     @Autowired
     private MaterialService materialService;
 
@@ -35,9 +38,25 @@ public class MaterialsController {
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ModelAndView oneProduct(@PathVariable("id") String idProduct, ModelAndView modelAndView) {
-        modelAndView.addObject("product",materialService.getMaterials(idProduct));
+        modelAndView.addObject("product", materialService.getMaterials(idProduct));
+        modelAndView.addObject("numberOfPhoto",materialService.getAllPhotoMaterials(materialService.getMaterials(idProduct)).size());
         modelAndView.setViewName("WEB-INF/views/" + "one_product");
         return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/files/{productId}", method = RequestMethod.GET)
+    public void getFile(
+            @PathVariable("productId") String productId,
+            HttpServletResponse response) {
+        try {
+            FileInputStream is = materialService.getPDFWithMaterialsData(materialService.getMaterials(productId));
+            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            System.err.println("Error writing file to output stream. Filename was-" + productId);
+        }
+        throw new RuntimeException("IOError writing file to output stream");
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
@@ -46,7 +65,7 @@ public class MaterialsController {
             try {
                 Date date = new Date();
                 MaterialsPictures materialsPictures = new MaterialsPictures();
-                String imageName = date.toString().replaceAll(":",",");
+                String imageName = date.toString().replaceAll(":", ",");
                 materialService.saveTheImageOnServer(imageName, file.getBytes());
 
                 materialsPictures.setMaterial(materialService.getMaterials(material));
@@ -57,7 +76,6 @@ public class MaterialsController {
                 e.printStackTrace();
                 return "redirect:/admin";
             }
-        }
-        else return "redirect:/admin";
+        } else return "redirect:/admin";
     }
 }
