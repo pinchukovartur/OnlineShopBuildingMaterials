@@ -1,4 +1,5 @@
 package ru.pinch.service.material;
+import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 
@@ -11,13 +12,14 @@ public interface MaterialService {
     void addMaterial(Material material);
     List<Material> getAllMaterials();
     void deleteMaterial(String id);
-    Material getMaterials(String productID);
+    Material getMaterial(String productID);
 
     List<MaterialsPictures> getAllPhotoMaterials(Material material);
 
     boolean saveTheImageOnServer(String filename, byte[] bytes);
     void saveTheImageOnDataBase(MaterialsPictures materialsPictures);
     FileInputStream getPDFWithMaterialsData(Material material);
+    void addMaterialsFromExcel(MultipartFile file);
 
     List<Material> getListMaterialsOnPage(List<Material> materialListOld,int pageNumber, int amountOnThePage);
     Integer getNumberPages(List<Material> materialListOld,int amountOnThePage);

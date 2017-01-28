@@ -44,7 +44,7 @@
 
     <div id="header">
         <div id="logo">
-            <a href="home.html" title="Go to Homepage"><span>Great Admin</span></a>
+            <a href="/" title="Go to Homepage"><span>Great Admin</span></a>
         </div>
         <div id="user">
             <h2><sec:authentication property="principal.username"/></h2>
@@ -59,6 +59,72 @@
                 <li>Admin Page</li>
             </ul>
         </div>
+
+        <div class="box">
+            <div class="headlines">
+                <h2>
+                    <span>Загрузка данных</span>
+                </h2>
+                <%--<a href="#help" class="help"></a>--%>
+            </div>
+            <div class="box-content">
+                <p>
+                    <c:if test="${not empty errorImage}">
+                        <label class="lab">${errorImage}</label>
+                    </c:if>
+                </p>
+                <h2>Загрузка картинки товара</h2>
+                <form class="formBox" method="post" action="uploadFile"
+                      enctype="multipart/form-data">
+                    <fieldset>
+
+                        <div class="form">
+                            <div class="col1">
+                                <div class="clearfix file">
+                                    <div class="con">
+                                        <input type="file" class="upload-file" id="inputFile"
+                                               name="file"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label>Название продукта:</label>
+                        <input type="text" name="material"/>
+                        <div class="tab-action">
+                            <input type="submit" value="Загрузить" class="button"
+                                   id="upload"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="box-content">
+                <p>
+                    <c:if test="${not empty errorExcel}">
+                        <label class="lab">${errorExcel}</label>
+                    </c:if>
+                </p>
+                <h2>Загрузка из Excel</h2>
+                <form class="formBox" method="post" action="uploadExcel"
+                      enctype="multipart/form-data">
+                    <fieldset>
+
+                        <div class="form">
+                            <div class="col1">
+                                <div class="clearfix file">
+                                    <div class="con">
+                                        <input type="file" class="upload-file" name="file"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-action">
+                            <input type="submit" value="Загрузить" class="button"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
         <div class="box">
             <div class="headlines">
                 <h2>
@@ -88,19 +154,19 @@
                     <c:forEach items="${listProduct}" var="elem">
                         <tr>
                             <td class="dragHandle">&nbsp;</td>
-                            <td><c:out value="${ elem.productId }"/></td>
-                            <td><c:out value="${ elem.type }"/></td>
-                            <td><c:out value="${ elem.length }"/></td>
-                            <td><c:out value="${ elem.weight }"/></td>
-                            <td><c:out value="${ elem.thickness }"/></td>
-                            <td><c:out value="${ elem.color }"/></td>
-                            <td><c:out value="${ elem.grade }"/></td>
-                            <td><c:out value="${ elem.sanded }"/></td>
-                            <td><c:out value="${ elem.waterResistance }"/></td>
-                            <td><c:out value="${ elem.price }"/></td>
-                            <td><c:out value="${ elem.numberOfSheets }"/></td>
-                            <td><c:out value="${ elem.numberOfPackages }"/></td>
-                            <td><c:out value="${ elem.machineDescription }"/></td>
+                            <td><c:out value="${elem.productId }"/></td>
+                            <td><c:out value="${elem.type }"/></td>
+                            <td><c:out value="${elem.length }"/></td>
+                            <td><c:out value="${elem.weight }"/></td>
+                            <td><c:out value="${elem.thickness }"/></td>
+                            <td><c:out value="${elem.color }"/></td>
+                            <td><c:out value="${elem.grade }"/></td>
+                            <td><c:out value="${elem.sanded }"/></td>
+                            <td><c:out value="${elem.waterResistance }"/></td>
+                            <td><c:out value="${elem.price }"/></td>
+                            <td><c:out value="${elem.numberOfSheets }"/></td>
+                            <td><c:out value="${elem.numberOfPackages }"/></td>
+                            <td><c:out value="${elem.machineDescription }"/></td>
 
                             <td class="action"><a href="dProduct/${elem.productId}"
                                                   class="ico ico-delete">Delete</a><%-- <a--%>
@@ -122,7 +188,7 @@
                                     <button class="close" type="button" data-dismiss="modal">×</button>
                                     <h4 class="modal-title">Добавление товара</h4>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body row">
                                     <spring:form method="POST" modelAttribute="addProduct" action="newProduct">
                                         ProductID: <spring:input path="productId"/><br/>
                                         Type: <spring:input path="type"/><br/>
@@ -150,53 +216,18 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="box">
-            <div class="headlines">
-                <h2>
-                    <span>Загрузка данных</span>
-                </h2>
-                <%--<a href="#help" class="help"></a>--%>
-            </div>
-            <div class="box-content">
-                <p>${error}</p>
-                <h2>Загрузка картинки товара</h2>
-                <form class="formBox" method="post" action="uploadFile"
-                      enctype="multipart/form-data">
-                    <fieldset>
-
-                        <div class="form">
-                            <div class="col1">
-                                <div class="clearfix file">
-                                    <div class="con">
-                                        <input type="file" class="upload-file" id="inputFile"
-                                               name="file"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <label>Название продукта:</label>
-                        <input type="text" name="material"/>
-                        <div class="tab-action">
-                            <input type="submit" value="Загрузить" class="button"
-                                   id="upload"/>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
     </div>
-    <div id="sidebar">
-        <ul id="floatMenu" class="mainmenu">
-            <li><a href="/" title="Главная" class="link">Главная</a></li>
-        </ul>
-    </div>
-    <div id="footer">
-        <p>
-            © 2017 Great Admin
-        </p>
-    </div>
+</div>
+<div id="sidebar">
+    <ul id="floatMenu" class="mainmenu">
+        <li><a href="/" title="Главная" class="link">Главная</a></li>
+    </ul>
+</div>
+<div id="footer">
+    <p>
+        © 2017 Great Admin
+    </p>
+</div>
 </div>
 </body>
 </html>

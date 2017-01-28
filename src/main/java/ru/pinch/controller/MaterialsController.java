@@ -38,8 +38,8 @@ public class MaterialsController {
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ModelAndView oneProduct(@PathVariable("id") String idProduct, ModelAndView modelAndView) {
-        modelAndView.addObject("product", materialService.getMaterials(idProduct));
-        modelAndView.addObject("numberOfPhoto",materialService.getAllPhotoMaterials(materialService.getMaterials(idProduct)).size());
+        modelAndView.addObject("product", materialService.getMaterial(idProduct));
+        modelAndView.addObject("numberOfPhoto", materialService.getAllPhotoMaterials(materialService.getMaterial(idProduct)).size());
         modelAndView.setViewName("WEB-INF/views/" + "one_product");
         return modelAndView;
     }
@@ -50,7 +50,7 @@ public class MaterialsController {
             @PathVariable("productId") String productId,
             HttpServletResponse response) {
         try {
-            FileInputStream is = materialService.getPDFWithMaterialsData(materialService.getMaterials(productId));
+            FileInputStream is = materialService.getPDFWithMaterialsData(materialService.getMaterial(productId));
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
@@ -60,22 +60,58 @@ public class MaterialsController {
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("material") String material) {
+    public ModelAndView uploadFile(@RequestParam("file") MultipartFile file,
+                                   @RequestParam("material") String material, ModelAndView modelAndView) {
+
+        modelAndView.addObject("addProduct", new Material());
+        modelAndView.addObject("listProduct", materialService.getAllMaterials());
+
         if (!file.isEmpty()) {
             try {
                 Date date = new Date();
                 MaterialsPictures materialsPictures = new MaterialsPictures();
                 String imageName = date.toString().replaceAll(":", ",");
+
                 materialService.saveTheImageOnServer(imageName, file.getBytes());
 
-                materialsPictures.setMaterial(materialService.getMaterials(material));
+                System.out.println(file.getOriginalFilename());
+
+                materialsPictures.setMaterial(materialService.getMaterial(material));
                 materialsPictures.setPhoto(imageName);
+
                 materialService.saveTheImageOnDataBase(materialsPictures);
-                return "redirect:/admin";
+
+                modelAndView.addObject("errorImage", "file has been successfully downloaded");
+                modelAndView.setViewName("WEB-INF/views/"+"admin");
+                return modelAndView;
             } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/admin";
+                modelAndView.setViewName("WEB-INF/views/"+"admin");
+                modelAndView.addObject("errorImage", e.getMessage());
+                return modelAndView;
             }
-        } else return "redirect:/admin";
+        } else {
+            modelAndView.addObject("errorImage", "empty file");
+            modelAndView.setViewName("WEB-INF/views/"+"admin");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/uploadExcel", method = RequestMethod.POST)
+    public ModelAndView uploadExcel(@RequestParam("file") MultipartFile file, ModelAndView modelAndView) {
+
+        modelAndView.addObject("addProduct", new Material());
+        modelAndView.addObject("listProduct", materialService.getAllMaterials());
+
+        if (!file.isEmpty()) {
+            modelAndView.setViewName("WEB-INF/views/"+"admin");
+            modelAndView.addObject("errorExcel", "not empty file");
+
+            materialService.addMaterialsFromExcel(file);
+
+        } else {
+            modelAndView.addObject("errorExcel", "empty file");
+            modelAndView.setViewName("WEB-INF/views/"+"admin");
+        }
+        return modelAndView;
     }
 }

@@ -32,7 +32,6 @@ public class MainController {
         modelAndView.setViewName("WEB-INF/views/" + "admin");
         modelAndView.addObject("addProduct", new Material());
         modelAndView.addObject("listProduct", materialService.getAllMaterials());
-        modelAndView.addObject("listUsers", userService.getUsers());
         return modelAndView;
     }
 
@@ -105,4 +104,6 @@ public class MainController {
         modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
+
+
 }
