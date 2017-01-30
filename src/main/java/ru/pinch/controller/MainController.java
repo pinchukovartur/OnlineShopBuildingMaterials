@@ -20,6 +20,7 @@ import java.util.List;
 public class MainController {
 
     private static final int AMOUNT_ON_THE_PAGE = 9;
+    public static final String ANONYMOUS_USER = "Is server is connected with anonymous user";
 
     @Autowired
     private MaterialService materialService;
@@ -46,7 +47,7 @@ public class MainController {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
         catch (Exception e){
-            System.err.println(e.getMessage());
+            System.err.println(ANONYMOUS_USER);
         }
         return modelAndView;
     }
@@ -57,7 +58,7 @@ public class MainController {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
         catch (Exception e){
-            System.err.println(e.getMessage());
+            System.err.println(ANONYMOUS_USER);
         }
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
@@ -78,7 +79,7 @@ public class MainController {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
         catch (Exception e){
-            System.err.println(e.getMessage());
+            System.err.println(ANONYMOUS_USER);
         }
         return modelAndView;
     }
@@ -99,7 +100,7 @@ public class MainController {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
         catch (Exception e){
-            System.err.println(e.getMessage());
+            System.err.println(ANONYMOUS_USER);
         }
         modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;

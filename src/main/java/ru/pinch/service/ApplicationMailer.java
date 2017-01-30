@@ -10,7 +10,7 @@ import java.util.Properties;
 public class ApplicationMailer
 {
     private final String USER_NAME = "pinchukovartur@gmail.com"; //Нужно вставить почту, от кого будет идти письмо
-    private final String PASSWORD = "9012qw9012QW";
+    private final String PASSWORD = "********";
 
     public void send(String subject, String text, String toEmail){
 

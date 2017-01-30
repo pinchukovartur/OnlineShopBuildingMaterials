@@ -74,8 +74,6 @@ public class MaterialsController {
 
                 materialService.saveTheImageOnServer(imageName, file.getBytes());
 
-                System.out.println(file.getOriginalFilename());
-
                 materialsPictures.setMaterial(materialService.getMaterial(material));
                 materialsPictures.setPhoto(imageName);
 
