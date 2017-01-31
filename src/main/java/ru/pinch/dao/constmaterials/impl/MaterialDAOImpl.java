@@ -58,11 +58,17 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     public Material getMaterialsByID(String productID) {
         openSession();
-        Query query = session.createQuery("from Material where productId = :productId");
-        query.setParameter("productId", productID);
-        List<Material> result = query.list();
-        session.close();
-        return result.get(0);
+        try {
+            Query query = session.createQuery("from Material where productId = :productId");
+            query.setParameter("productId", productID);
+            List<Material> result = query.list();
+            session.close();
+            return result.get(0);
+        }
+        catch (Exception e){
+            return null;
+        }
+
     }
 
 

@@ -19,7 +19,8 @@ public interface MaterialService {
     boolean saveTheImageOnServer(String filename, byte[] bytes);
     void saveTheImageOnDataBase(MaterialsPictures materialsPictures);
     FileInputStream getPDFWithMaterialsData(Material material);
-    void addMaterialsFromExcel(MultipartFile file);
+
+    String addMaterialsFromExcel(MultipartFile file);
 
     List<Material> getListMaterialsOnPage(List<Material> materialListOld,int pageNumber, int amountOnThePage);
     Integer getNumberPages(List<Material> materialListOld,int amountOnThePage);

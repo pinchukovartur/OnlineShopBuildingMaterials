@@ -8,16 +8,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormat;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -28,16 +18,13 @@ import ru.pinch.dao.constmaterials.MaterialDAO;
 import ru.pinch.entity.Material;
 import ru.pinch.entity.MaterialsPictures;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,6 +36,9 @@ public class MaterialServiceImpl implements MaterialService {
 
 
     public void addMaterial(Material material) {
+        if (getMaterial(material.getProductId()) != null) {
+            deleteMaterial(material.getProductId());
+        }
         shopDataBase.addMaterial(material);
     }
 
@@ -88,7 +78,7 @@ public class MaterialServiceImpl implements MaterialService {
         }
     }
 
-    public FileInputStream  getPDFWithMaterialsData(Material material) {
+    public FileInputStream getPDFWithMaterialsData(Material material) {
         String RESULT
                 = COMPUPER_PATH + "test.pdf";
 
@@ -99,7 +89,6 @@ public class MaterialServiceImpl implements MaterialService {
             document.open();
             PdfPTable table = new PdfPTable(5);
 
-            //подключаем файл шрифта, который поддерживает кириллицу
             BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(bf);
 
@@ -109,21 +98,11 @@ public class MaterialServiceImpl implements MaterialService {
             table.addCell(new Paragraph("Ширина", font));
             table.addCell(new Paragraph("Тип", font));
 
-                table.addCell(material.getProductId());
-                table.addCell(String.valueOf(material.getPrice()));
-                table.addCell(String.valueOf(material.getLength()));
-                table.addCell(String.valueOf(material.getWeight()));
-                table.addCell(material.getType());
-              /*table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());
-                table.addCell(materialList.get(i).getProductId());*/
+            table.addCell(material.getProductId());
+            table.addCell(String.valueOf(material.getPrice()));
+            table.addCell(String.valueOf(material.getLength()));
+            table.addCell(String.valueOf(material.getWeight()));
+            table.addCell(material.getType());
             document.add(table);
         } catch (DocumentException e) {
             e.printStackTrace();
@@ -134,46 +113,56 @@ public class MaterialServiceImpl implements MaterialService {
 
         FileInputStream pdfFile = null;
         try {
-            pdfFile = new FileInputStream(COMPUPER_PATH+"test.pdf");
+            pdfFile = new FileInputStream(COMPUPER_PATH + "test.pdf");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return pdfFile;
     }
 
-    public void addMaterialsFromExcel(MultipartFile file) {
-
+    public String addMaterialsFromExcel(MultipartFile file) {
         try {
-            writeIntoExcel("test2.xlsx");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            File file1 = new File(COMPUPER_PATH + file.getOriginalFilename());
+            File file1 = new File(COMPUPER_PATH + "test.xlsx");
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(file1));
             stream.write(file.getBytes());
             stream.close();
 
+            XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(COMPUPER_PATH + "test.xlsx"));
+            XSSFSheet myExcelSheet = myExcelBook.getSheet("Materials");
 
-            XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(COMPUPER_PATH+"test2.xlsx"));
-            XSSFSheet myExcelSheet = myExcelBook.getSheet("Birthdays");
+            Material material = new Material();
+
             XSSFRow row = myExcelSheet.getRow(0);
+            material.setProductId(row.getCell(1).getStringCellValue());
 
-            if(row.getCell(0).getCellType() == HSSFCell.CELL_TYPE_STRING){
-                String name = row.getCell(0).getStringCellValue();
-                System.out.println("name : " + name);
-            }
+            row = myExcelSheet.getRow(1);
+            material.setType(row.getCell(1).getStringCellValue());
 
-            if(row.getCell(1).getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                Date birthdate = row.getCell(1).getDateCellValue();
-                System.out.println("birthdate :" + birthdate);
-            }
+            row = myExcelSheet.getRow(2);
+            material.setLength((int) row.getCell(1).getNumericCellValue());
 
+            row = myExcelSheet.getRow(3);
+            material.setWeight((int) row.getCell(1).getNumericCellValue());
+
+            row = myExcelSheet.getRow(4);
+            material.setThickness((int) row.getCell(1).getNumericCellValue());
+
+            row = myExcelSheet.getRow(5);
+            material.setGrade(row.getCell(1).getStringCellValue());
+
+            row = myExcelSheet.getRow(6);
+            material.setPrice(row.getCell(1).getNumericCellValue());
+
+            addMaterial(material);
             myExcelBook.close();
-        } catch (Exception e) {
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            return e.getMessage();
         }
+        return "ok";
     }
 
     public List<Material> getListMaterialsOnPage(List<Material> materialListOld, int pageNumber, int amountOnThePage) {
@@ -243,36 +232,16 @@ public class MaterialServiceImpl implements MaterialService {
         } else return materialListOld;
     }
 
-    @SuppressWarnings("deprecation")
-    private static void writeIntoExcel(String file) throws FileNotFoundException, IOException{
-        Workbook book = new XSSFWorkbook();
-        Sheet sheet = book.createSheet("Birthdays");
-
-        // Нумерация начинается с нуля
-        Row row = sheet.createRow(0);
-
-        // Мы запишем имя и дату в два столбца
-        // имя будет String, а дата рождения --- Date,
-        // формата dd.mm.yyyy
-        Cell name = row.createCell(0);
-        name.setCellValue("John");
-
-        Cell birthdate = row.createCell(1);
-
-        DataFormat format = book.createDataFormat();
-        CellStyle dateStyle = book.createCellStyle();
-        dateStyle.setDataFormat(format.getFormat("dd.mm.yyyy"));
-        birthdate.setCellStyle(dateStyle);
-
-
-        // Нумерация лет начинается с 1900-го
-        birthdate.setCellValue(new Date(110, 10, 10));
-
-        // Меняем размер столбца
-        sheet.autoSizeColumn(1);
-
-        // Записываем всё в файл
-        book.write(new FileOutputStream(COMPUPER_PATH+file));
-        book.close();
+    private Material checkFirstColumnExcel(Material material, XSSFRow row) {
+        if (row.getCell(0).getStringCellValue().contains("Product ID")) {
+            material.setProductId(row.getCell(1).getStringCellValue());
+        }
+        if (row.getCell(0).getStringCellValue().contains("Type")) {
+            material.setType(row.getCell(1).getStringCellValue());
+        }
+        /*if(row.getCell(0).getStringCellValue().contains("Length")){
+            material.setLength((int) row.getCell(1).getNumericCellValue());
+        }*/
+        return material;
     }
 }

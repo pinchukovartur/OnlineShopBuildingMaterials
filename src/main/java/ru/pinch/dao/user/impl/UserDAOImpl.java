@@ -51,7 +51,6 @@ public class UserDAOImpl implements UserDAO {
             return result.get(0);
         }
         catch (Exception e){
-            System.err.println("Пользователь не был найден(getUserByID)");
             session.close();
             return null;
         }

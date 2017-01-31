@@ -97,19 +97,17 @@ public class MaterialsController {
     @RequestMapping(value = "/uploadExcel", method = RequestMethod.POST)
     public ModelAndView uploadExcel(@RequestParam("file") MultipartFile file, ModelAndView modelAndView) {
 
-        modelAndView.addObject("addProduct", new Material());
-        modelAndView.addObject("listProduct", materialService.getAllMaterials());
-
         if (!file.isEmpty()) {
             modelAndView.setViewName("WEB-INF/views/"+"admin");
-            modelAndView.addObject("errorExcel", "not empty file");
-
-            materialService.addMaterialsFromExcel(file);
+            modelAndView.addObject("errorExcel", materialService.addMaterialsFromExcel(file));
 
         } else {
             modelAndView.addObject("errorExcel", "empty file");
             modelAndView.setViewName("WEB-INF/views/"+"admin");
         }
+
+        modelAndView.addObject("addProduct", new Material());
+        modelAndView.addObject("listProduct", materialService.getAllMaterials());
         return modelAndView;
     }
 }
