@@ -1,14 +1,10 @@
-package ru.pinch.entity;
+package ru.pinch.entity.users;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "authorities", schema = "buildingonlineshop", catalog = "")

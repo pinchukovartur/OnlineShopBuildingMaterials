@@ -1,8 +1,8 @@
 package ru.pinch.dao.user;
 
-import ru.pinch.entity.Basket;
-import ru.pinch.entity.Role;
-import ru.pinch.entity.User;
+import ru.pinch.entity.users.Basket;
+import ru.pinch.entity.users.Role;
+import ru.pinch.entity.users.User;
 
 import java.util.List;
 

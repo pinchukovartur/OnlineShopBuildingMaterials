@@ -3,15 +3,15 @@ package ru.pinch.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.pinch.dao.constmaterials.MaterialDAO;
+import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.dao.user.UserDAO;
-import ru.pinch.entity.Basket;
-import ru.pinch.entity.Role;
-import ru.pinch.entity.User;
+import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.plywoods.Plywood;
+import ru.pinch.entity.users.Basket;
+import ru.pinch.entity.users.Role;
+import ru.pinch.entity.users.User;
 import ru.pinch.service.ApplicationMailer;
 
-import ru.pinch.entity.Material;
-import ru.pinch.entity.MaterialsPictures;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
     private UserDAO userDAO;
 
     @Autowired
-    private MaterialDAO materialDAO;
+    private ProductsDAO productsDAO;
 
     @Transactional
     public void addUser(User user) {
@@ -72,20 +72,20 @@ public class UserServiceImpl implements UserService{
         userDAO.addToBasket(basket);
     }
 
-    public List<Material> getAllTheMaterialsOfThisUser(String username) {
+    public List<Plywood> getAllTheMaterialsOfThisUser(String username) {
         List<String> result = userDAO.getProductIDUsers(username);
 
-        List<Material> materialsListUser = new ArrayList<Material>();
+        List<Plywood> materialsListUser = new ArrayList<Plywood>();
         for (int i = 0; i < result.size(); i++) {
-            materialsListUser.add(materialDAO.getMaterialsByID(result.get(i)));
+            materialsListUser.add(productsDAO.getMaterialsByID(result.get(i)));
         }
         return materialsListUser;
     }
 
-    public void buyMaterialsUser(User user, Material material){
+    public void buyMaterialsUser(User user, Product plywood){
         ApplicationMailer mailer = new ApplicationMailer();
-        String message = "Вы заказали:" + material.getProductId() + material.getType()
-                            + "Стоимость:" +  material.getPrice();
+        String message = "Вы заказали:" + plywood.getProductId() + plywood.getType()
+                            + "Стоимость:" +  plywood.getPrice();
         mailer.send("Online Materials Shop", message,  user.getEmail());
     }
 }

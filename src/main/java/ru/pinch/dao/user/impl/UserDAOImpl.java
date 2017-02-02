@@ -5,9 +5,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ru.pinch.dao.HibernateUtil;
 import ru.pinch.dao.user.UserDAO;
-import ru.pinch.entity.Basket;
-import ru.pinch.entity.Role;
-import ru.pinch.entity.User;
+import ru.pinch.entity.users.Basket;
+import ru.pinch.entity.users.Role;
+import ru.pinch.entity.users.User;
 
 import java.util.List;
 
@@ -71,7 +71,6 @@ public class UserDAOImpl implements UserDAO {
             session.close();
         }
         catch (Exception e){
-            System.err.println("ERROR ADD ROLE");
             session.close();
         }
     }

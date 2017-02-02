@@ -1,4 +1,4 @@
-package ru.pinch.entity;
+package ru.pinch.entity.users;
 
 import javax.persistence.*;
 

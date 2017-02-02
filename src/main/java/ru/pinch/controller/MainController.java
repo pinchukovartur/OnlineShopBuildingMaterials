@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pinch.entity.Material;
-import ru.pinch.entity.User;
-import ru.pinch.service.material.MaterialService;
+import ru.pinch.entity.products.plywoods.Plywood;
+import ru.pinch.entity.users.User;
+import ru.pinch.service.products.ProductsService;
 import ru.pinch.service.user.UserService;
 
 import java.security.Principal;
@@ -19,47 +19,36 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    private static final int AMOUNT_ON_THE_PAGE = 9;
-    public static final String ANONYMOUS_USER = "Is server is connected with anonymous user";
+
+    private static final String ANONYMOUS_USER = "Is server is connected with anonymous user";
 
     @Autowired
-    private MaterialService materialService;
+    private ProductsService productsService;
 
     @Autowired
     private UserService userService;
 
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView modelAndView) {
         modelAndView.setViewName("WEB-INF/views/" + "admin");
-        modelAndView.addObject("addProduct", new Material());
-        modelAndView.addObject("listProduct", materialService.getAllMaterials());
+        modelAndView.addObject("addProduct", new Plywood());
+        modelAndView.addObject("listProduct", productsService.getAllMaterials());
         return modelAndView;
     }
 
-    @RequestMapping(value = "/page_{pageNumber}", method = RequestMethod.GET)
-    public ModelAndView main(@PathVariable("pageNumber") int pageNumber, ModelAndView modelAndView, Principal user) {
-        List<Material> materialList = materialService.getAllMaterials();
-        modelAndView.addObject("listProduct", materialService.getListMaterialsOnPage(materialList,pageNumber,AMOUNT_ON_THE_PAGE));
-        modelAndView.addObject("numberOfPages", materialService.getNumberPages(materialList,AMOUNT_ON_THE_PAGE));
-        modelAndView.setViewName("WEB-INF/views/" + "catalog");
 
-        try {
-            modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
-        }
-        catch (Exception e){
-            System.err.println(ANONYMOUS_USER);
-        }
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main(ModelAndView modelAndView,Principal user) {
-        try {
+        /*try {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
         }
         catch (Exception e){
             System.err.println(ANONYMOUS_USER);
-        }
+        }*/
+
+        System.out.println(userService.getUsers());
         modelAndView.setViewName("WEB-INF/views/" + "index");
         return modelAndView;
     }
@@ -93,7 +82,7 @@ public class MainController {
             @RequestParam(value = "grade",defaultValue = "0") int grade,
             ModelAndView modelAndView, Principal user)
     {
-        modelAndView.addObject("listProduct", materialService.getSortListMaterials(checkbox_particleBoard,
+        modelAndView.addObject("listProduct", productsService.getSortListMaterials(checkbox_particleBoard,
                 checkbox_plywood, input_with,input_before,grade));
 
         try {

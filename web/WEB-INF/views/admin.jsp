@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <label>Название продукта:</label>
-                        <input type="text" name="material"/>
+                        <input type="text" name="plywood"/>
                         <div class="tab-action">
                             <input type="submit" value="Загрузить" class="button"
                                    id="upload"/>

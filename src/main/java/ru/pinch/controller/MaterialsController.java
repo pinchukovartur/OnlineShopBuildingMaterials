@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pinch.entity.Material;
-import ru.pinch.entity.MaterialsPictures;
-import ru.pinch.service.material.MaterialService;
+import ru.pinch.entity.products.plywoods.Plywood;
+import ru.pinch.service.products.ProductsService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
@@ -22,26 +21,18 @@ import java.util.Date;
 public class MaterialsController {
 
     @Autowired
-    private MaterialService materialService;
+    private ProductsService productsService;
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.POST)
-    public String addProduct(@ModelAttribute("addProduct") Material product) {
-        materialService.addMaterial(product);
+    public String addProduct(@ModelAttribute("addProduct") Plywood product) {
+        productsService.addMaterial(product);
         return "redirect:/admin";
     }
 
     @RequestMapping(value = "/dProduct/{id}", method = RequestMethod.GET)
     public String deleteContact(@PathVariable("id") String idProduct) {
-        materialService.deleteMaterial(idProduct);
+        productsService.deleteMaterial(idProduct);
         return "redirect:/admin";
-    }
-
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-    public ModelAndView oneProduct(@PathVariable("id") String idProduct, ModelAndView modelAndView) {
-        modelAndView.addObject("product", materialService.getMaterial(idProduct));
-        modelAndView.addObject("numberOfPhoto", materialService.getAllPhotoMaterials(materialService.getMaterial(idProduct)).size());
-        modelAndView.setViewName("WEB-INF/views/" + "one_product");
-        return modelAndView;
     }
 
 
@@ -50,7 +41,7 @@ public class MaterialsController {
             @PathVariable("productId") String productId,
             HttpServletResponse response) {
         try {
-            FileInputStream is = materialService.getPDFWithMaterialsData(materialService.getMaterial(productId));
+            FileInputStream is = productsService.getPDFWithMaterialsData(productsService.getMaterial(productId));
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
@@ -63,21 +54,21 @@ public class MaterialsController {
     public ModelAndView uploadFile(@RequestParam("file") MultipartFile file,
                                    @RequestParam("material") String material, ModelAndView modelAndView) {
 
-        modelAndView.addObject("addProduct", new Material());
-        modelAndView.addObject("listProduct", materialService.getAllMaterials());
+        modelAndView.addObject("addProduct", new Plywood());
+        modelAndView.addObject("listProduct", productsService.getAllMaterials());
 
         if (!file.isEmpty()) {
             try {
                 Date date = new Date();
-                MaterialsPictures materialsPictures = new MaterialsPictures();
+                /*Photosplywoods plywoodPhotos = new Photosplywoods();*/
                 String imageName = date.toString().replaceAll(":", ",");
 
-                materialService.saveTheImageOnServer(imageName, file.getBytes());
+                productsService.saveTheImageOnServer(imageName, file.getBytes());
 
-                materialsPictures.setMaterial(materialService.getMaterial(material));
-                materialsPictures.setPhoto(imageName);
+                /*plywoodPhotos.setProduct(productsService.getMaterial(material));
+                plywoodPhotos.setPhoto(imageName);*/
 
-                materialService.saveTheImageOnDataBase(materialsPictures);
+                /*productsService.saveTheImageOnDataBase(plywoodPhotos);*/
 
                 modelAndView.addObject("errorImage", "file has been successfully downloaded");
                 modelAndView.setViewName("WEB-INF/views/"+"admin");
@@ -99,15 +90,15 @@ public class MaterialsController {
 
         if (!file.isEmpty()) {
             modelAndView.setViewName("WEB-INF/views/"+"admin");
-            modelAndView.addObject("errorExcel", materialService.addMaterialsFromExcel(file));
+            modelAndView.addObject("errorExcel", productsService.addMaterialsFromExcel(file));
 
         } else {
             modelAndView.addObject("errorExcel", "empty file");
             modelAndView.setViewName("WEB-INF/views/"+"admin");
         }
 
-        modelAndView.addObject("addProduct", new Material());
-        modelAndView.addObject("listProduct", materialService.getAllMaterials());
+        modelAndView.addObject("addProduct", new Plywood());
+        modelAndView.addObject("listProduct", productsService.getAllMaterials());
         return modelAndView;
     }
 }

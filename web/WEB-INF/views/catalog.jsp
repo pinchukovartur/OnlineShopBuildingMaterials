@@ -200,7 +200,7 @@
                                                 <div class="ribbon red"><span>В продаже</span></div>
                                                 <div class="image">
                                                     <img alt=""
-                                                         src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"
+                                                         src="resources/initialData/jpg/${product.firstPhoto}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                                 <div class="body">
@@ -250,7 +250,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img src="resources/initialData/jpg/${product.materialsPicturesList[0].photo}.jpg"
+                                                    <img src="resources/initialData/jpg/${product.firstPhoto}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                             </div>
@@ -258,7 +258,7 @@
                                                 <div class="body">
                                                     <div class="label-discount green">-10% sale</div>
                                                     <div class="title">
-                                                        <a href="product/${product.productId}">${product.productId} ${product.productId}</a>
+                                                        <a href="product/${product.productId}">${product.productId}</a>
                                                     </div>
                                                     <div class="brand">${product.productId}
                                                         <br>

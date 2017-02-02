@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pinch.entity.User;
-import ru.pinch.service.material.MaterialService;
+import ru.pinch.entity.users.User;
+import ru.pinch.service.products.ProductsService;
 import ru.pinch.service.user.UserService;
 
 import java.security.Principal;
@@ -23,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private MaterialService materialService;
+    private ProductsService productsService;
 
     @Autowired
     private MessageSource messageSource;
@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
     public String buyMaterial(@PathVariable("productID") String productID, Principal user) {
         userService.buyMaterialsUser(userService.getUserByID(user.getName()),
-                materialService.getMaterial(productID));
+                productsService.getMaterial(productID));
         return "redirect:/basket";
     }
 

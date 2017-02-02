@@ -10,11 +10,10 @@
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
 
-        <mapping class="ru.pinch.entity.Material"/>
-        <mapping class="ru.pinch.entity.MaterialsPictures"/>
-        <mapping class="ru.pinch.entity.User"/>
-        <mapping class="ru.pinch.entity.Role"/>
-        <mapping class="ru.pinch.entity.Basket"/>
+        <mapping class="ru.pinch.entity.products.plywoods.Plywood"/>
+        <mapping class="ru.pinch.entity.users.User"/>
+        <mapping class="ru.pinch.entity.users.Role"/>
+        <mapping class="ru.pinch.entity.users.Basket"/>
 
     </session-factory>
 </hibernate-configuration>

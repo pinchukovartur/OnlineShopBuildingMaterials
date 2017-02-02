@@ -1,8 +1,9 @@
 package ru.pinch.service.user;
 
-import ru.pinch.entity.User;
-import ru.pinch.entity.Material;
-import ru.pinch.entity.MaterialsPictures;
+import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.plywoods.Plywood;
+import ru.pinch.entity.users.User;
+
 import java.util.List;
 
 public interface UserService {
@@ -13,6 +14,6 @@ public interface UserService {
 
     void saveUser(String username, String password, String email);
     void addToBasket(String username, String productId);
-    List<Material> getAllTheMaterialsOfThisUser(String username);
-    void buyMaterialsUser(User user, Material material);
+    List<Plywood> getAllTheMaterialsOfThisUser(String username);
+    void buyMaterialsUser(User user, Product plywood);
 }
