@@ -1,20 +1,28 @@
 package ru.pinch.entity.products;
 
 
+import ru.pinch.entity.users.User;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity(name = "Product")
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-        name="type",
+        name="discriminator",
         discriminatorType= DiscriminatorType.STRING
 )
 @DiscriminatorValue(value="Product")
@@ -23,9 +31,7 @@ public class Product {
     private String type;
     private Double price;
     private String description;
-    private String firstPhoto;
-    private String secondPhoto;
-    private String thirdPhoto;
+    private List<Photos> photosList;
 
     @Id
     @Column(name = "ProductID", nullable = false, length = 45)
@@ -68,30 +74,14 @@ public class Product {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "FirstPhoto", nullable = true, length = 45)
-    public String getFirstPhoto() {
-        return firstPhoto;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    public List<Photos> getPhotosList() {
+        return photosList;
     }
 
-    public void setFirstPhoto(String firstPhoto) {
-        this.firstPhoto = firstPhoto;
-    }
-
-    @Basic
-    @Column(name = "SecondPhoto", nullable = true, length = 45)
-    public String getSecondPhoto() {
-        return secondPhoto;
-    }
-
-    public void setSecondPhoto(String secondPhoto) {
-        this.secondPhoto = secondPhoto;
-    }
-
-    @Basic
-    @Column(name = "ThirdPhoto", nullable = true, length = 45)
-    public String getThirdPhoto() {
-        return thirdPhoto;
+    public void setPhotosList(List<Photos> photosList) {
+        this.photosList = photosList;
     }
 
     @Override
@@ -105,9 +95,7 @@ public class Product {
         if (!type.equals(product.type)) return false;
         if (!price.equals(product.price)) return false;
         if (!description.equals(product.description)) return false;
-        if (!firstPhoto.equals(product.firstPhoto)) return false;
-        if (!secondPhoto.equals(product.secondPhoto)) return false;
-        return thirdPhoto.equals(product.thirdPhoto);
+        return photosList.equals(product.photosList);
     }
 
     @Override
@@ -116,15 +104,7 @@ public class Product {
         result = 31 * result + type.hashCode();
         result = 31 * result + price.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + firstPhoto.hashCode();
-        result = 31 * result + secondPhoto.hashCode();
-        result = 31 * result + thirdPhoto.hashCode();
+        result = 31 * result + photosList.hashCode();
         return result;
-    }
-
-    public void setThirdPhoto(String thirdPhoto) {
-
-
-        this.thirdPhoto = thirdPhoto;
     }
 }

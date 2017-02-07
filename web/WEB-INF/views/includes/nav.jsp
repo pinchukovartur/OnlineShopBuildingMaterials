@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-xs-12 col-sm-6 no-margin">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/page_1"><local:message code="nav.label.home"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/"><local:message code="nav.label.home"/></a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#change-colors">
                         <local:message code="nav.label.changeColors"/>

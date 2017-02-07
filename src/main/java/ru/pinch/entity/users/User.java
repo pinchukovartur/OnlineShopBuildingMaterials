@@ -1,6 +1,9 @@
 package ru.pinch.entity.users;
 
+import ru.pinch.entity.products.Product;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "buildingonlineshop")
@@ -9,6 +12,7 @@ public class User{
     private String password;
     private String email;
     private int enabled;
+    private Role role;
 
     @Id
     @Column(name = "username", nullable = false, length = 45)
@@ -51,17 +55,14 @@ public class User{
     }
 
 
-
-    /*@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_role")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }*/
-
+    }
 
     @Override
     public boolean equals(Object o) {

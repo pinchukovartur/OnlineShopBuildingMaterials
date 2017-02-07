@@ -59,11 +59,11 @@ class tmhUtilities {
     $target = (!empty($opts['target'])) ? ' target="'.$opts['target'].'"' : '';
 
     // prepare the entities
-    foreach ($tweet['entities'] as $type => $things) {
+    foreach ($tweet['entities'] as $photo => $things) {
       foreach ($things as $entity => $value) {
         $tweet_link = "<a href=\"https://twitter.com/{$tweet['user']['screen_name']}/statuses/{$tweet['id']}\"{$target}>{$tweet['created_at']}</a>";
 
-        switch ($type) {
+        switch ($photo) {
           case 'hashtags':
             $href = "<a href=\"https://twitter.com/search?q=%23{$value['text']}\"{$target}>#{$value['text']}</a>";
             break;

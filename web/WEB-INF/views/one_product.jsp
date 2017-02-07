@@ -49,63 +49,16 @@
 
 <div class="wrapper">
 
-
-
-    <!-- ============================================================= TOP NAVIGATION ============================================================= -->
     <%@include file="includes/nav.jsp" %>
-    <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->       <!-- ============================================================= HEADER ============================================================= -->
     <%@include file="includes/header.jsp" %>
-    <!-- ============================================================= HEADER : END ============================================================= --><div class="animate-dropdown"><!-- ========================================= BREADCRUMB ========================================= -->
 
 
     <div id="top-mega-nav">
         <div class="container">
             <nav>
                 <ul class="inline">
-                    <!--                <li class="dropdown le-dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-list"></i> shop by department
-                                        </a>-->
-
-                    <!--                   <ul class="dropdown-menu">
-                                            <li><a href="vmc.htm">Vertical machine centers</a></li>
-                                            <li><a href="#">Horizontal machine centers</a></li>
-                                            <li><a href="#">Lathe CNC</a></li>
-
-                                        </ul>-->
-
-                    <!--</li>-->
-
                     <li class="breadcrumb-nav-holder">
                         <ul>
-                            <!--                        <li class="dropdown breadcrumb-item">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vertical machine center</a>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="#">PDA</a>
-                                                                <a href="#">accesories</a>
-                                                                <a href="#">tablets</a>
-                                                                <a href="#">games</a>
-                                                                <a href="#">consoles</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    /.breadcrumb-item
-
-                                                    <li class="dropdown breadcrumb-item">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Desktop PC </a>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="#">PDA</a>
-                                                                <a href="#">accesories</a>
-                                                                <a href="#">tablets</a>
-                                                                <a href="#">games</a>
-                                                                <a href="#">consoles</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li> -->
-                            <!--/.breadcrumb-item-->
-
                             <li class="breadcrumb-item">
                                 <a href="index.htm">Главная</a>
                             </li>
@@ -151,107 +104,103 @@
                         </a>
                     </div>
                 </div>
-                    </div>
-                    <div class="nav-holder left hidden-xs">
-                        <a class="prev-btn slider-prev" data-target="#owl-single-product-thumbnails" href="#prev"></a>
-                    </div>
-                    <div class="nav-holder right hidden-xs">
-                        <a class="next-btn slider-next" data-target="#owl-single-product-thumbnails" href="#next"></a>
-                    </div>
-                </div>
+            </div>
+            <div class="nav-holder left hidden-xs">
+                <a class="prev-btn slider-prev" data-target="#owl-single-product-thumbnails" href="#prev"></a>
+            </div>
+            <div class="nav-holder right hidden-xs">
+                <a class="next-btn slider-next" data-target="#owl-single-product-thumbnails" href="#next"></a>
             </div>
         </div>
     </div>
+</div>
+</div>
 
 
 
 
 
 </div>
-    <section id="single-product-tab">
-        <div class="container">
-            <div class="tab-holder">
+<section id="single-product-tab">
+    <div class="container">
+        <div class="tab-holder">
 
-                <ul class="nav nav-tabs simple" >
-                    <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
-                    <li><a href="#additional-info" data-toggle="tab">Характеристики</a></li>
-                    <!--<li><a href="#reviews" data-toggle="tab">Reviews (3)</a></li>-->
-                </ul><!-- /.nav-tabs -->
+            <ul class="nav nav-tabs simple" >
+                <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+                <li><a href="#additional-info" data-toggle="tab">Характеристики</a></li>
+            </ul>
 
-                <div class="tab-content">
-                    <div class="tab-pane active" id="description">
-                        <p>${product.description}</p>
+            <div class="tab-content">
+                <div class="tab-pane active" id="description">
+                    <p>${product.description}</p>
 
-                        <!--<p>Sed consequat orci vel rutrum blandit. Nam non leo vel risus cursus porta quis non nulla. Vestibulum vitae pellentesque nunc. In hac habitasse platea dictumst. Cras egestas, turpis a malesuada mollis, magna tortor scelerisque urna, in pellentesque diam tellus sit amet velit. Donec vel rhoncus nisi, eget placerat elit. Phasellus dignissim nisl vel lectus vehicula, eget vehicula nisl egestas. Duis pretium sed risus dapibus egestas. Nam lectus felis, sodales sit amet turpis se.</p>-->
+                    <div class="meta-row">
+                        <div class="inline">
+                            <label>SKU:</label>
+                            <span>54687621</span>
+                        </div>
 
+                        <span class="seperator">/</span>
 
-                        <div class="meta-row">
-                            <div class="inline">
-                                <label>SKU:</label>
-                                <span>54687621</span>
-                            </div><!-- /.inline -->
+                        <div class="inline">
+                            <label>categories:</label>
+                            <!--<span><a href="#">-50% sale</a>,</span>-->
+                            <span><a href="#">gaming</a>,</span>
+                            <span><a href="#">desktop PC</a></span>
+                        </div>
 
-                            <span class="seperator">/</span>
+                        <span class="seperator">/</span>
 
-                            <div class="inline">
-                                <label>categories:</label>
-                                <!--<span><a href="#">-50% sale</a>,</span>-->
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">desktop PC</a></span>
-                            </div><!-- /.inline -->
-
-                            <span class="seperator">/</span>
-
-                            <div class="inline">
-                                <label>tag:</label>
-                                <span><a href="#">fast</a>,</span>
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">strong</a></span>
-                            </div>
+                        <div class="inline">
+                            <label>tag:</label>
+                            <span><a href="#">fast</a>,</span>
+                            <span><a href="#">gaming</a>,</span>
+                            <span><a href="#">strong</a></span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="tab-pane" id="additional-info">
+                <div class="tab-pane" id="additional-info">
 
-                        <ul class="tabled-data">
-                            <li>
-                                <label>Модель </label>
-                                <div class="value">${product.productId}</div>
+                    <ul class="tabled-data">
+                        <li>
+                            <label>Модель </label>
+                            <div class="value">${product.productId}</div>
 
-                            </li>
+                        </li>
 
-                        </ul><!-- /.tabled-data -->
+                    </ul><!-- /.tabled-data -->
 
-                        <div class="meta-row">
-                            <div class="inline">
-                                <label>SKU:</label>
-                                <span>54687621</span>
-                            </div><!-- /.inline -->
+                    <div class="meta-row">
+                        <div class="inline">
+                            <label>SKU:</label>
+                            <span>54687621</span>
+                        </div><!-- /.inline -->
 
-                            <span class="seperator">/</span>
+                        <span class="seperator">/</span>
 
-                            <div class="inline">
-                                <label>categories:</label>
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">desktop PC</a></span>
-                            </div><!-- /.inline -->
+                        <div class="inline">
+                            <label>categories:</label>
+                            <span><a href="#">gaming</a>,</span>
+                            <span><a href="#">desktop PC</a></span>
+                        </div><!-- /.inline -->
 
-                            <span class="seperator">/</span>
+                        <span class="seperator">/</span>
 
-                            <div class="inline">
-                                <label>tag:</label>
-                                <span><a href="#">fast</a>,</span>
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">strong</a></span>
-                            </div>
+                        <div class="inline">
+                            <label>tag:</label>
+                            <span><a href="#">fast</a>,</span>
+                            <span><a href="#">gaming</a>,</span>
+                            <span><a href="#">strong</a></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <%@include file="includes/footer.jsp" %>
+<%@include file="includes/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.10.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-migrate-1.2.1.js"></script>
@@ -269,9 +218,7 @@
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.customSelect.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/wow.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/scripts.js"></script>
-
 <script src="${pageContext.request.contextPath}/resources/assets/switchstylesheet/switchstylesheet.js"></script>
-
 <script>
     $(document).ready(function(){
         $(".changecolor").switchstylesheet( { seperator:"color"} );
@@ -280,14 +227,10 @@
             return false;
         });
     });
-
     $(window).bind("load", function() {
         $('.show-theme-options').delay(2000).trigger('click');
     });
 </script>
-<!-- For demo purposes â can be removed on production : End -->
-
 <script src="http://w.sharethis.com/button/buttons.js"></script>
-
 </body>
 </html>

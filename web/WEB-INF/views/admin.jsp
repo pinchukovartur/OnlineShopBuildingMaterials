@@ -138,17 +138,8 @@
                         <td class="dragHandle">&nbsp;</td>
                         <th><local:message code="label.productId"/></th>
                         <th><local:message code="label.type"/></th>
-                        <th><local:message code="label.length"/></th>
-                        <th><local:message code="label.weight"/></th>
-                        <th><local:message code="label.thickness"/></th>
-                        <th><local:message code="label.color"/></th>
-                        <th><local:message code="label.grade"/></th>
-                        <th><local:message code="label.sanded"/></th>
-                        <th><local:message code="label.waterResistance"/></th>
                         <th><local:message code="label.price"/></th>
-                        <th><local:message code="label.numberOfSheets"/></th>
-                        <th><local:message code="label.numberOfPackages"/></th>
-                        <th><local:message code="label.machineDescription"/></th>
+                        <th><local:message code="label.description"/></th>
                         <th class="action">Action</th>
                     </tr>
                     <c:forEach items="${listProduct}" var="elem">
@@ -156,17 +147,8 @@
                             <td class="dragHandle">&nbsp;</td>
                             <td><c:out value="${elem.productId }"/></td>
                             <td><c:out value="${elem.type }"/></td>
-                            <td><c:out value="${elem.length }"/></td>
-                            <td><c:out value="${elem.weight }"/></td>
-                            <td><c:out value="${elem.thickness }"/></td>
-                            <td><c:out value="${elem.color }"/></td>
-                            <td><c:out value="${elem.grade }"/></td>
-                            <td><c:out value="${elem.sanded }"/></td>
-                            <td><c:out value="${elem.waterResistance }"/></td>
                             <td><c:out value="${elem.price }"/></td>
-                            <td><c:out value="${elem.numberOfSheets }"/></td>
-                            <td><c:out value="${elem.numberOfPackages }"/></td>
-                            <td><c:out value="${elem.machineDescription }"/></td>
+                            <td><c:out value="${elem.description }"/></td>
 
                             <td class="action"><a href="dProduct/${elem.productId}"
                                                   class="ico ico-delete">Delete</a><%-- <a--%>
@@ -192,17 +174,8 @@
                                     <spring:form method="POST" modelAttribute="addProduct" action="newProduct">
                                         ProductID: <spring:input path="productId"/><br/>
                                         Type: <spring:input path="type"/><br/>
-                                        Length: <spring:input path="length"/><br/>
-                                        Weight: <spring:input path="weight"/><br/>
-                                        Thickness: <spring:input path="thickness"/><br/>
-                                        Grade: <spring:input path="grade"/><br/>
                                         Price: <spring:input path="price"/><br/>
-                                        Sanded: <spring:input path="sanded"/><br/>
-                                        WaterResistance: <spring:input path="waterResistance"/><br/>
-                                        NumberOfSheets: <spring:input path="numberOfSheets"/><br/>
-                                        NumberOfPackages: <spring:input path="numberOfPackages"/><br/>
-                                        MachineDescription: <spring:input path="machineDescription"/><br/>
-                                        Сolor: <spring:input path="color"/><br/>
+                                        MachineDescription: <spring:input path="description"/><br/>
                                         <spring:button class="btn btn-info btn-lg">Добавить</spring:button>
                                     </spring:form>
                                 </div>

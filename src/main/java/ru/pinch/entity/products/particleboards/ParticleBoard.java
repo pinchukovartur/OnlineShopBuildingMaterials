@@ -1,4 +1,5 @@
-package ru.pinch.entity.products.plywoods;
+package ru.pinch.entity.products.particleboards;
+
 
 import ru.pinch.entity.products.Product;
 
@@ -9,17 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "Plywood")
+@Entity(name = "ParticleBoard")
 @Table(name = "Product")
-@DiscriminatorValue("Plywood")
-public class Plywood extends Product {
+@DiscriminatorValue("ParticleBoard")
+public class ParticleBoard extends Product {
     private String productId;
     private Integer length;
     private Integer weight;
     private Integer thickness;
-    private String grade;
-    private Integer sanded;
-    private Integer waterResistance;
+    private String color;
     private Integer numberOfSheets;
     private Integer numberOfPackages;
 
@@ -64,33 +63,13 @@ public class Plywood extends Product {
     }
 
     @Basic
-    @Column(name = "Grade", nullable = true, length = 45)
-    public String getGrade() {
-        return grade;
+    @Column(name = "Color", nullable = true, length = 45)
+    public String getColor() {
+        return color;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    @Basic
-    @Column(name = "Sanded", nullable = true)
-    public Integer getSanded() {
-        return sanded;
-    }
-
-    public void setSanded(Integer sanded) {
-        this.sanded = sanded;
-    }
-
-    @Basic
-    @Column(name = "WaterResistance", nullable = true)
-    public Integer getWaterResistance() {
-        return waterResistance;
-    }
-
-    public void setWaterResistance(Integer waterResistance) {
-        this.waterResistance = waterResistance;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Basic
@@ -113,24 +92,21 @@ public class Plywood extends Product {
         this.numberOfPackages = numberOfPackages;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        Plywood plywood = (Plywood) o;
+        ParticleBoard that = (ParticleBoard) o;
 
-        if (!productId.equals(plywood.productId)) return false;
-        if (!length.equals(plywood.length)) return false;
-        if (!weight.equals(plywood.weight)) return false;
-        if (!thickness.equals(plywood.thickness)) return false;
-        if (!grade.equals(plywood.grade)) return false;
-        if (!sanded.equals(plywood.sanded)) return false;
-        if (!waterResistance.equals(plywood.waterResistance)) return false;
-        if (!numberOfSheets.equals(plywood.numberOfSheets)) return false;
-        return numberOfPackages.equals(plywood.numberOfPackages);
+        if (!productId.equals(that.productId)) return false;
+        if (!length.equals(that.length)) return false;
+        if (!weight.equals(that.weight)) return false;
+        if (!thickness.equals(that.thickness)) return false;
+        if (!color.equals(that.color)) return false;
+        if (!numberOfSheets.equals(that.numberOfSheets)) return false;
+        return numberOfPackages.equals(that.numberOfPackages);
     }
 
     @Override
@@ -140,9 +116,7 @@ public class Plywood extends Product {
         result = 31 * result + length.hashCode();
         result = 31 * result + weight.hashCode();
         result = 31 * result + thickness.hashCode();
-        result = 31 * result + grade.hashCode();
-        result = 31 * result + sanded.hashCode();
-        result = 31 * result + waterResistance.hashCode();
+        result = 31 * result + color.hashCode();
         result = 31 * result + numberOfSheets.hashCode();
         result = 31 * result + numberOfPackages.hashCode();
         return result;

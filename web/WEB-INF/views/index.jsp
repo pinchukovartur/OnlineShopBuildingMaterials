@@ -39,7 +39,7 @@
     <!-- Demo Purpose Only. Should be removed in production : END -->
 
     <%--<!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>--%>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' photo='text/css'>--%>
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
@@ -65,8 +65,8 @@
                 </div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
-                        <li><a href="/page_1"><local:message code="index.label.particleBoard"/></a></li>
-                        <li><a href="/page_1"><local:message code="index.label.plywood"/></a></li>
+                        <li><a href="/catalog?type=ParticleBoards"><local:message code="index.label.particleBoard"/></a></li>
+                        <li><a href="/catalog?type=Plywood"><local:message code="index.label.plywood"/></a></li>
                     </ul>
                 </nav>
             </div>

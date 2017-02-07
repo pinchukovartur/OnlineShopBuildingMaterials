@@ -11,9 +11,11 @@
         <property name="connection.password">root</property>
 
         <mapping class="ru.pinch.entity.products.plywoods.Plywood"/>
+        <mapping class="ru.pinch.entity.products.Product"/>
         <mapping class="ru.pinch.entity.users.User"/>
         <mapping class="ru.pinch.entity.users.Role"/>
         <mapping class="ru.pinch.entity.users.Basket"/>
+        <mapping class="ru.pinch.entity.products.Photos"/>
 
     </session-factory>
 </hibernate-configuration>

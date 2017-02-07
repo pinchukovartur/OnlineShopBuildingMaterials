@@ -17,34 +17,34 @@
     <title>PMarket</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css">
 
     <!-- Customizable CSS -->
-    <link rel="stylesheet" href="resources/assets/css/main.css">
-    <link rel="stylesheet" href="resources/assets/css/green.css">
-    <link rel="stylesheet" href="resources/assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="resources/assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/green.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css">
 
     <!-- Demo Purpose Only. Should be removed in production -->
     <link rel="stylesheet" href="resources/assets/css/config.css">
 
-    <link href="resources/assets/css/green.css" rel="alternate stylesheet" title="Green color">
-    <link href="resources/assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
-    <link href="resources/assets/css/red.css" rel="alternate stylesheet" title="Red color">
-    <link href="resources/assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
-    <link href="resources/assets/css/navy.css" rel="alternate stylesheet" title="Navy color">
-    <link href="resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/green.css" rel="alternate stylesheet" title="Green color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/red.css" rel="alternate stylesheet" title="Red color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/navy.css" rel="alternate stylesheet" title="Navy color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
     <!-- Demo Purpose Only. Should be removed in production : END -->
 
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Icons/Glyphs -->
-    <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="resources/assets/images/eftech.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/images/eftech.ico">
 </head>
 <body>
 <div class="wrapper">
@@ -78,10 +78,10 @@
         <div class="col-xs-12 col-sm-3 no-margin sidebar narrow">
             <div class="widget">
                 <h1><local:message code="catalog.label.sort"/>:</h1>
-                <form action="product_select" method="GET">
+                <form action="/page" method="GET">
                     <div class="body bordered">
                         <div class="category-filter">
-                            <h2><local:message code="catalog.label.type"/></h2>
+                            <h2><local:message code="label.type"/></h2>
                             <hr>
                             <ul>
                                 <c:choose>
@@ -156,13 +156,13 @@
                                             <c:when test="${grade==i}">
                                                 <option selected value=${i}>
                                                         ${i}
-                                                        <local:message code="catalog.label.grade"/>
+                                                    <local:message code="catalog.label.grade"/>
                                                 </option>
                                             </c:when>
                                             <c:otherwise>
                                                 <option value=${i}>
                                                         ${i}
-                                                        <local:message code="catalog.label.grade"/>
+                                                    <local:message code="catalog.label.grade"/>
                                                 </option>
                                             </c:otherwise>
                                         </c:choose>
@@ -200,12 +200,12 @@
                                                 <div class="ribbon red"><span>В продаже</span></div>
                                                 <div class="image">
                                                     <img alt=""
-                                                         src="resources/initialData/jpg/${product.firstPhoto}.jpg"
+                                                         src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photosList[0].photo}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                                 <div class="body">
                                                     <div class="title">
-                                                        <a href="product/${product.productId}">${product.productId} ${product.type}</a>
+                                                        <a href="product/${product.productId}">${product.productId}</a>
                                                     </div>
                                                     <div class="brand">${product.type} </div>
                                                 </div>
@@ -234,7 +234,7 @@
 
                                             <c:forEach var="i" begin="1" end="${numberOfPages}">
                                                 <li class="current">
-                                                <li><a href="/page_${i}">${i}</a></li>
+                                                <li><a href="/page?pageNumber=${i}">${i}</a></li>
                                             </c:forEach>
                                         </ul>
                                     </div>
@@ -250,7 +250,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img src="resources/initialData/jpg/${product.firstPhoto}.jpg"
+                                                    <img src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photosList[0].photo}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                             </div>
@@ -324,7 +324,6 @@
             return false;
         });
     });
-
     $(window).bind("load", function () {
         $('.show-theme-options').delay(2000).trigger('click');
     });

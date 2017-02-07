@@ -808,32 +808,32 @@
   .col(1); // kickstart it
 }
 
-.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+.calc-grid-column(@index, @class, @photo) when (@photo = width) and (@index > 0) {
   .col-@{class}-@{index} {
     width: percentage((@index / @grid-columns));
   }
 }
-.calc-grid-column(@index, @class, @type) when (@type = push) {
+.calc-grid-column(@index, @class, @photo) when (@photo = push) {
   .col-@{class}-push-@{index} {
     left: percentage((@index / @grid-columns));
   }
 }
-.calc-grid-column(@index, @class, @type) when (@type = pull) {
+.calc-grid-column(@index, @class, @photo) when (@photo = pull) {
   .col-@{class}-pull-@{index} {
     right: percentage((@index / @grid-columns));
   }
 }
-.calc-grid-column(@index, @class, @type) when (@type = offset) {
+.calc-grid-column(@index, @class, @photo) when (@photo = offset) {
   .col-@{class}-offset-@{index} {
     margin-left: percentage((@index / @grid-columns));
   }
 }
 
 // Basic looping in LESS
-.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
-  .calc-grid-column(@index, @class, @type);
+.loop-grid-columns(@index, @class, @photo) when (@index >= 0) {
+  .calc-grid-column(@index, @class, @photo);
   // next iteration
-  .loop-grid-columns((@index - 1), @class, @type);
+  .loop-grid-columns((@index - 1), @class, @photo);
 }
 
 // Create grid for specific class

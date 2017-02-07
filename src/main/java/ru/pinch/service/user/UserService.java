@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface UserService {
     void addUser(User user);
-    List<User> getUsers();
+    List getUsers();
     User getUserByID(String username);
     void deleteUser(String id);
 
     void saveUser(String username, String password, String email);
     void addToBasket(String username, String productId);
-    List<Plywood> getAllTheMaterialsOfThisUser(String username);
+    List getAllTheMaterialsOfThisUser(String username);
     void buyMaterialsUser(User user, Product plywood);
 }

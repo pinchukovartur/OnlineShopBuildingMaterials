@@ -1,4 +1,4 @@
-package ru.pinch.service.products.plywoods;
+package ru.pinch.service.products;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.particleboards.ParticleBoard;
 import ru.pinch.entity.products.plywoods.Plywood;
-import ru.pinch.service.products.ProductsService;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PlywoodServiceImpl implements ProductsService {
+public class ProductServiceImpl implements ProductsService {
 
     private static final String COMPUTER_PATH = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\jpg\\";
 
@@ -37,23 +37,31 @@ public class PlywoodServiceImpl implements ProductsService {
     private ProductsDAO shopDataBase;
 
 
-    public void addMaterial(Product plywood) {
-        if (getMaterial(plywood.getProductId()) != null) {
-            deleteMaterial(plywood.getProductId());
+    public void addProduct(Product product) {
+            shopDataBase.addProduct(product);
+    }
+
+    public List getProducts() {
+        return shopDataBase.getProducts();
+    }
+
+    public void deleteProduct(String id) {
+        shopDataBase.deleteProduct(id);
+    }
+
+    public Product getProductByID(String productID) {
+        return shopDataBase.getProductByID(productID);
+    }
+
+    public List getProductsByType(String type) {
+        List<Product> products = shopDataBase.getProducts();
+        List<Product> newProducts = new ArrayList<Product>();
+        for (int i = 0; i < products.size(); i++) {
+            if(products.get(i).getType().equals(type)){
+               newProducts.add(products.get(i));
+            }
         }
-        shopDataBase.addProduct(plywood);
-    }
-
-    public List<Product> getAllMaterials() {
-        return shopDataBase.getMaterials();
-    }
-
-    public void deleteMaterial(String id) {
-        shopDataBase.deleteMaterial(id);
-    }
-
-    public Plywood getMaterial(String productID) {
-        return shopDataBase.getMaterialsByID(productID);
+        return newProducts;
     }
 
 
@@ -97,7 +105,7 @@ public class PlywoodServiceImpl implements ProductsService {
             table.addCell(String.valueOf(plywood.getPrice()));
             table.addCell(String.valueOf(((Plywood)plywood).getLength()));
             table.addCell(String.valueOf(((Plywood)plywood).getWeight()));
-            table.addCell(plywood.getType());
+            /*table.addCell(plywood.getType());*/
             document.add(table);
         } catch (DocumentException e) {
             e.printStackTrace();
@@ -115,7 +123,7 @@ public class PlywoodServiceImpl implements ProductsService {
         return pdfFile;
     }
 
-    public String addMaterialsFromExcel(MultipartFile file) {
+    public String addProductsFromExcel(MultipartFile file) {
         try {
             File file1 = new File(COMPUTER_PATH + "test.xlsx");
             BufferedOutputStream stream = new BufferedOutputStream(
@@ -131,8 +139,8 @@ public class PlywoodServiceImpl implements ProductsService {
             XSSFRow row = myExcelSheet.getRow(0);
             plywood.setProductId(row.getCell(1).getStringCellValue());
 
-            row = myExcelSheet.getRow(1);
-            plywood.setType(row.getCell(1).getStringCellValue());
+            /*row = myExcelSheet.getRow(1);
+            plywood.setType(row.getCell(1).getStringCellValue());*/
 
             row = myExcelSheet.getRow(2);
             plywood.setLength((int) row.getCell(1).getNumericCellValue());
@@ -149,7 +157,7 @@ public class PlywoodServiceImpl implements ProductsService {
             row = myExcelSheet.getRow(6);
             plywood.setPrice(row.getCell(1).getNumericCellValue());
 
-            addMaterial(plywood);
+            addProduct(plywood);
             myExcelBook.close();
 
         } catch (FileNotFoundException e) {
@@ -160,7 +168,7 @@ public class PlywoodServiceImpl implements ProductsService {
         return "ok";
     }
 
-    public List<Product> getListMaterialsOnPage(List<Product> plywoodListOld, int pageNumber, int amountOnThePage) {
+    public List<Product> getProductsOnPage(List<Product> plywoodListOld, int pageNumber, int amountOnThePage) {
         List<Product> plywoodListOnPage = new ArrayList<Product>();
         for (int i = pageNumber * amountOnThePage - amountOnThePage; i < pageNumber * amountOnThePage; i++) {
             try {
@@ -168,7 +176,7 @@ public class PlywoodServiceImpl implements ProductsService {
                     plywoodListOnPage.add(plywoodListOld.get(i));
                 }
             } catch (Exception e) {
-                System.err.println("Обработка исключений в getListMaterialsOnPage:" + i);
+                System.err.println("Обработка исключений в getProductsOnPage:" + i);
             }
         }
         return plywoodListOnPage;
@@ -183,13 +191,12 @@ public class PlywoodServiceImpl implements ProductsService {
         return numberOfPages;
     }
 
-    public List<Product> getSortListMaterials(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade) {
-        List<Product> plywoodList = shopDataBase.getSortListMaterials(price_with, price_before);
-        plywoodList = sortMaterialsByType(plywoodList, type_particleBoard, type_plywood);
-        plywoodList = sortMaterialsByGrade(plywoodList, grade);
-        return plywoodList;
+    public List<Product> getProductsByPrice(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade) {
+        List<Product> productList = shopDataBase.getProductsByPrice(price_with, price_before);
+        productList = sortMaterialsByType(productList, type_particleBoard, type_plywood);
+        productList = sortMaterialsByGrade(productList, grade);
+        return productList;
     }
-
     private List<Product> sortMaterialsByType(List<Product> plywoodListOld, int type_particleBoard, int type_plywood) {
         List<Product> plywoodListNew = new ArrayList<Product>();
         for (int i = 0; i < plywoodListOld.size(); i++) {
@@ -227,6 +234,11 @@ public class PlywoodServiceImpl implements ProductsService {
         } else return plywoodListOld;
     }
 
+/*
+
+
+
+
     private Product checkFirstColumnExcel(Product plywood, XSSFRow row) {
         if (row.getCell(0).getStringCellValue().contains("Product ID")) {
             plywood.setProductId(row.getCell(1).getStringCellValue());
@@ -234,9 +246,9 @@ public class PlywoodServiceImpl implements ProductsService {
         if (row.getCell(0).getStringCellValue().contains("Type")) {
             plywood.setType(row.getCell(1).getStringCellValue());
         }
-        /*if(row.getCell(0).getStringCellValue().contains("Length")){
+        *//*if(row.getCell(0).getStringCellValue().contains("Length")){
             plywood.setLength((int) row.getCell(1).getNumericCellValue());
-        }*/
+        }*//*
         return plywood;
-    }
+    }*/
 }

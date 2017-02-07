@@ -1,16 +1,25 @@
 package ru.pinch.entity.users;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
-@Table(name = "authorities", schema = "buildingonlineshop", catalog = "")
+@Table(name = "authorities", schema = "buildingonlineshop")
 public class Role {
     private String username;
     private String authority;
+    private User user;
 
     @Id
     @Column(name = "username", nullable = false, length = 45)
@@ -33,14 +42,15 @@ public class Role {
     }
 
 
-    /*@OneToMany(mappedBy = "role", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    public List<User> getUserList() {
-        return userList;
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "username")
+    public User getUser() {
+        return user;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }*/
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {

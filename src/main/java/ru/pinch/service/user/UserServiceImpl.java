@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.dao.user.UserDAO;
 import ru.pinch.entity.products.Product;
-import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.entity.users.Basket;
 import ru.pinch.entity.users.Role;
 import ru.pinch.entity.users.User;
@@ -24,25 +23,18 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private ProductsDAO productsDAO;
 
-    @Transactional
     public void addUser(User user) {
         userDAO.addUser(user);
     }
-
-    @Transactional
     public List<User> getUsers() {
         return userDAO.getUsers();
     }
-
     public User getUserByID(String username) {
         return userDAO.getUserByID(username);
     }
-
-    @Transactional
     public void deleteUser(String id) {
         userDAO.deleteUser(id);
     }
-
     public void saveUser(String username, String password, String email) {
         User user = new User();
         user.setUsername(username);
@@ -52,18 +44,10 @@ public class UserServiceImpl implements UserService{
         Role role = new Role();
         role.setUsername(username);
         role.setAuthority("ROLE_USER");
-        userDAO.addRole(role);
+
         userDAO.addUser(user);
-    }
-
-
-   /* public void addRole(Role role) {
         userDAO.addRole(role);
     }
-
-    public void deleteRoleByID(int id) {
-        userDAO.deleteRoleByID(id);
-    }*/
 
     public void addToBasket(String username, String productId) {
         Basket basket = new Basket();
@@ -72,19 +56,19 @@ public class UserServiceImpl implements UserService{
         userDAO.addToBasket(basket);
     }
 
-    public List<Plywood> getAllTheMaterialsOfThisUser(String username) {
+    public List<Product> getAllTheMaterialsOfThisUser(String username) {
         List<String> result = userDAO.getProductIDUsers(username);
 
-        List<Plywood> materialsListUser = new ArrayList<Plywood>();
+        List<Product> materialsListUser = new ArrayList<Product>();
         for (int i = 0; i < result.size(); i++) {
-            materialsListUser.add(productsDAO.getMaterialsByID(result.get(i)));
+            materialsListUser.add(productsDAO.getProductByID(result.get(i)));
         }
         return materialsListUser;
     }
 
     public void buyMaterialsUser(User user, Product plywood){
         ApplicationMailer mailer = new ApplicationMailer();
-        String message = "Вы заказали:" + plywood.getProductId() + plywood.getType()
+        String message = "Вы заказали:" + plywood.getProductId()  /*plywood.getType()*/
                             + "Стоимость:" +  plywood.getPrice();
         mailer.send("Online Materials Shop", message,  user.getEmail());
     }

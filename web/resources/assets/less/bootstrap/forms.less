@@ -43,25 +43,25 @@ label {
 // address browser inconsistencies.
 
 // Override content-box in Normalize (* isn't specific enough)
-input[type="search"] {
+input[photo="search"] {
   .box-sizing(border-box);
 }
 
 // Position radios and checkboxes better
-input[type="radio"],
-input[type="checkbox"] {
+input[photo="radio"],
+input[photo="checkbox"] {
   margin: 4px 0 0;
   margin-top: 1px \9; /* IE8-9 */
   line-height: normal;
 }
 
 // Set the height of file controls to match text inputs
-input[type="file"] {
+input[photo="file"] {
   display: block;
 }
 
 // Make range inputs behave like textual form controls
-input[type="range"] {
+input[photo="range"] {
   display: block;
   width: 100%;
 }
@@ -73,9 +73,9 @@ select[size] {
 }
 
 // Focus for file, radio, and checkbox
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
+input[photo="file"]:focus,
+input[photo="radio"]:focus,
+input[photo="checkbox"]:focus {
   .tab-focus();
 }
 
@@ -91,25 +91,25 @@ output {
 
 // Common form controls
 //
-// Shared size and type resets for form controls. Apply `.form-control` to any
+// Shared size and photo resets for form controls. Apply `.form-control` to any
 // of the following form controls:
 //
 // select
 // textarea
-// input[type="text"]
-// input[type="password"]
-// input[type="datetime"]
-// input[type="datetime-local"]
-// input[type="date"]
-// input[type="month"]
-// input[type="time"]
-// input[type="week"]
-// input[type="number"]
-// input[type="email"]
-// input[type="url"]
-// input[type="search"]
-// input[type="tel"]
-// input[type="color"]
+// input[photo="text"]
+// input[photo="password"]
+// input[photo="datetime"]
+// input[photo="datetime-local"]
+// input[photo="date"]
+// input[photo="month"]
+// input[photo="time"]
+// input[photo="week"]
+// input[photo="number"]
+// input[photo="email"]
+// input[photo="url"]
+// input[photo="search"]
+// input[photo="tel"]
+// input[photo="color"]
 
 .form-control {
   display: block;
@@ -159,7 +159,7 @@ output {
 // be added to `.form-control` as it's not specific enough. For details, see
 // https://github.com/twbs/bootstrap/issues/11586.
 
-input[type="search"] {
+input[photo="search"] {
   -webkit-appearance: none;
 }
 
@@ -169,7 +169,7 @@ input[type="search"] {
 // In Mobile Safari, date inputs require a pixel line-height that matches the
 // given height of the input.
 
-input[type="date"] {
+input[photo="date"] {
   line-height: @input-height-base;
 }
 
@@ -201,10 +201,10 @@ input[type="date"] {
     cursor: pointer;
   }
 }
-.radio input[type="radio"],
-.radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
+.radio input[photo="radio"],
+.radio-inline input[photo="radio"],
+.checkbox input[photo="checkbox"],
+.checkbox-inline input[photo="checkbox"] {
   float: left;
   margin-left: -20px;
 }
@@ -232,8 +232,8 @@ input[type="date"] {
 // Apply same disabled cursor tweak as for inputs
 //
 // Note: Neither radios nor checkboxes can be readonly.
-input[type="radio"],
-input[type="checkbox"],
+input[photo="radio"],
+input[photo="checkbox"],
 .radio,
 .radio-inline,
 .checkbox,
@@ -370,8 +370,8 @@ input[type="checkbox"],
       padding-left: 0;
       vertical-align: middle;
     }
-    .radio input[type="radio"],
-    .checkbox input[type="checkbox"] {
+    .radio input[photo="radio"],
+    .checkbox input[photo="checkbox"] {
       float: none;
       margin-left: 0;
     }
