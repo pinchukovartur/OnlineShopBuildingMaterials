@@ -9,22 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.service.products.ProductsService;
-import ru.pinch.service.user.UserService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 public class FileProductController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private ProductsService productsService;
-
-
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ModelAndView uploadPhotoProduct(@RequestParam("file") MultipartFile file,
@@ -34,17 +32,17 @@ public class FileProductController {
         modelAndView.addObject("listProduct", productsService.getProducts());
 
         if (!file.isEmpty()) {
-            /*try {
+            try {
                 Date date = new Date();
-                *//*Photosplywoods plywoodPhotos = new Photosplywoods();*//*
+                Photo photo = new Photo();
                 String imageName = date.toString().replaceAll(":", ",");
 
                 productsService.saveTheImageOnServer(imageName, file.getBytes());
 
-                *//*plywoodPhotos.setProduct(productsService.getProductByID(material));
-                plywoodPhotos.setPhoto(imageName);*//*
+                photo.setProduct(productsService.getProductByID(material));
+                photo.setPhoto(imageName);
 
-                *//*productsService.saveTheImageOnDataBase(plywoodPhotos);*//*
+                productsService.savePhoto(photo);
 
                 modelAndView.addObject("errorImage", "file has been successfully downloaded");
                 modelAndView.setViewName("WEB-INF/views/"+"admin");
@@ -53,7 +51,7 @@ public class FileProductController {
                 modelAndView.setViewName("WEB-INF/views/"+"admin");
                 modelAndView.addObject("errorImage", e.getMessage());
                 return modelAndView;
-            }*/
+            }
         } else {
             modelAndView.addObject("errorImage", "empty file");
             modelAndView.setViewName("WEB-INF/views/"+"admin");
@@ -66,8 +64,8 @@ public class FileProductController {
             @PathVariable("productId") String productId,
             HttpServletResponse response) {
         try {
-            /*FileInputStream is = productsService.getPDFWithMaterialsData(productsService.getProductByID(productId));*/
-            /*org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());*/
+            FileInputStream is = productsService.getPDF(productsService.getProductByID(productId));
+            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
             System.err.println("Error writing file to output stream. Filename was-" + productId);

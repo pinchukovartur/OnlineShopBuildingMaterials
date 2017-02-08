@@ -13,23 +13,23 @@
     <meta name="keywords" content=""/>
     <title>Great admin</title>
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/default.css"
+            href="${pageContext.request.contextPath}public/css/default.css"
             rel="stylesheet" type="text/css" media="screen"/>
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/blue.css"
+            href="${pageContext.request.contextPath}public/css/blue.css"
             rel="stylesheet" type="text/css" media="screen"/>
     <!-- color skin: blue / red / green / dark -->
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/datePicker.css"
+            href="${pageContext.request.contextPath}public/css/datePicker.css"
             rel="stylesheet" type="text/css" media="screen"/>
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/wysiwyg.css"
+            href="${pageContext.request.contextPath}ublic/css/wysiwyg.css"
             rel="stylesheet" type="text/css" media="screen"/>
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/fancybox-1.3.1.css"
+            href="${pageContext.request.contextPath}public/css/fancybox-1.3.1.css"
             rel="stylesheet" type="text/css" media="screen"/>
     <link
-            href="${pageContext.request.contextPath}/resources/public/css/visualize.css"
+            href="${pageContext.request.contextPath}public/css/visualize.css"
             rel="stylesheet" type="text/css" media="screen"/>
 
     <%--lib--%>
@@ -130,8 +130,8 @@
                 <h2>
                     <span>VMC or IR</span>
                 </h2>
-                <%--<a href="#help" class="help"></a>--%>
             </div>
+
             <div class="box-content">
                 <table class="tab tab-drag">
                     <tr class="top nodrop nodrag">
@@ -158,49 +158,27 @@
                     </c:forEach>
                 </table>
 
-                <div class="tab-action">
-                    <a class="btn-default" data-toggle="modal" data-target="#addModal">
-                        <span style="color: white;">
-                            Добавить
-                        </span></a>
-                    <div id="addModal" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button class="close" type="button" data-dismiss="modal">×</button>
-                                    <h4 class="modal-title">Добавление товара</h4>
-                                </div>
-                                <div class="modal-body row">
-                                    <spring:form method="POST" modelAttribute="addProduct" action="newProduct">
-                                        ProductID: <spring:input path="productId"/><br/>
-                                        Type: <spring:input path="type"/><br/>
-                                        Price: <spring:input path="price"/><br/>
-                                        MachineDescription: <spring:input path="description"/><br/>
-                                        <spring:button class="btn btn-info btn-lg">Добавить</spring:button>
-                                    </spring:form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
+    <div id="sidebar">
+        <ul id="floatMenu" class="mainmenu">
+            <li><a href="/" title="Главная" class="link">Главная</a></li>
+        </ul>
+    </div>
+    <div id="footer">
+        <p>
+            © 2017 Great Admin
+        </p>
+    </div>
 </div>
-<div id="sidebar">
-    <ul id="floatMenu" class="mainmenu">
-        <li><a href="/" title="Главная" class="link">Главная</a></li>
-    </ul>
-</div>
-<div id="footer">
-    <p>
-        © 2017 Great Admin
-    </p>
-</div>
-</div>
+
+<%--<spring:form method="POST" action="newProduct">>
+    productID: <spring:input path="ParticleBoard.productId"/><br/>
+    type: <spring:input path="ParticleBoard.type"/><br/>
+    price: <spring:input path="ParticleBoard.price"/><br/>
+    description: <spring:input path="ParticleBoard.description"/><br/>
+    <spring:button class="btn btn-info btn-lg">Добавить ParticleBoard</spring:button>
+</spring:form>--%>
 </body>
 </html>

@@ -1,18 +1,20 @@
 package ru.pinch.service;
 
-import org.springframework.stereotype.Service;
-
-import javax.mail.*;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class ApplicationMailer
-{
+public class ApplicationMailer {
     private final String USER_NAME = "pinchukovartur@gmail.com"; //Нужно вставить почту, от кого будет идти письмо
-    private final String PASSWORD = "********";
+    private final String PASSWORD = "9012qw9012QW";
 
-    public void send(String subject, String text, String toEmail){
+    public void send(String subject, String text, String toEmail) {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

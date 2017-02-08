@@ -1,5 +1,6 @@
 package ru.pinch.dao.products;
 
+import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.products.plywoods.Plywood;
 
@@ -14,4 +15,6 @@ public interface ProductsDAO {
     Product getProductByID(String productID);
     List getProductsByType(String type);
     List getProductsByPrice(double priceWith, double priceBefore);
+
+    void savePhoto(Photo photo);
 }

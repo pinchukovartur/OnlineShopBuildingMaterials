@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public class ParticleBoard extends Product {
     private String productId;
     private Integer length;
-    private Integer weight;
     private Integer thickness;
     private String color;
     private Integer numberOfSheets;
@@ -40,16 +39,6 @@ public class ParticleBoard extends Product {
 
     public void setLength(Integer length) {
         this.length = length;
-    }
-
-    @Basic
-    @Column(name = "Weight", nullable = true)
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 
     @Basic
@@ -102,7 +91,6 @@ public class ParticleBoard extends Product {
 
         if (!productId.equals(that.productId)) return false;
         if (!length.equals(that.length)) return false;
-        if (!weight.equals(that.weight)) return false;
         if (!thickness.equals(that.thickness)) return false;
         if (!color.equals(that.color)) return false;
         if (!numberOfSheets.equals(that.numberOfSheets)) return false;
@@ -114,7 +102,6 @@ public class ParticleBoard extends Product {
         int result = super.hashCode();
         result = 31 * result + productId.hashCode();
         result = 31 * result + length.hashCode();
-        result = 31 * result + weight.hashCode();
         result = 31 * result + thickness.hashCode();
         result = 31 * result + color.hashCode();
         result = 31 * result + numberOfSheets.hashCode();

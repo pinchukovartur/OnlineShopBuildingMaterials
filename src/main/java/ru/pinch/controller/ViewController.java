@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.particleboards.ParticleBoard;
 import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.entity.users.User;
 import ru.pinch.service.products.ProductsService;
@@ -40,10 +41,27 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView admin(ModelAndView modelAndView) {
-        modelAndView.setViewName("WEB-INF/views/" + "admin");
-        modelAndView.addObject("addProduct", new Plywood());
-        modelAndView.addObject("listProduct", productsService.getProducts());
+    public ModelAndView admin(
+            @RequestParam(value = "window",   defaultValue = "purchases") String window,
+            ModelAndView modelAndView) {
+        if(window.equals("purchases")) {
+            modelAndView.setViewName("WEB-INF/views/admin/" + "purchase");
+            modelAndView.addObject("purchasesList", userService.getPurchases());
+        }
+        if(window.equals("users")) {
+            modelAndView.setViewName("WEB-INF/views/admin/" + "user");
+            modelAndView.addObject("usersList", userService.getUsers());
+        }
+        if(window.equals("products")) {
+            modelAndView.setViewName("WEB-INF/views/admin/" + "product");
+            System.out.println(productsService.getProductsByType("Plywood").size());
+            System.out.println(productsService.getProducts().size());
+            modelAndView.addObject("plywoodList", productsService.getProductsByType("Plywood"));
+            modelAndView.addObject("particleBoardsList", productsService.getProductsByType("ParticleBoard"));
+        }
+        /*modelAndView.addObject("Plywood", new Plywood());
+        modelAndView.addObject("ParticleBoard", new ParticleBoard());
+        modelAndView.addObject("listProduct", productsService.getProducts());*/
         return modelAndView;
     }
 
@@ -78,12 +96,12 @@ public class ViewController {
             @RequestParam(value = "grade",defaultValue = "0") int grade,
             ModelAndView modelAndView, Principal user)
     {
+        System.out.println(productsService.getProducts().size());
         List<Product> productList = productsService.getProductsByType(type);
-        System.out.println(productList);
+        System.out.println(productList.size());
         productList = productsService.getProductsOnPage(productList,pageNumber,AMOUNT_ON_THE_PAGE);
-        System.out.println(productList.get(0).getPhotosList().get(0).getPhoto());
-        System.out.println(productsService.getNumberPages(productList,AMOUNT_ON_THE_PAGE));
-        modelAndView.addObject("listProduct", productList);
+        System.out.println(productList.size());
+        modelAndView.addObject("listProducts", productList);
         modelAndView.addObject("numberOfPages", productsService.getNumberPages(productList,AMOUNT_ON_THE_PAGE));
         try {
             modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());

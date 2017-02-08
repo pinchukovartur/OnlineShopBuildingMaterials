@@ -2,9 +2,9 @@ package ru.pinch.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.dao.user.UserDAO;
+import ru.pinch.entity.Purchase;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.users.Basket;
 import ru.pinch.entity.users.Role;
@@ -12,6 +12,7 @@ import ru.pinch.entity.users.User;
 import ru.pinch.service.ApplicationMailer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -66,10 +67,30 @@ public class UserServiceImpl implements UserService{
         return materialsListUser;
     }
 
-    public void buyMaterialsUser(User user, Product plywood){
+    public void buyMaterialsUser(User user, Product product){
         ApplicationMailer mailer = new ApplicationMailer();
-        String message = "Вы заказали:" + plywood.getProductId()  /*plywood.getType()*/
-                            + "Стоимость:" +  plywood.getPrice();
+        String message = "Вы заказали:" + product.getProductId()
+                            + "Стоимость:" +  product.getPrice();
         mailer.send("Online Materials Shop", message,  user.getEmail());
+    }
+
+    public void savePurchase(String username, String productID, int quantity) {
+        Date date = new Date();
+        Purchase purchase = new Purchase();
+        purchase.setUsername(username);
+        purchase.setEmail(userDAO.getUserByID(username).getEmail());
+        purchase.setQuantity(quantity);
+        purchase.setProductID(productID);
+        purchase.setDate(date.toString());
+
+        userDAO.savePurchase(purchase);
+    }
+
+    public List<Purchase> getPurchases() {
+        return userDAO.getPurchases();
+    }
+
+    public void deletePurchaseByID(int id) {
+        userDAO.deletePurchaseByID(id);
     }
 }

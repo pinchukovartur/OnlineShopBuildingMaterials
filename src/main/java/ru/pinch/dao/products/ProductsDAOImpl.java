@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 import ru.pinch.dao.HibernateUtil;
+import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.users.User;
 
@@ -40,7 +41,7 @@ public class ProductsDAOImpl implements ProductsDAO {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            products = session.createCriteria(Product.class).list();
+            products = session.createQuery("from Product").list();
         } catch (Exception e) {
             System.err.println("getProducts exception:" + e.getMessage());
         } finally {
@@ -135,5 +136,22 @@ public class ProductsDAOImpl implements ProductsDAO {
             }
         }
         return products;
+    }
+
+    public void savePhoto(Photo photo) {
+            Session session = null;
+            try {
+                session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.save(photo);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
+                System.out.println("savePhoto exception:" + e.getMessage());
+            } finally {
+                if (session != null && session.isOpen()) {
+                    session.close();
+                }
+            }
     }
 }

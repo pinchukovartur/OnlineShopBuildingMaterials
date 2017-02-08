@@ -15,7 +15,8 @@
         <mapping class="ru.pinch.entity.users.User"/>
         <mapping class="ru.pinch.entity.users.Role"/>
         <mapping class="ru.pinch.entity.users.Basket"/>
-        <mapping class="ru.pinch.entity.products.Photos"/>
+        <mapping class="ru.pinch.entity.products.Photo"/>
+        <mapping class="ru.pinch.entity.Purchase"/>
 
     </session-factory>
 </hibernate-configuration>

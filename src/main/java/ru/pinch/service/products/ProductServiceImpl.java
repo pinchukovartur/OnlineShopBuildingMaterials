@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.dao.products.ProductsDAO;
+import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.products.particleboards.ParticleBoard;
 import ru.pinch.entity.products.plywoods.Plywood;
@@ -53,6 +54,10 @@ public class ProductServiceImpl implements ProductsService {
         return shopDataBase.getProductByID(productID);
     }
 
+    public void savePhoto(Photo photo){
+        shopDataBase.savePhoto(photo);
+    }
+
     public List getProductsByType(String type) {
         List<Product> products = shopDataBase.getProducts();
         List<Product> newProducts = new ArrayList<Product>();
@@ -81,7 +86,7 @@ public class ProductServiceImpl implements ProductsService {
         }
     }
 
-    public FileInputStream getPDFWithMaterialsData(Product plywood) {
+    public FileInputStream getPDF(Product product) {
         String RESULT
                 = COMPUTER_PATH + "test.pdf";
 
@@ -90,22 +95,21 @@ public class ProductServiceImpl implements ProductsService {
         try {
             PdfWriter.getInstance(document, new FileOutputStream(RESULT));
             document.open();
-            PdfPTable table = new PdfPTable(5);
+            PdfPTable table = new PdfPTable(4);
 
             BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(bf);
 
             table.addCell(new Paragraph("Наименование", font));
             table.addCell(new Paragraph("Цена", font));
-            table.addCell(new Paragraph("Высота", font));
-            table.addCell(new Paragraph("Ширина", font));
             table.addCell(new Paragraph("Тип", font));
+            table.addCell(new Paragraph("Описание", font));
 
-            table.addCell(plywood.getProductId());
-            table.addCell(String.valueOf(plywood.getPrice()));
-            table.addCell(String.valueOf(((Plywood)plywood).getLength()));
-            table.addCell(String.valueOf(((Plywood)plywood).getWeight()));
-            /*table.addCell(plywood.getType());*/
+            table.addCell(product.getProductId());
+            table.addCell(String.valueOf(product.getPrice()));
+            table.addCell(product.getType());
+            table.addCell(product.getDescription());
+
             document.add(table);
         } catch (DocumentException e) {
             e.printStackTrace();

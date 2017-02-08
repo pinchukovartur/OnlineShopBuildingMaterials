@@ -1,13 +1,17 @@
 package ru.pinch.entity.users;
 
-import ru.pinch.entity.products.Product;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users", schema = "buildingonlineshop")
-public class User{
+public class User {
     private String username;
     private String password;
     private String email;
@@ -55,7 +59,7 @@ public class User{
     }
 
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     public Role getRole() {
         return role;
     }

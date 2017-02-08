@@ -1,8 +1,6 @@
 package ru.pinch.entity.products;
 
 
-import ru.pinch.entity.users.User;
-
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,24 +12,23 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity(name = "Product")
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-        name="discriminator",
-        discriminatorType= DiscriminatorType.STRING
+        name = "discriminator",
+        discriminatorType = DiscriminatorType.STRING
 )
-@DiscriminatorValue(value="Product")
+@DiscriminatorValue(value = "Product")
 public class Product {
     private String productId;
     private String type;
     private Double price;
     private String description;
-    private List<Photos> photosList;
+    private List<Photo> photoList;
+    private Integer weight;
 
     @Id
     @Column(name = "ProductID", nullable = false, length = 45)
@@ -65,6 +62,16 @@ public class Product {
     }
 
     @Basic
+    @Column(name = "Weight", nullable = true)
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    @Basic
     @Column(name = "Description", nullable = true, length = 200)
     public String getDescription() {
         return description;
@@ -76,12 +83,12 @@ public class Product {
 
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    public List<Photos> getPhotosList() {
-        return photosList;
+    public List<Photo> getPhotoList() {
+        return photoList;
     }
 
-    public void setPhotosList(List<Photos> photosList) {
-        this.photosList = photosList;
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     @Override
@@ -95,7 +102,8 @@ public class Product {
         if (!type.equals(product.type)) return false;
         if (!price.equals(product.price)) return false;
         if (!description.equals(product.description)) return false;
-        return photosList.equals(product.photosList);
+        if (!photoList.equals(product.photoList)) return false;
+        return weight.equals(product.weight);
     }
 
     @Override
@@ -104,7 +112,8 @@ public class Product {
         result = 31 * result + type.hashCode();
         result = 31 * result + price.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + photosList.hashCode();
+        result = 31 * result + photoList.hashCode();
+        result = 31 * result + weight.hashCode();
         return result;
     }
 }

@@ -1,5 +1,6 @@
 package ru.pinch.service.user;
 
+import ru.pinch.entity.Purchase;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.entity.users.User;
@@ -16,4 +17,8 @@ public interface UserService {
     void addToBasket(String username, String productId);
     List getAllTheMaterialsOfThisUser(String username);
     void buyMaterialsUser(User user, Product plywood);
+
+    void savePurchase(String username, String productID, int quantity);
+    List<Purchase> getPurchases();
+    void deletePurchaseByID(int id);
 }

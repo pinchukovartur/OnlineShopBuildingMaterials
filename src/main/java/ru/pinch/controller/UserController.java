@@ -20,10 +20,10 @@ import java.util.Locale;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private ProductsService productsService;
 
     @Autowired
-    private ProductsService productsService;
+    private UserService userService;
 
     @Autowired
     private MessageSource messageSource;
@@ -61,6 +61,9 @@ public class UserController {
 
     @RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
     public String buyMaterial(@PathVariable("productID") String productID, Principal user) {
+
+        userService.savePurchase(user.getName(),productID,1);
+
         userService.buyMaterialsUser(userService.getUserByID(user.getName()),
                 productsService.getProductByID(productID));
         return "redirect:/basket";
@@ -73,7 +76,7 @@ public class UserController {
         if (user.getUsername().equals("") || user.getEmail().equals("") || user.getPassword().equals("")) {
             modelAndView.addObject("error", messageSource.getMessage("FillInAllTheFields",
                                                                     new String[]{locale.getDisplayName(locale)}, locale));
-            modelAndView.setViewName("WEB-INF/views/" + "regist");
+            modelAndView.setViewName("WEB-INF/views/" + "registration");
             return modelAndView;
         }
         if (userService.getUserByID(user.getUsername())==null){
@@ -83,9 +86,21 @@ public class UserController {
         }
         else {
             modelAndView.addObject("error", messageSource.getMessage("ThisNameIsAlreadyTaken",
-                                                                    new String[]{locale.getDisplayName(locale)}, locale));
-            modelAndView.setViewName("WEB-INF/views/" + "regist");
+                    new String[]{locale.getDisplayName(locale)}, locale));
+            modelAndView.setViewName("WEB-INF/views/" + "registration");
             return modelAndView;
         }
+    }
+
+    @RequestMapping(value = "/dPurchase/{id}", method = RequestMethod.GET)
+    public String deletePurchase(@PathVariable("id") int idPurchase) {
+        userService.deletePurchaseByID(idPurchase);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping(value = "/dUser/{id}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") String username) {
+        userService.deleteUser(username);
+        return "redirect:/admin?window=users";
     }
 }

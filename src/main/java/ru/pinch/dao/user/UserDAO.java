@@ -1,5 +1,6 @@
 package ru.pinch.dao.user;
 
+import ru.pinch.entity.Purchase;
 import ru.pinch.entity.users.Basket;
 import ru.pinch.entity.users.Role;
 import ru.pinch.entity.users.User;
@@ -18,4 +19,8 @@ public interface UserDAO {
 
     void addToBasket(Basket basket);
     List<String> getProductIDUsers (String username);
+
+    List<Purchase> getPurchases();
+    void savePurchase(Purchase purchase);
+    void deletePurchaseByID(int id);
 }

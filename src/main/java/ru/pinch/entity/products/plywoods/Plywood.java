@@ -15,7 +15,6 @@ import javax.persistence.Table;
 public class Plywood extends Product {
     private String productId;
     private Integer length;
-    private Integer weight;
     private Integer thickness;
     private String grade;
     private Integer sanded;
@@ -41,16 +40,6 @@ public class Plywood extends Product {
 
     public void setLength(Integer length) {
         this.length = length;
-    }
-
-    @Basic
-    @Column(name = "Weight", nullable = true)
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 
     @Basic
@@ -113,7 +102,6 @@ public class Plywood extends Product {
         this.numberOfPackages = numberOfPackages;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,7 +112,6 @@ public class Plywood extends Product {
 
         if (!productId.equals(plywood.productId)) return false;
         if (!length.equals(plywood.length)) return false;
-        if (!weight.equals(plywood.weight)) return false;
         if (!thickness.equals(plywood.thickness)) return false;
         if (!grade.equals(plywood.grade)) return false;
         if (!sanded.equals(plywood.sanded)) return false;
@@ -138,7 +125,6 @@ public class Plywood extends Product {
         int result = super.hashCode();
         result = 31 * result + productId.hashCode();
         result = 31 * result + length.hashCode();
-        result = 31 * result + weight.hashCode();
         result = 31 * result + thickness.hashCode();
         result = 31 * result + grade.hashCode();
         result = 31 * result + sanded.hashCode();

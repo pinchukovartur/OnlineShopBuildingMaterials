@@ -71,7 +71,7 @@
                 <div class="col-xs-12 col-sm-2 no-margin">
                     <a href="vmc${item.productId}.htm" class="thumb-holder">
 
-                        <img class="lazy" alt="" width="73" height="73" src="resources/initialData/jpg/${item.photosList[0].photo}.jpg"/>
+                        <img class="lazy" alt="" width="73" height="73" src="resources/initialData/jpg/${item.photoList[0].photo}.jpg"/>
                     </a>
                 </div>
 

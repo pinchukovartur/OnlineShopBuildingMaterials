@@ -31,29 +31,47 @@ CREATE TABLE `buildingonlineshop`.`product` (
   `Discriminator` varchar(45) NOT NULL,
   `Price` double DEFAULT NULL,
   `Description` varchar(200) DEFAULT NULL,
-  `FirstPhoto` varchar(45) DEFAULT NULL,
-  `SecondPhoto` varchar(45) DEFAULT NULL,
-  `ThirdPhoto` varchar(45) DEFAULT NULL,
-  `Length` int(45) DEFAULT NULL,
   `Weight` int(45) DEFAULT NULL,
+  `Length` int(45) DEFAULT NULL,
   `Thickness` int(45) DEFAULT NULL,
   `Grade` varchar(45) DEFAULT NULL,
   `Sanded` int(25) DEFAULT NULL,
   `WaterResistance` int(45) DEFAULT NULL,
   `NumberOfSheets` int(45) DEFAULT NULL,
   `NumberOfPackages` int(45) DEFAULT NULL,
-  `Color` varchar(45) DEFAULT NULL,
+  `Model` varchar(45) DEFAULT NULL,
+  `Manufacturer` varchar(45) DEFAULT NULL,
+  `ProductionYear` INT(45) DEFAULT NULL,
+  `Condition` varchar(45) DEFAULT NULL,
+  `Axles` varchar(45) DEFAULT NULL,
+  `MaxLoad` INT(45) DEFAULT NULL,
+  `Reach` INT(45) DEFAULT NULL,
+  `Footprint` varchar(45) DEFAULT NULL,
+  `Repeatability` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ProductID`));
 
-CREATE TABLE `buildingonlineshop`.`photos` (
+INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test', 'Plywood', 'Plywood',1);
+INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test2', 'Plywood', 'Plywood',1);
+INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test3', 'Plywood', 'Plywood',1);
+
+CREATE TABLE `buildingonlineshop`.`photo` (
   `ProductID` VARCHAR(45) NOT NULL,
   `Photo` VARCHAR(45) NOT NULL,
   `id_photo` INT(5) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_photo`));
 
+CREATE TABLE `buildingonlineshop`.`purchase` (
+  `id_purchase` INT(5) NOT NULL AUTO_INCREMENT,
+  `productName` VARCHAR(45) NOT NULL,
+  `quantity` INT(6) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `date` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_purchase`));
+
 CREATE INDEX `product` ON `buildingonlineshop`.`product` (`ProductID`);
 
-ALTER TABLE `buildingonlineshop`.`photos` ADD CONSTRAINT `product_fk1` FOREIGN KEY (`ProductID`)
+ALTER TABLE `buildingonlineshop`.`photo` ADD CONSTRAINT `product_fk1` FOREIGN KEY (`ProductID`)
 REFERENCES `buildingonlineshop`.`product`(`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

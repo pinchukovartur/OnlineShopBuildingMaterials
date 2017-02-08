@@ -1,6 +1,7 @@
 package ru.pinch.service.products;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
 
 import java.io.FileInputStream;
@@ -18,9 +19,14 @@ public interface ProductsService {
     List getProductsOnPage(List<Product> plywoodListOld, int pageNumber, int amountOnThePage);
     Integer getNumberPages(List<Product> plywoodListOld, int amountOnThePage);
 
-   /* FileInputStream getPDFWithMaterialsData(Product plywood);
-
     boolean saveTheImageOnServer(String fileName, byte[] bytes);
+    void savePhoto(Photo photo);
+
+    FileInputStream getPDF(Product plywood);
+
+   /*
+
+
 
     List<Product> getProductsByPrice(int type_particleBoard,
                                        int type_plywood, int price_with,

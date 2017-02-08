@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Photos {
+public class Photo {
     private String photo;
     private int idPhoto;
     private Product product;
@@ -41,10 +41,10 @@ public class Photos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Photos photos = (Photos) o;
+        Photo photo = (Photo) o;
 
-        if (idPhoto != photos.idPhoto) return false;
-        if (photo != null ? !photo.equals(photos.photo) : photos.photo != null) return false;
+        if (idPhoto != photo.idPhoto) return false;
+        if (this.photo != null ? !this.photo.equals(photo.photo) : photo.photo != null) return false;
 
         return true;
     }
@@ -57,7 +57,7 @@ public class Photos {
     }
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "productID")
+    @JoinColumn(name = "productId")
     public Product getProduct() {
         return product;
     }

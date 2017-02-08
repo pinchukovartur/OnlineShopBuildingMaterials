@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ru.pinch.dao.HibernateUtil;
+import ru.pinch.entity.Purchase;
 import ru.pinch.entity.products.Product;
 import ru.pinch.entity.users.Basket;
 import ru.pinch.entity.users.Role;
@@ -57,7 +58,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            user = session.load(User.class, username);
+            user = session.get(User.class, username);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
             System.out.println("getUsers exception:" + e.getMessage());
@@ -156,5 +157,57 @@ public class UserDAOImpl implements UserDAO {
             }
         }
         return products;
+    }
+
+    public List<Purchase> getPurchases() {
+        Session session = null;
+        List purchase = new ArrayList<Purchase>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            purchase = session.createCriteria(Purchase.class).list();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
+            System.out.println("getPurchases exception:" + e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return purchase;
+    }
+
+    public void savePurchase(Purchase purchase) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(purchase);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
+            System.out.println("savePurchase exception:" + e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public void deletePurchaseByID(int id) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(session.get(Purchase.class, id));
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
+            System.out.println("deletePurchaseByID exception:" + e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }

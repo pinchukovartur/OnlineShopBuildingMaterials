@@ -194,13 +194,13 @@
                         <div id="grid-view" class="products-grid fade tab-pane in active">
                             <div class="product-grid-holder">
                                 <div class="row no-margin">
-                                    <c:forEach items="${listProduct}" var="product">
+                                    <c:forEach items="${listProducts}" var="product">
                                         <div class="col-xs-12 col-sm-4 no-margin product-item-holder hover">
                                             <div class="product-item">
                                                 <div class="ribbon red"><span>В продаже</span></div>
                                                 <div class="image">
                                                     <img alt=""
-                                                         src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photosList[0].photo}.jpg"
+                                                         src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photoList[0].photo}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                                 <div class="body">
@@ -243,14 +243,14 @@
                         </div>
                         <div id="list-view" class="products-grid fade tab-pane ">
                             <div class="products-list">
-                                <c:forEach items="${listProduct}" var="product">
+                                <c:forEach items="${listProducts}" var="product">
                                     <div class="product-item product-item-holder">
                                         <div class="ribbon red"><span>sale</span></div>
                                         <div class="ribbon blue"><span>new!</span></div>
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photosList[0].photo}.jpg"
+                                                    <img src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photoList[0].photo}.jpg"
                                                          width="246" height="186"/>
                                                 </div>
                                             </div>
