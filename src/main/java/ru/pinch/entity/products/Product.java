@@ -15,7 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@Entity(name = "Product")
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
         name = "discriminator",

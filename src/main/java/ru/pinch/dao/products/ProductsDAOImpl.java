@@ -17,7 +17,6 @@ import java.util.List;
 public class ProductsDAOImpl implements ProductsDAO {
 
     public void addProduct(Product product) {
-        if (getProductByID(product.getProductId()) == null) {
             Session session = null;
             try {
                 session = HibernateUtil.getSessionFactory().openSession();
@@ -32,7 +31,6 @@ public class ProductsDAOImpl implements ProductsDAO {
                     session.close();
                 }
             }
-        }
     }
 
     public List<Product> getProducts() {

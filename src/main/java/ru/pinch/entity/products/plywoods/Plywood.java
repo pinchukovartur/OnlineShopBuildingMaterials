@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "Plywood")
+@Entity
 @Table(name = "Product")
 @DiscriminatorValue("Plywood")
 public class Plywood extends Product {

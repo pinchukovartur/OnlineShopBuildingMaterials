@@ -65,7 +65,6 @@
                     <span>Plywood Table</span>
                 </h2>
             </div>
-
             <div class="box-content">
                 <table class="tab tab-drag">
                     <tr class="top nodrop nodrag">
@@ -105,6 +104,27 @@
                                                   class="ico ico-delete">Delete</a>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <form action="addPlywood" METHOD="get">
+                            <td class="dragHandle">&nbsp;</td>
+                            <td><input name="productId" SIZE="5"></td>
+                            <td><label>Plywood</label></td>
+                            <td><input name="price" SIZE="3"></td>
+                            <td><input name="weight" SIZE="5"></td>
+                            <td><input name="length" SIZE="5"></td>
+                            <td><input name="thickness" SIZE="5"></td>
+                            <td><input name="grade" SIZE="1"></td>
+                            <td><input name="sanded" SIZE="1"></td>
+                            <td><input name="waterResistance" SIZE="1"></td>
+                            <td><input name="numberOfSheets" SIZE="5"></td>
+                            <td><input name="numberOfPackages" SIZE="5"></td>
+                            <td><input name="description" SIZE="5"></td>
+                            <td><label>DEFAULT NULL</label></td>
+                            <td class="action">
+                                <input type="submit"/>
+                            </td>
+                        </form>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -116,7 +136,6 @@
                     <span>Particle Board Table</span>
                 </h2>
             </div>
-
             <div class="box-content">
                 <table class="tab tab-drag">
                     <tr class="top nodrop nodrag">
@@ -131,7 +150,6 @@
                         <th>NumberOfPackages</th>
                         <th>Color</th>
                         <th>Description</th>
-                        <th>Color</th>
                         <th>Main Photo</th>
                         <th class="action">Action</th>
                     </tr>
@@ -141,14 +159,117 @@
                             <td><c:out value="${particleBoard.productId }"/></td>
                             <td><c:out value="${particleBoard.type }"/></td>
                             <td><c:out value="${particleBoard.price }"/></td>
+                            <td><c:out value="${particleBoard.weight }"/></td>
+                            <td><c:out value="${particleBoard.length }"/></td>
+                            <td><c:out value="${particleBoard.thickness }"/></td>
+                            <td><c:out value="${particleBoard.numberOfSheets }"/></td>
+                            <td><c:out value="${particleBoard.numberOfPackages }"/></td>
+                            <td><c:out value="${particleBoard.color }"/></td>
+                            <td><c:out value="${particleBoard.description }"/></td>
                             <td><c:out value="${particleBoard.photoList[0].photo}"/></td>
                             <td class="action"><a href="dProduct/${particleBoard.productId}"
                                                   class="ico ico-delete">Delete</a>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <form action="addParticleBoard" METHOD="get">
+                        <td class="dragHandle">&nbsp;</td>
+                        <td><input name="productId" SIZE="5"></td>
+                        <td><label>ParticleBoard</label></td>
+                        <td><input name="price" SIZE="3"></td>
+                        <td><input name="weight" SIZE="5"></td>
+                        <td><input name="length" SIZE="5"></td>
+                        <td><input name="thickness" SIZE="5"></td>
+                        <td><input name="numberOfSheets" SIZE="5"></td>
+                        <td><input name="numberOfPackages" SIZE="5"></td>
+                        <td><input name="color" SIZE="5"></td>
+                        <td><input name="description" SIZE="5"></td>
+                        <td><label>DEFAULT NULL</label></td>
+                        <td class="action">
+                            <input type="submit"/>
+                        </td>
+                        </form>
+                    </tr>
                 </table>
             </div>
         </div>
+
+        <div class="box">
+            <div class="headlines">
+                <h2>
+                    <span>Robot Table</span>
+                </h2>
+            </div>
+            <div class="box-content">
+                <table class="tab tab-drag">
+                    <tr class="top nodrop nodrag">
+                        <td class="dragHandle">&nbsp;</td>
+                        <th>Product Name</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Weight</th>
+                        <th>Model</th>
+                        <th>Manufacturer</th>
+                        <th>ProductionYear</th>
+                        <th>Condition</th>
+                        <th>Axles</th>
+                        <th>MaxLoad</th>
+                        <th>Reach</th>
+                        <th>Footprint</th>
+                        <th>Repeatability</th>
+                        <th>Description</th>
+                        <th>Main Photo</th>
+                        <th class="action">Action</th>
+                    </tr>
+                    <c:forEach items="${robotList}" var="particleBoard">
+                        <tr>
+                            <td class="dragHandle">&nbsp;</td>
+                            <td><c:out value="${particleBoard.productId }"/></td>
+                            <td><c:out value="${particleBoard.type }"/></td>
+                            <td><c:out value="${particleBoard.price }"/></td>
+                            <td><c:out value="${particleBoard.weight }"/></td>
+                            <td><c:out value="${particleBoard.model }"/></td>
+                            <td><c:out value="${particleBoard.manufacturer }"/></td>
+                            <td><c:out value="${particleBoard.productionYear }"/></td>
+                            <td><c:out value="${particleBoard.condition }"/></td>
+                            <td><c:out value="${particleBoard.axles }"/></td>
+                            <td><c:out value="${particleBoard.maxLoad }"/></td>
+                            <td><c:out value="${particleBoard.reach }"/></td>
+                            <td><c:out value="${particleBoard.footprint }"/></td>
+                            <td><c:out value="${particleBoard.repeatability }"/></td>
+                            <td><c:out value="${particleBoard.description }"/></td>
+                            <td><c:out value="${particleBoard.photoList[0].photo}"/></td>
+                            <td class="action"><a href="dProduct/${particleBoard.productId}"
+                                                  class="ico ico-delete">Delete</a>
+                        </tr>
+                    </c:forEach>
+                    <tr>
+                        <form action="addRobot" METHOD="get">
+                            <td class="dragHandle">&nbsp;</td>
+                            <td><input name="productId" SIZE="5"></td>
+                            <td><label>Robot</label></td>
+                            <td><input name="price" SIZE="3"></td>
+                            <td><input name="weight" SIZE="5"></td>
+                            <td><input name="model" SIZE="5"></td>
+                            <td><input name="manufacturer" SIZE="5"></td>
+                            <td><input name="productionYear" SIZE="5"></td>
+                            <td><input name="condition" SIZE="5"></td>
+                            <td><input name="axles" SIZE="5"></td>
+                            <td><input name="maxLoad" SIZE="5"></td>
+                            <td><input name="reach" SIZE="5"></td>
+                            <td><input name="footprint" SIZE="5"></td>
+                            <td><input name="repeatability" SIZE="5"></td>
+                            <td><input name="description" SIZE="5"></td>
+                            <td><label>DEFAULT NULL</label></td>
+                            <td class="action">
+                                <input type="submit"/>
+                            </td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
     <div id="sidebar">
         <ul id="floatMenu" class="mainmenu">

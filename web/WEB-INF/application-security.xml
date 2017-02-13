@@ -18,7 +18,9 @@
 
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/dProduct" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/newProduct" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/addParticleBoard" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/addPlywood" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/addRobot" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/uploadFile" access="hasRole('ROLE_ADMIN')" />
 
         <form-login
