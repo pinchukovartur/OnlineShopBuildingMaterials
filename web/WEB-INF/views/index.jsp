@@ -65,7 +65,7 @@
                 </div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
-                        <li><a href="/catalog=ParticleBoards&page=1"><local:message code="index.label.particleBoard"/></a></li>
+                        <li><a href="/catalog=ParticleBoard&page=1"><local:message code="index.label.particleBoard"/></a></li>
                         <li><a href="/catalog=Plywood&page=1"><local:message code="index.label.plywood"/></a></li>
                         <li><a href="/catalog=Robot&page=1"><local:message code="index.label.robot"/></a></li>
                     </ul>

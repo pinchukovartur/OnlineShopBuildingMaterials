@@ -17,13 +17,11 @@ public class Robot extends Product{
     private String model;
     private String manufacturer;
     private Integer productionYear;
-
     private String axles;
     private Integer maxLoad;
     private Integer reach;
     private String footprint;
     private String repeatability;
-
     private String condition;
 
     @Id
