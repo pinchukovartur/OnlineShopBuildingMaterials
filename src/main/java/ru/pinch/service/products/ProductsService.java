@@ -3,6 +3,7 @@ package ru.pinch.service.products;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.robots.Robot;
 
 import java.io.FileInputStream;
 import java.util.List;
@@ -23,6 +24,14 @@ public interface ProductsService {
     void savePhoto(Photo photo);
 
     FileInputStream getPDF(Product plywood);
+
+    List<Product> sortProductsByPrice(List<Product> oldProducts, int priceWith, int priceBefore);
+
+    List<Robot> sortRobotsByProductionYear(List<Robot> oldList, int productionYear);
+    List<Robot> sortRobotsByMaxLoad(List<Robot> oldList, int maxLoad);
+    List<Robot> sortRobotsByReach(List<Robot> oldList, int reach);
+    List<Robot> sortRobotsByManufacturer(List<Robot> oldList, String manufacturer);
+
 
    /*
 

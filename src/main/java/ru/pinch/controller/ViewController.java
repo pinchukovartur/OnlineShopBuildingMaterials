@@ -72,16 +72,9 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/catalog={type}&page={pageNumber}", method = RequestMethod.GET)
-    public ModelAndView select(
+    public ModelAndView catalog(
             @PathVariable(value = "type") String type,
             @PathVariable(value = "pageNumber") int pageNumber,
-            /*
-            @RequestParam(value = "type",   defaultValue = "all") String type,
-            @RequestParam(value = "checkbox_particleBoard",   defaultValue = "0") int checkbox_particleBoard,
-            @RequestParam(value = "checkbox_plywood",   defaultValue = "0") int checkbox_plywood,
-            @RequestParam(value = "input_with", defaultValue = "0") int input_with,
-            @RequestParam(value = "input_before",  defaultValue = "0") int input_before,
-            @RequestParam(value = "grade",defaultValue = "0") int grade,*/
             ModelAndView modelAndView, Principal user)
     {
         List<Product> productList = productsService.getProductsByType(type);
@@ -100,6 +93,31 @@ public class ViewController {
     public ModelAndView oneProduct(@PathVariable("id") String idProduct, ModelAndView modelAndView) {
         modelAndView.addObject("product", productsService.getProductByID(idProduct));
         modelAndView.setViewName("WEB-INF/views/" + "one_product");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchRobots", method = RequestMethod.GET)
+    public ModelAndView searchRobots(
+            @RequestParam(value = "productionYear", defaultValue = "-1") int productionYear,
+            @RequestParam(value = "maxLoad" , defaultValue = "-1") int maxLoad,
+            @RequestParam(value = "reach", defaultValue = "-1") int reach,
+            @RequestParam(value = "manufacturer", defaultValue = "") String manufacturer,
+            @RequestParam(value = "priceWith", defaultValue = "-1") int priceWith,
+            @RequestParam(value = "priceBefore", defaultValue = "-1") int priceBefore,
+            ModelAndView modelAndView, Principal user)
+    {
+        List robots = productsService.getProductsByType("Robot");
+        robots = productsService.sortProductsByPrice(robots,priceWith,priceBefore);
+        robots = productsService.sortRobotsByProductionYear(robots,productionYear);
+        robots = productsService.sortRobotsByMaxLoad(robots, maxLoad);
+        robots = productsService.sortRobotsByReach(robots, reach);
+        robots = productsService.sortRobotsByManufacturer(robots, manufacturer);
+        if(user!=null) {
+            modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
+        }
+        modelAndView.addObject("listProducts", robots);
+        modelAndView.addObject("numberOfPages", productsService.getNumberPages(robots,AMOUNT_ON_THE_PAGE));
+        modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
 }

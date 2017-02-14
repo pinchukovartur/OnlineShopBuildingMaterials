@@ -17,8 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
-import ru.pinch.entity.products.particleboards.ParticleBoard;
-import ru.pinch.entity.products.plywoods.Plywood;
+import ru.pinch.entity.products.robots.Robot;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -39,7 +38,7 @@ public class ProductServiceImpl implements ProductsService {
 
 
     public void addProduct(Product product) {
-            shopDataBase.addProduct(product);
+        shopDataBase.addProduct(product);
     }
 
     public List getProducts() {
@@ -54,7 +53,7 @@ public class ProductServiceImpl implements ProductsService {
         return shopDataBase.getProductByID(productID);
     }
 
-    public void savePhoto(Photo photo){
+    public void savePhoto(Photo photo) {
         shopDataBase.savePhoto(photo);
     }
 
@@ -62,8 +61,8 @@ public class ProductServiceImpl implements ProductsService {
         List<Product> products = shopDataBase.getProducts();
         List<Product> newProducts = new ArrayList<Product>();
         for (int i = 0; i < products.size(); i++) {
-            if(products.get(i).getType().equals(type)){
-               newProducts.add(products.get(i));
+            if (products.get(i).getType().equals(type)) {
+                newProducts.add(products.get(i));
             }
         }
         return newProducts;
@@ -125,6 +124,96 @@ public class ProductServiceImpl implements ProductsService {
             e.printStackTrace();
         }
         return pdfFile;
+    }
+
+    public List<Product> sortProductsByPrice(List<Product> oldProducts, int priceWith, int priceBefore) {
+        List<Product> newProducts = new ArrayList<Product>();
+        if (priceWith > 0 && priceBefore > 0) {
+            for (Product oldProduct : oldProducts) {
+                if(oldProduct.getPrice()!=null) {
+                    int priceProduct = oldProduct.getPrice().intValue();
+                    if (priceProduct >= priceWith && priceProduct <= priceBefore) {
+                        newProducts.add(oldProduct);
+                    }
+                }
+            }
+            return newProducts;
+        }
+        if (priceWith > 0) {
+            for (Product oldProduct : oldProducts) {
+                if(oldProduct.getPrice()!=null) {
+                    int priceProduct = oldProduct.getPrice().intValue();
+                    if (priceProduct >= priceWith) {
+                        newProducts.add(oldProduct);
+                    }
+                }
+            }
+            return newProducts;
+        }
+        if (priceBefore > 0) {
+            for (Product oldProduct : oldProducts) {
+                if(oldProduct.getPrice()!=null) {
+                    int priceProduct = oldProduct.getPrice().intValue();
+                    if (priceProduct <= priceBefore) {
+                        newProducts.add(oldProduct);
+                    }
+                }
+            }
+            return newProducts;
+        }
+        return oldProducts;
+    }
+
+    public List<Robot> sortRobotsByProductionYear(List<Robot> oldList, int productionYear) {
+        if(productionYear>1995) {
+            List<Robot> newRobots = new ArrayList<Robot>();
+            for (Robot anOldList : oldList) {
+                if (anOldList.getProductionYear() == productionYear) {
+                    newRobots.add(anOldList);
+                }
+            }
+            return newRobots;
+        }
+        else return oldList;
+    }
+
+    public List<Robot> sortRobotsByMaxLoad(List<Robot> oldList, int maxLoad) {
+        if(maxLoad>0) {
+            List<Robot> newRobots = new ArrayList<Robot>();
+            for (Robot anOldList : oldList) {
+                if (anOldList.getMaxLoad() == maxLoad) {
+                    newRobots.add(anOldList);
+                }
+            }
+            return newRobots;
+        }
+        else return oldList;
+    }
+
+    public List<Robot> sortRobotsByReach(List<Robot> oldList, int reach) {
+        if(reach>0) {
+            List<Robot> newRobots = new ArrayList<Robot>();
+            for (Robot anOldList : oldList) {
+                if (anOldList.getReach() == reach) {
+                    newRobots.add(anOldList);
+                }
+            }
+            return newRobots;
+        }
+        else return oldList;
+    }
+
+    public List<Robot> sortRobotsByManufacturer(List<Robot> oldList, String manufacturer) {
+        if(!manufacturer.equals("")) {
+            List<Robot> newRobots = new ArrayList<Robot>();
+            for (Robot anOldList : oldList) {
+                if (anOldList.getManufacturer().equals(manufacturer)) {
+                    newRobots.add(anOldList);
+                }
+            }
+            return newRobots;
+        }
+        else return oldList;
     }
 
     public String addProductsFromExcel(MultipartFile file) {
@@ -195,54 +284,11 @@ public class ProductServiceImpl implements ProductsService {
         return numberOfPages;
     }
 
-    public List<Product> getProductsByPrice(int type_particleBoard, int type_plywood, int price_with, int price_before, int grade) {
-        List<Product> productList = shopDataBase.getProductsByPrice(price_with, price_before);
-        productList = sortMaterialsByType(productList, type_particleBoard, type_plywood);
-        /*productList = sortMaterialsByGrade(productList, grade);*/
-        return productList;
-    }
-    private List<Product> sortMaterialsByType(List<Product> plywoodListOld, int type_particleBoard, int type_plywood) {
-        List<Product> plywoodListNew = new ArrayList<Product>();
-        for (int i = 0; i < plywoodListOld.size(); i++) {
-            if (type_plywood == 1 && type_particleBoard == 1) {
-                if (plywoodListOld.get(i).getType().contains("lywood") || plywoodListOld.get(i).getType().contains("article")) {
-                    plywoodListNew.add(plywoodListOld.get(i));
-                }
-            }
-            if (type_particleBoard == 1 && plywoodListOld.get(i).getType().contains("article") && type_plywood == 0) {
-                plywoodListNew.add(plywoodListOld.get(i));
-            }
-            if (type_plywood == 1 && plywoodListOld.get(i).getType().contains("lywood") && type_particleBoard == 0) {
-                plywoodListNew.add(plywoodListOld.get(i));
-            }
-            if (type_plywood == 0 && type_particleBoard == 0) {
-                return plywoodListOld;
-            }
-        }
-        return plywoodListNew;
-    }
 
-    /*private List<Product> sortMaterialsByGrade(List<Product> plywoodListOld, int grade) {
-        if (grade > 0) {
-            List<Product> plywoodListNew = new ArrayList<Product>();
-            for (int i = 0; i < plywoodListOld.size(); i++) {
-                try {
-                    if (Integer.parseInt(((Plywood)plywoodListOld.get(i)).getGrade().substring(0, 1)) == grade) {
-                        plywoodListNew.add(plywoodListOld.get(i));
-                    }
-                } catch (Exception e) {
-                    System.err.println("В базе храниться сорт с ошибкой-" + ((Plywood)plywoodListOld.get(i)).getGrade());
-                }
-            }
-            return plywoodListNew;
-        } else return plywoodListOld;
-    }*/
+
+
 
 /*
-
-
-
-
     private Product checkFirstColumnExcel(Product plywood, XSSFRow row) {
         if (row.getCell(0).getStringCellValue().contains("Product ID")) {
             plywood.setProductId(row.getCell(1).getStringCellValue());
