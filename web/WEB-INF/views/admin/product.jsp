@@ -268,6 +268,42 @@
                     </tr>
                 </table>
             </div>
+            <div class="box">
+                <div class="headlines">
+                    <h2>
+                        <span>Загрузка данных</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <c:if test="${not empty errorImage}">
+                            <label class="lab">${errorImage}</label>
+                        </c:if>
+                    </p>
+                    <h2>Загрузка картинки товара</h2>
+                    <form class="formBox" method="post" action="uploadFile"
+                          enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form">
+                                <div class="col1">
+                                    <div class="clearfix file">
+                                        <div class="con">
+                                            <input type="file" class="upload-file" id="inputFile"
+                                                   name="file"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Название продукта:</label>
+                            <input type="text" name="productId"/>
+                            <div class="tab-action">
+                                <input type="submit" value="Загрузить" class="button"
+                                       id="upload"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
 
     </div>

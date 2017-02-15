@@ -18,7 +18,7 @@
                 <div class="maxLoad-filter">
                     <label>
                         <h2><local:message code="catalog.sort.label.maxLoad"/></h2>
-                        <input type="range" name="maxLoad" min="0" max="2000" value="0" id="fader"
+                        <input type="range" name="maxLoad" min="0" max="1000" value="0" id="fader"
                                step="1" oninput="outputUpdate(value)">
                         <output for="fader" id="volume">0</output>
                     </label>
@@ -26,7 +26,7 @@
                 <div class="reach-filter">
                     <label>
                         <h2><local:message code="catalog.sort.label.reach"/></h2>
-                        <input type="range" name="reach" min="0" max="2000" value="0" id="fader3"
+                        <input type="range" name="reach" min="0" max="500" value="0" id="fader3"
                                step="1" oninput="outputUpdate3(value)">
                         <output for="fader3" id="volume3">0</output>
                     </label>
@@ -37,30 +37,9 @@
                     <div class="le-select">
                         <select name="manufacturer">
                             <option disabled><local:message code="catalog.sort.label.manufacturer"/></option>
-                            <c:choose>
-                                <c:when test="${manufacturer==0}">
                                     <option selected value="0">Not important</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="0">Not important</option>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:choose>
-                                <c:when test="${manufacturer==0}">
                                     <option selected value="Kuka">Kuka</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Kuka">Kuka</option>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:choose>
-                                <c:when test="${manufacturer==0}">
                                     <option selected value="ABB">ABB</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="ABB">ABB</option>
-                                </c:otherwise>
-                            </c:choose>
                         </select>
                     </div>
                 </div>

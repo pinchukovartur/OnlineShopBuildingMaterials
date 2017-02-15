@@ -15,6 +15,7 @@ import ru.pinch.service.products.ProductsService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
@@ -26,35 +27,34 @@ public class FileProductController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ModelAndView uploadPhotoProduct(@RequestParam("file") MultipartFile file,
-                                   @RequestParam("material") String material, ModelAndView modelAndView) {
+                                   @RequestParam(value = "productId", defaultValue = "") String productId,
+                                           ModelAndView modelAndView) {
 
         modelAndView.addObject("addProduct", new Plywood());
         modelAndView.addObject("listProduct", productsService.getProducts());
-
-        if (!file.isEmpty()) {
+        if (!file.isEmpty() && !productId.equals("")) {
             try {
-                Date date = new Date();
+                /*Date date = new Date();
+                String imageName = date.toString().replaceAll(":", ",");*/
+
+                productsService.saveTheImageOnServer(file.getOriginalFilename(), file.getBytes());
                 Photo photo = new Photo();
-                String imageName = date.toString().replaceAll(":", ",");
-
-                productsService.saveTheImageOnServer(imageName, file.getBytes());
-
-                photo.setProduct(productsService.getProductByID(material));
-                photo.setPhoto(imageName);
+                photo.setProduct(productsService.getProductByID(productId));
+                photo.setPhoto(file.getOriginalFilename());
 
                 productsService.savePhoto(photo);
 
                 modelAndView.addObject("errorImage", "file has been successfully downloaded");
-                modelAndView.setViewName("WEB-INF/views/"+"admin");
+                modelAndView.setViewName("WEB-INF/views/admin/" + "product");
                 return modelAndView;
             } catch (IOException e) {
-                modelAndView.setViewName("WEB-INF/views/"+"admin");
+                modelAndView.setViewName("WEB-INF/views/admin/" + "product");
                 modelAndView.addObject("errorImage", e.getMessage());
                 return modelAndView;
             }
         } else {
             modelAndView.addObject("errorImage", "empty file");
-            modelAndView.setViewName("WEB-INF/views/"+"admin");
+            modelAndView.setViewName("WEB-INF/views/admin/" + "product");
         }
         return modelAndView;
     }
@@ -88,5 +88,28 @@ public class FileProductController {
         modelAndView.addObject("addProduct", new Plywood());
         modelAndView.addObject("listProduct", productsService.getProducts());
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/getImage", method = RequestMethod.GET)
+    public void getImage(
+            @RequestParam("image") String imageName,
+            HttpServletResponse response) {
+        System.out.println(imageName);
+        if(!imageName.equals("")) {
+            final String COMPUTER_PATH = "E:\\Projects\\dataServer\\";
+            try {
+                FileInputStream image = null;
+                try {
+                    image = new FileInputStream(COMPUTER_PATH + imageName);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                org.apache.commons.io.IOUtils.copy(image, response.getOutputStream());
+                response.flushBuffer();
+            } catch (IOException ex) {
+                System.err.println("Error writing file to output stream. Filename was-" + imageName);
+            }
+            throw new RuntimeException("IOError writing file to output stream");
+        }
     }
 }

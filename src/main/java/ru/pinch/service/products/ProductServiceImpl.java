@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.dao.products.ProductsDAO;
 import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.particleboards.ParticleBoard;
+import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.entity.products.robots.Robot;
 
 import java.io.BufferedOutputStream;
@@ -31,7 +33,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductsService {
 
-    private static final String COMPUTER_PATH = "E:\\Projects\\OnlineShopBuildingMaterials\\web\\resources\\jpg\\";
+    private static final String COMPUTER_PATH = "E:\\Projects\\dataServer\\";
 
     @Autowired
     private ProductsDAO shopDataBase;
@@ -74,7 +76,7 @@ public class ProductServiceImpl implements ProductsService {
             /*String rootPath = System.getProperty("catalina.properties");*/
 
             File serverFile = new File(COMPUTER_PATH
-                    + fileName + ".jpg");
+                    + fileName);
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));
             stream.write(bytes);
@@ -212,6 +214,63 @@ public class ProductServiceImpl implements ProductsService {
                 }
             }
             return newRobots;
+        }
+        else return oldList;
+    }
+
+    public List<Plywood> sortPlywoodsBySanded(List<Plywood> oldList, int sanded) {
+        List<Plywood> newList = new ArrayList<Plywood>();
+        if(sanded>=0){
+            for (Plywood anOldList : oldList) {
+                if (anOldList.getSanded() == sanded) {
+                    newList.add(anOldList);
+                }
+            }
+            return newList;
+        }
+        else return oldList;
+    }
+
+    public List<Plywood> sortPlywoodsByWaterResistance(List<Plywood> oldList, int waterResistance) {
+        List<Plywood> newList = new ArrayList<Plywood>();
+        if(waterResistance>=0){
+            for (Plywood anOldList : oldList) {
+                if (anOldList.getWaterResistance() == waterResistance) {
+                    newList.add(anOldList);
+                }
+            }
+            return newList;
+        }
+        else return oldList;
+    }
+
+    public List<Plywood> sortPlywoodsByGrade(List<Plywood> oldList, int grade) {
+        List<Plywood> newList = new ArrayList<Plywood>();
+        if(grade>=0){
+            for (Plywood anOldList : oldList) {
+                try {
+                    if (Integer.parseInt(anOldList.getGrade().substring(0, 1)) == grade) {
+                        newList.add(anOldList);
+                    }
+                }
+                catch (Exception e){
+                    System.err.println("В Базе храниться сорт с ошибкой-"+anOldList.getGrade());
+                }
+            }
+            return newList;
+        }
+        else return oldList;
+    }
+
+    public List<ParticleBoard> sortParticleBoardsByColor(List<ParticleBoard> oldList, String color) {
+        List<ParticleBoard> newList = new ArrayList<ParticleBoard>();
+        if(!color.equals("")){
+            for (ParticleBoard anOldList : oldList) {
+                if (anOldList.getColor().equals(color)) {
+                    newList.add(anOldList);
+                }
+            }
+            return newList;
         }
         else return oldList;
     }

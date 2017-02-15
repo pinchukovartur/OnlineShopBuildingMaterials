@@ -29,16 +29,19 @@
     <!-- Demo Purpose Only. Should be removed in production -->
     <link rel="stylesheet" href="resources/assets/css/config.css">
 
-    <link href="${pageContext.request.contextPath}/resources/assets/css/green.css" rel="alternate stylesheet" title="Green color">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/red.css" rel="alternate stylesheet" title="Red color">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/navy.css" rel="alternate stylesheet" title="Navy color">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/green.css" rel="alternate stylesheet"
+          title="Green color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/blue.css" rel="alternate stylesheet"
+          title="Blue color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/red.css" rel="alternate stylesheet"
+          title="Red color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/orange.css" rel="alternate stylesheet"
+          title="Orange color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/navy.css" rel="alternate stylesheet"
+          title="Navy color">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/dark-green.css" rel="alternate stylesheet"
+          title="Darkgreen color">
     <!-- Demo Purpose Only. Should be removed in production : END -->
-
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css">
@@ -73,7 +76,6 @@
         </div>
     </div>
 </div>
-
 <section id="category-grid">
     <div class="container">
         <c:if test="${listProducts[0].type == 'Plywood'}">
@@ -107,9 +109,8 @@
                                             <div class="product-item">
                                                 <div class="ribbon red"><span>В продаже</span></div>
                                                 <div class="image">
-                                                    <img alt=""
-                                                         src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photoList[0].photo}.jpg"
-                                                         width="246" height="186"/>
+                                                    <img src="/getImage?image=${product.photoList[0].photo}"
+                                                         alt="" width="246" height="186"/>
                                                 </div>
                                                 <div class="body">
                                                     <div class="title">
@@ -157,10 +158,10 @@
                                         <div class="ribbon blue"><span>new!</span></div>
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
-                                                <div class="image">
-                                                    <img src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.photoList[0].photo}.jpg"
+                                                <%--<div class="image">
+                                                    <img src="/resources/dataServer/${product.photoList[0].photo}"
                                                          width="246" height="186"/>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
                                                 <div class="body">

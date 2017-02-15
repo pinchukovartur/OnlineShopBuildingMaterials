@@ -3,6 +3,8 @@ package ru.pinch.service.products;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pinch.entity.products.Photo;
 import ru.pinch.entity.products.Product;
+import ru.pinch.entity.products.particleboards.ParticleBoard;
+import ru.pinch.entity.products.plywoods.Plywood;
 import ru.pinch.entity.products.robots.Robot;
 
 import java.io.FileInputStream;
@@ -31,6 +33,12 @@ public interface ProductsService {
     List<Robot> sortRobotsByMaxLoad(List<Robot> oldList, int maxLoad);
     List<Robot> sortRobotsByReach(List<Robot> oldList, int reach);
     List<Robot> sortRobotsByManufacturer(List<Robot> oldList, String manufacturer);
+
+    List<Plywood> sortPlywoodsBySanded(List<Plywood> oldList, int sanded);
+    List<Plywood> sortPlywoodsByWaterResistance(List<Plywood> oldList, int waterResistance);
+    List<Plywood> sortPlywoodsByGrade(List<Plywood> oldList, int grade);
+
+    List<ParticleBoard> sortParticleBoardsByColor(List<ParticleBoard> oldList, String color);
 
 
    /*

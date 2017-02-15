@@ -2,6 +2,7 @@ package ru.pinch.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,12 @@ import ru.pinch.entity.users.User;
 import ru.pinch.service.products.ProductsService;
 import ru.pinch.service.user.UserService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -37,8 +44,11 @@ public class ViewController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(
-            @RequestParam(value = "window",   defaultValue = "purchases") String window,
+            @RequestParam(value = "window",   defaultValue = "purchases") String window,HttpServletResponse response,
             ModelAndView modelAndView) {
+
+        String imagePath ="E:\\Projects\\dataServer\\";
+        modelAndView.addObject("imgUrl", imagePath);
 
         if(window.equals("purchases")) {
             modelAndView.setViewName("WEB-INF/views/admin/" + "purchase");
@@ -117,6 +127,48 @@ public class ViewController {
         }
         modelAndView.addObject("listProducts", robots);
         modelAndView.addObject("numberOfPages", productsService.getNumberPages(robots,AMOUNT_ON_THE_PAGE));
+        modelAndView.setViewName("WEB-INF/views/" + "catalog");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchPlywoods", method = RequestMethod.GET)
+    public ModelAndView searchPlywoods(
+            @RequestParam(value = "grade", defaultValue = "-1") int grade,
+            @RequestParam(value = "sanded" , defaultValue = "-1") int sanded,
+            @RequestParam(value = "waterResistance", defaultValue = "-1") int waterResistance,
+            @RequestParam(value = "priceWith", defaultValue = "-1") int priceWith,
+            @RequestParam(value = "priceBefore", defaultValue = "-1") int priceBefore,
+            ModelAndView modelAndView, Principal user)
+    {
+        List plywoods = productsService.getProductsByType("Plywood");
+        plywoods = productsService.sortProductsByPrice(plywoods,priceWith,priceBefore);
+        plywoods = productsService.sortPlywoodsByGrade(plywoods,grade);
+        plywoods = productsService.sortPlywoodsBySanded(plywoods,sanded);
+        plywoods = productsService.sortPlywoodsByWaterResistance(plywoods,waterResistance);
+        if(user!=null) {
+            modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
+        }
+        modelAndView.addObject("listProducts", plywoods);
+        modelAndView.addObject("numberOfPages", productsService.getNumberPages(plywoods,AMOUNT_ON_THE_PAGE));
+        modelAndView.setViewName("WEB-INF/views/" + "catalog");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchParticleBoards", method = RequestMethod.GET)
+    public ModelAndView searchParticleBoards(
+            @RequestParam(value = "color", defaultValue = "") String color,
+            @RequestParam(value = "priceWith", defaultValue = "-1") int priceWith,
+            @RequestParam(value = "priceBefore", defaultValue = "-1") int priceBefore,
+            ModelAndView modelAndView, Principal user)
+    {
+        List particleBoard = productsService.getProductsByType("ParticleBoard");
+        particleBoard = productsService.sortProductsByPrice(particleBoard,priceWith,priceBefore);
+        particleBoard = productsService.sortParticleBoardsByColor(particleBoard,color);
+        if(user!=null) {
+            modelAndView.addObject("productsInBasket", userService.getAllTheMaterialsOfThisUser(user.getName()).size());
+        }
+        modelAndView.addObject("listProducts", particleBoard);
+        modelAndView.addObject("numberOfPages", productsService.getNumberPages(particleBoard,AMOUNT_ON_THE_PAGE));
         modelAndView.setViewName("WEB-INF/views/" + "catalog");
         return modelAndView;
     }
