@@ -73,8 +73,6 @@ public class ProductServiceImpl implements ProductsService {
 
     public boolean saveTheImageOnServer(String fileName, byte[] bytes) {
         try {
-            /*String rootPath = System.getProperty("catalina.properties");*/
-
             File serverFile = new File(COMPUTER_PATH
                     + fileName);
             BufferedOutputStream stream = new BufferedOutputStream(
@@ -90,34 +88,109 @@ public class ProductServiceImpl implements ProductsService {
     public FileInputStream getPDF(Product product) {
         String RESULT
                 = COMPUTER_PATH + "test.pdf";
-
-        Document document = new Document(PageSize.A4.rotate());
-        document.open();
         try {
+            Document document = new Document(PageSize.A4.rotate());
+            document.open();
             PdfWriter.getInstance(document, new FileOutputStream(RESULT));
             document.open();
-            PdfPTable table = new PdfPTable(4);
-
-            BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Font font = new Font(bf);
-
-            table.addCell(new Paragraph("Наименование", font));
-            table.addCell(new Paragraph("Цена", font));
-            table.addCell(new Paragraph("Тип", font));
-            table.addCell(new Paragraph("Описание", font));
-
-            table.addCell(product.getProductId());
-            table.addCell(String.valueOf(product.getPrice()));
-            table.addCell(product.getType());
-            table.addCell(product.getDescription());
-
-            document.add(table);
+            if(product.getType().equals("Robot")) {
+                PdfPTable table = new PdfPTable(13);
+                BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font font = new Font(bf);
+                Robot robot = (Robot) product;
+                table.addCell(new Paragraph("Наименование", font));
+                table.addCell(new Paragraph("Цена", font));
+                table.addCell(new Paragraph("Тип", font));
+                table.addCell(new Paragraph("Описание", font));
+                table.addCell(new Paragraph("Модель", font));
+                table.addCell(new Paragraph("Производитель", font));
+                table.addCell(new Paragraph("Год выпуска", font));
+                table.addCell(new Paragraph("Ось", font));
+                table.addCell(new Paragraph("Грузоподьемность", font));
+                table.addCell(new Paragraph("Охват", font));
+                table.addCell(new Paragraph("След", font));
+                table.addCell(new Paragraph("Стабильность", font));
+                table.addCell(new Paragraph("Состояние", font));
+                table.addCell(robot.getProductId());
+                table.addCell(String.valueOf(robot.getPrice()));
+                table.addCell(robot.getType());
+                table.addCell(robot.getDescription());
+                table.addCell(robot.getModel());
+                table.addCell(robot.getManufacturer());
+                table.addCell(String.valueOf(robot.getProductionYear()));
+                table.addCell(robot.getAxles());
+                table.addCell(String.valueOf(robot.getMaxLoad()));
+                table.addCell(String.valueOf(robot.getReach()));
+                table.addCell(robot.getFootprint());
+                table.addCell(robot.getRepeatability());
+                table.addCell(robot.getCondition());
+                document.add(table);
+                document.close();
+            }
+            if(product.getType().equals("Plywood")) {
+                PdfPTable table = new PdfPTable(11);
+                BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font font = new Font(bf);
+                Plywood plywood = (Plywood) product;
+                table.addCell(new Paragraph("Наименование", font));
+                table.addCell(new Paragraph("Цена", font));
+                table.addCell(new Paragraph("Тип", font));
+                table.addCell(new Paragraph("Описание", font));
+                table.addCell(new Paragraph("Длина", font));
+                table.addCell(new Paragraph("Толщина", font));
+                table.addCell(new Paragraph("Сорт", font));
+                table.addCell(new Paragraph("Водонепронецаемый", font));
+                table.addCell(new Paragraph("Шлифованный", font));
+                table.addCell(new Paragraph("Кол-во листов в упаковке", font));
+                table.addCell(new Paragraph("Кол-во упаковок", font));
+                table.addCell(plywood.getProductId());
+                table.addCell(String.valueOf(plywood.getPrice()));
+                table.addCell(plywood.getType());
+                table.addCell(plywood.getDescription());
+                table.addCell(String.valueOf(plywood.getLength()));
+                table.addCell(String.valueOf(plywood.getThickness()));
+                table.addCell(plywood.getGrade());
+                if(plywood.getWaterResistance()>0)table.addCell("+");
+                else table.addCell("-");
+                if(plywood.getSanded()>0)table.addCell("+");
+                else table.addCell("-");
+                table.addCell(String.valueOf(plywood.getNumberOfSheets()));
+                table.addCell(String.valueOf(plywood.getNumberOfPackages()));
+                document.add(table);
+                document.close();
+            }
+            if(product.getType().equals("ParticleBoard")) {
+                PdfPTable table = new PdfPTable(9);
+                BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font font = new Font(bf);
+                ParticleBoard particleBoard = (ParticleBoard) product;
+                table.addCell(new Paragraph("Наименование", font));
+                table.addCell(new Paragraph("Цена", font));
+                table.addCell(new Paragraph("Тип", font));
+                table.addCell(new Paragraph("Описание", font));
+                table.addCell(new Paragraph("Длина", font));
+                table.addCell(new Paragraph("Толщина", font));
+                table.addCell(new Paragraph("Цвет", font));
+                table.addCell(new Paragraph("Кол-во листов в упаковке", font));
+                table.addCell(new Paragraph("Кол-во упаковок", font));
+                table.addCell(particleBoard.getProductId());
+                table.addCell(String.valueOf(particleBoard.getPrice()));
+                table.addCell(particleBoard.getType());
+                table.addCell(particleBoard.getDescription());
+                table.addCell(String.valueOf(particleBoard.getLength()));
+                table.addCell(String.valueOf(particleBoard.getThickness()));
+                table.addCell(particleBoard.getColor());
+                table.addCell(String.valueOf(particleBoard.getNumberOfSheets()));
+                table.addCell(String.valueOf(particleBoard.getNumberOfPackages()));
+                document.add(table);
+                document.close();
+            }
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        document.close();
+
 
         FileInputStream pdfFile = null;
         try {

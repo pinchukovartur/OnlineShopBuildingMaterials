@@ -139,6 +139,25 @@ public class UserDAOImpl implements UserDAO {
         }
         }
 
+    public void deleteProductInBasket(String username, String productId) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query query = session.createQuery("DELETE Basket where productId= :productId and username= :username");
+            query.setParameter("productId",productId);
+            query.setParameter("username",username);
+            query.list();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
+            System.out.println("getUsers exception:" + e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
     public List getProductIDUsers(String username) {
         Session session = null;
         List products = new ArrayList<Product>();
@@ -147,7 +166,10 @@ public class UserDAOImpl implements UserDAO {
             session.beginTransaction();
             Query query = session.createQuery("select distinct productId from Basket where username = :username");
             query.setParameter("username", username);
-            products = query.list();
+            int result = query.executeUpdate();
+            if (result > 0) {
+                System.out.println("basket products was removed");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
             System.out.println("addToBasket exception:" + e.getMessage());

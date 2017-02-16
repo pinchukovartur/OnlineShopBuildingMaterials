@@ -19,7 +19,7 @@
     <div id="content">
         <div id="login">
             <div id="logo"></div>
-            <form method="post" action="${pageContext.request.contextPath}/j_spring_security_check" id="form-login"
+            <form method="post" action="<c:url value="/j_spring_security_check"/>" id="form-login"
                   class="formBox">
                 <fieldset>
                     <div class="form-col">

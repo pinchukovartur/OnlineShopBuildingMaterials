@@ -15,6 +15,7 @@ public interface UserService {
 
     void saveUser(String username, String password, String email);
     void addToBasket(String username, String productId);
+    void deleteProductInBasket(String username, String productId);
     List getAllTheMaterialsOfThisUser(String username);
     void buyMaterialsUser(User user, Product plywood);
 

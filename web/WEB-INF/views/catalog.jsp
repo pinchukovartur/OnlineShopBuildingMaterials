@@ -76,6 +76,7 @@
         </div>
     </div>
 </div>
+
 <section id="category-grid">
     <div class="container">
         <c:if test="${listProducts[0].type == 'Plywood'}">

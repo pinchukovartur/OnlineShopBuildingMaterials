@@ -57,6 +57,10 @@ public class UserServiceImpl implements UserService{
         userDAO.addToBasket(basket);
     }
 
+    public void deleteProductInBasket(String username, String productId) {
+        userDAO.deleteProductInBasket(username,productId);
+    }
+
     public List<Product> getAllTheMaterialsOfThisUser(String username) {
         List<String> result = userDAO.getProductIDUsers(username);
 

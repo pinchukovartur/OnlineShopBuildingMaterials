@@ -18,6 +18,7 @@ public interface UserDAO {
     void deleteRoleByID(int id);
 
     void addToBasket(Basket basket);
+    void deleteProductInBasket(String username, String productId);
     List<String> getProductIDUsers (String username);
 
     List<Purchase> getPurchases();
