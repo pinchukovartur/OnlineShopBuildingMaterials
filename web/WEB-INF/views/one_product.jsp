@@ -81,25 +81,25 @@
                     <div class="single-product-gallery-item" id="slide1">
                         <a data-rel="prettyphoto" href="resources/assets/images/products/{iphone.photo1}">
                             <img alt=""
-                                 src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.firstPhoto}.jpg"
+                                 src="/getImage?image=${product.photoList[0].photo}"
                                  width="246" height="186"/>
                             <!--src="resources/assets/images/blank.gif"-->
                         </a>
                     </div><!-- /.single-product-gallery-item -->
 
                     <div class="single-product-gallery-item" id="slide2">
-                        <a data-rel="prettyphoto" href="resources/assets/images/products/{iphone.photo2}">
+                        <a data-rel="prettyphoto" href="/getImage?image=${product.photoList[0].photo}">
                             <img alt=""
-                                 src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.secondPhoto}.jpg"
+                                 src="/getImage?image=${product.photoList[0].photo}"
                                  width="246" height="186"/>
                             <!--src="resources/assets/images/blank.gif"-->
                         </a>
                     </div>
 
                     <div class="single-product-gallery-item" id="slide3">
-                        <a data-rel="prettyphoto" href="resources/assets/images/products/{iphone.photo3}">
+                        <a data-rel="prettyphoto" href="/getImage?image=${product.photoList[0].photo}">
                             <img alt=""
-                                 src="${pageContext.request.contextPath}/resources/initialData/jpg/${product.thirdPhoto}.jpg"
+                                 src="/getImage?image=${product.photoList[0].photo}"
                                  width="246" height="186"/>
                         </a>
                     </div>

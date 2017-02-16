@@ -357,33 +357,29 @@ public class ProductServiceImpl implements ProductsService {
             stream.close();
 
             XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(COMPUTER_PATH + "test.xlsx"));
-            XSSFSheet myExcelSheet = myExcelBook.getSheet("Materials");
+            XSSFSheet myExcelSheet = myExcelBook.getSheet("Лист1");
 
-            Product product = new Product();
+            Robot robot = new Robot();
 
-            XSSFRow row = myExcelSheet.getRow(0);
-            product.setProductId(row.getCell(1).getStringCellValue());
-
-            /*row = myExcelSheet.getRow(1);
-            plywood.setType(row.getCell(1).getStringCellValue());*/
-
-           /* row = myExcelSheet.getRow(2);
-            product.setLength((int) row.getCell(1).getNumericCellValue());
-
-            row = myExcelSheet.getRow(3);
-            product.setWeight((int) row.getCell(1).getNumericCellValue());
-
-            row = myExcelSheet.getRow(4);
-            product.setThickness((int) row.getCell(1).getNumericCellValue());
-
-            row = myExcelSheet.getRow(5);
-            product.setGrade(row.getCell(1).getStringCellValue());*/
-
-            row = myExcelSheet.getRow(6);
-            product.setPrice(row.getCell(1).getNumericCellValue());
-
-            addProduct(product);
+            robot.setProductId(myExcelSheet.getRow(0).getCell(1).getStringCellValue());
+            robot.setType(myExcelSheet.getRow(1).getCell(1).getStringCellValue());
+            robot.setModel(myExcelSheet.getRow(2).getCell(1).getStringCellValue());
+            robot.setManufacturer(myExcelSheet.getRow(3).getCell(1).getStringCellValue());
+            robot.setProductionYear((int) myExcelSheet.getRow(4).getCell(1).getNumericCellValue());
+            robot.setCondition(myExcelSheet.getRow(5).getCell(1).getStringCellValue());
+            robot.setAxles(String.valueOf(myExcelSheet.getRow(7).getCell(1).getNumericCellValue()));
+            robot.setMaxLoad((int) myExcelSheet.getRow(8).getCell(1).getNumericCellValue());
+            robot.setReach((int) myExcelSheet.getRow(9).getCell(1).getNumericCellValue());
+            robot.setFootprint(myExcelSheet.getRow(10).getCell(1).getStringCellValue());
+            robot.setRepeatability(myExcelSheet.getRow(11).getCell(1).getStringCellValue());
+            robot.setWeight((int) myExcelSheet.getRow(12).getCell(1).getNumericCellValue());
+            robot.setPrice(myExcelSheet.getRow(13).getCell(1).getNumericCellValue());
+            robot.setDescription(myExcelSheet.getRow(17).getCell(1).getStringCellValue());
+            addProduct(robot);
             myExcelBook.close();
+
+           /* if(getProductByID(robot.getProductId())!=null){return "Такой робот уже есть в базе";}*/
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

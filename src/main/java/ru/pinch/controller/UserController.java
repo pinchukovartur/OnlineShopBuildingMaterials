@@ -43,8 +43,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView checkUser(@RequestParam(value = "error", required = false) String error, Locale locale) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView checkUser(@RequestParam(value = "error", required = false) String error,
+                                  ModelAndView modelAndView, Locale locale) {
         if (error != null) {
             modelAndView.addObject("error", messageSource.getMessage("InvalidUsernameOrPassword",
                                                                      new String[]{locale.getDisplayName(locale)}, locale));
@@ -55,18 +55,18 @@ public class UserController {
 
     @RequestMapping(value = "/addtobasket/{productID}", method = RequestMethod.GET)
     public String addToBasket(@PathVariable("productID") String productID, Principal user) {
-        userService.addToBasket(user.getName(), productID);
         String url = productsService.getProductByID(productID).getType();
+        userService.addToBasket(user.getName(), productID);
         return "redirect:/catalog=" + url + "&page=1";
     }
 
-    @RequestMapping(value = "/deleteBasketProduct/{productID}", method = RequestMethod.GET)
-    public String deleteBasketProduct(@PathVariable("productID") String productID, Principal user) {
+          @RequestMapping(value = "/deleteBasketProduct/{productID}", method = RequestMethod.GET)
+        public String deleteBasketProduct(@PathVariable("productID") String productID, Principal user) {
         userService.deleteProductInBasket(user.getName(),productID);
         return "redirect:/basket";
-    }
+        }
 
-    @RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
+@RequestMapping(value = "/buymaterial/{productID}", method = RequestMethod.GET)
     public String buyMaterial(@PathVariable("productID") String productID, Principal user) {
 
         userService.savePurchase(user.getName(),productID,1);

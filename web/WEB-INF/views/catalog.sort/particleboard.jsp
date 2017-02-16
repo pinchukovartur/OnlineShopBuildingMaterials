@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="price-filter">
-                    <h2><local:message code="catalog.label.grade"/>:</h2>
+                    <h2><local:message code="catalog.sort.label.color"/>:</h2>
                     <hr>
                     <div class="le-select">
                         <select name="color">

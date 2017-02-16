@@ -79,6 +79,7 @@
 
 <section id="category-grid">
     <div class="container">
+        <c:if test="${not empty listProducts}">
         <c:if test="${listProducts[0].type == 'Plywood'}">
             <jsp:include page="/WEB-INF/views/catalog.sort/plywoodsort.jsp"/>
         </c:if>
@@ -87,6 +88,7 @@
         </c:if>
         <c:if test="${listProducts[0].type == 'ParticleBoard'}">
             <jsp:include page="/WEB-INF/views/catalog.sort/particleboard.jsp"/>
+        </c:if>
         </c:if>
         <div class="col-xs-12 col-sm-9 no-margin wide sidebar">
             <section id="gaming">
@@ -159,10 +161,10 @@
                                         <div class="ribbon blue"><span>new!</span></div>
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
-                                                <%--<div class="image">
-                                                    <img src="/resources/dataServer/${product.photoList[0].photo}"
-                                                         width="246" height="186"/>
-                                                </div>--%>
+                                                    <%--<div class="image">
+                                                        <img src="/resources/dataServer/${product.photoList[0].photo}"
+                                                             width="246" height="186"/>
+                                                    </div>--%>
                                             </div>
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
                                                 <div class="body">

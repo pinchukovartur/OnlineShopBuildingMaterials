@@ -37,9 +37,9 @@
                     <div class="le-select">
                         <select name="manufacturer">
                             <option disabled><local:message code="catalog.sort.label.manufacturer"/></option>
-                                    <option selected value="0">Not important</option>
                                     <option selected value="Kuka">Kuka</option>
                                     <option selected value="ABB">ABB</option>
+                            <option selected value="">Not important</option>
                         </select>
                     </div>
                 </div>

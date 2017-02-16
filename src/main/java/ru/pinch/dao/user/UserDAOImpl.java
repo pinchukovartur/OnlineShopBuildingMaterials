@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
             System.out.println("addUser exception:" + e.getMessage());
         } finally {
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
                 session.close();
             }
         }
-        }
+    }
 
     public void deleteProductInBasket(String username, String productId) {
         Session session = null;
@@ -145,9 +145,9 @@ public class UserDAOImpl implements UserDAO {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Query query = session.createQuery("DELETE Basket where productId= :productId and username= :username");
-            query.setParameter("productId",productId);
-            query.setParameter("username",username);
-            query.list();
+            query.setParameter("productId", productId);
+            query.setParameter("username", username);
+            query.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
             System.out.println("getUsers exception:" + e.getMessage());
@@ -166,10 +166,7 @@ public class UserDAOImpl implements UserDAO {
             session.beginTransaction();
             Query query = session.createQuery("select distinct productId from Basket where username = :username");
             query.setParameter("username", username);
-            int result = query.executeUpdate();
-            if (result > 0) {
-                System.out.println("basket products was removed");
-            }
+            products = query.list();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
             System.out.println("addToBasket exception:" + e.getMessage());

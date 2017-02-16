@@ -30,7 +30,7 @@ CREATE TABLE `buildingonlineshop`.`product` (
   `Type` varchar(45) NOT NULL,
   `Discriminator` varchar(45) NOT NULL,
   `Price` double DEFAULT NULL,
-  `Description` varchar(200) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
   `Weight` int(45) DEFAULT NULL,
   `Length` int(45) DEFAULT NULL,
   `Thickness` int(45) DEFAULT NULL,
@@ -39,10 +39,11 @@ CREATE TABLE `buildingonlineshop`.`product` (
   `WaterResistance` int(45) DEFAULT NULL,
   `NumberOfSheets` int(45) DEFAULT NULL,
   `NumberOfPackages` int(45) DEFAULT NULL,
+  `Color` varchar(45) DEFAULT NULL,
   `Model` varchar(45) DEFAULT NULL,
   `Manufacturer` varchar(45) DEFAULT NULL,
   `ProductionYear` INT(45) DEFAULT NULL,
-  `Condition` varchar(45) DEFAULT NULL,
+  `RobotCondition` varchar(45) DEFAULT NULL,
   `Axles` varchar(45) DEFAULT NULL,
   `MaxLoad` INT(45) DEFAULT NULL,
   `Reach` INT(45) DEFAULT NULL,
@@ -51,8 +52,8 @@ CREATE TABLE `buildingonlineshop`.`product` (
   PRIMARY KEY (`ProductID`));
 
 INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test', 'Plywood', 'Plywood',1);
-INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test2', 'Plywood', 'Plywood',1);
-INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test3', 'Plywood', 'Plywood',1);
+INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test2', 'Robot', 'Robot',1);
+INSERT INTO `buildingonlineshop`.`product`(ProductID, Type, Discriminator, Price) VALUES ('test3', 'ParticleBoard', 'ParticleBoard',1);
 
 CREATE TABLE `buildingonlineshop`.`photo` (
   `ProductID` VARCHAR(45) NOT NULL,

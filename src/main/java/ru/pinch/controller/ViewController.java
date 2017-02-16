@@ -2,7 +2,6 @@ package ru.pinch.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,12 +13,6 @@ import ru.pinch.entity.users.User;
 import ru.pinch.service.products.ProductsService;
 import ru.pinch.service.user.UserService;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -44,11 +37,8 @@ public class ViewController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(
-            @RequestParam(value = "window",   defaultValue = "purchases") String window,HttpServletResponse response,
+            @RequestParam(value = "window",   defaultValue = "purchases") String window,
             ModelAndView modelAndView) {
-
-        String imagePath ="E:\\Projects\\dataServer\\";
-        modelAndView.addObject("imgUrl", imagePath);
 
         if(window.equals("purchases")) {
             modelAndView.setViewName("WEB-INF/views/admin/" + "purchase");

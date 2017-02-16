@@ -27,7 +27,7 @@ public class FileProductController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ModelAndView uploadPhotoProduct(@RequestParam("file") MultipartFile file,
-                                   @RequestParam(value = "productId", defaultValue = "") String productId,
+                                           @RequestParam(value = "productId", defaultValue = "") String productId,
                                            ModelAndView modelAndView) {
 
         modelAndView.addObject("addProduct", new Plywood());
@@ -36,15 +36,15 @@ public class FileProductController {
             try {
                 /*Date date = new Date();
                 String imageName = date.toString().replaceAll(":", ",");*/
-
                 productsService.saveTheImageOnServer(file.getOriginalFilename(), file.getBytes());
                 Photo photo = new Photo();
                 photo.setProduct(productsService.getProductByID(productId));
                 photo.setPhoto(file.getOriginalFilename());
-
                 productsService.savePhoto(photo);
-
                 modelAndView.addObject("errorImage", "file has been successfully downloaded");
+                modelAndView.addObject("plywoodList", productsService.getProductsByType("Plywood"));
+                modelAndView.addObject("particleBoardsList", productsService.getProductsByType("ParticleBoard"));
+                modelAndView.addObject("robotList", productsService.getProductsByType("Robot"));
                 modelAndView.setViewName("WEB-INF/views/admin/" + "product");
                 return modelAndView;
             } catch (IOException e) {
@@ -73,16 +73,22 @@ public class FileProductController {
         throw new RuntimeException("IOError writing file to output stream");
     }
 
-    @RequestMapping(value = "/uploadExcel", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadExcelRobots", method = RequestMethod.POST)
     public ModelAndView uploadExcel(@RequestParam("file") MultipartFile file, ModelAndView modelAndView) {
 
         if (!file.isEmpty()) {
-            modelAndView.setViewName("WEB-INF/views/"+"admin");
+            modelAndView.addObject("plywoodList", productsService.getProductsByType("Plywood"));
+            modelAndView.addObject("particleBoardsList", productsService.getProductsByType("ParticleBoard"));
+            modelAndView.addObject("robotList", productsService.getProductsByType("Robot"));
+            modelAndView.setViewName("WEB-INF/views/admin/" + "product");
             modelAndView.addObject("errorExcel", productsService.addProductsFromExcel(file));
 
         } else {
             modelAndView.addObject("errorExcel", "empty file");
-            modelAndView.setViewName("WEB-INF/views/"+"admin");
+            modelAndView.addObject("plywoodList", productsService.getProductsByType("Plywood"));
+            modelAndView.addObject("particleBoardsList", productsService.getProductsByType("ParticleBoard"));
+            modelAndView.addObject("robotList", productsService.getProductsByType("Robot"));
+            modelAndView.setViewName("WEB-INF/views/admin/" + "product");
         }
 
         modelAndView.addObject("addProduct", new Plywood());

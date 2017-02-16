@@ -24,7 +24,6 @@ public class ProductsDAOImpl implements ProductsDAO {
                 session.save(product);
                 session.getTransaction().commit();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "«Ошибка при вставке»", JOptionPane.OK_OPTION);
                 System.out.println("addProduct exception:" + e.getMessage());
             } finally {
                 if (session != null && session.isOpen()) {

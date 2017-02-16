@@ -14,14 +14,24 @@ public class TClass {
         ApplicationContext context = new AnnotationConfigApplicationContext(ProductsDAOImpl.class);
         ProductsDAOImpl productsService = context.getBean(ProductsDAOImpl.class);
 
-        /*Robot robot = new Robot();
-        robot.setProductId("Robot34567");
-        robot.setType("Robot2");
-        robot.setManufacturer("M");
-        robot.setModel("Mo");
-        productsService.addProduct(robot);*/
+        Robot robot = new Robot();
+        robot.setProductId("1");
+        robot.setType("1");
+        robot.setModel("1");
+        robot.setManufacturer("1");
+        robot.setProductionYear(1);
+        robot.setCondition("1");
+        robot.setAxles("1");
+        robot.setMaxLoad(1);
+        robot.setReach(1);
+        robot.setFootprint("1");
+        robot.setRepeatability("1");
+        robot.setWeight(1);
+        robot.setPrice(1.1);
+        robot.setDescription("1");
+        productsService.addProduct(robot);
 
-        productsService.deleteProduct("test");
+        /*productsService.deleteProduct("test");*/
 
         System.out.println("Finishing");
     }

@@ -173,21 +173,21 @@
                     </c:forEach>
                     <tr>
                         <form action="addParticleBoard" METHOD="get">
-                        <td class="dragHandle">&nbsp;</td>
-                        <td><input name="productId" SIZE="5"></td>
-                        <td><label>ParticleBoard</label></td>
-                        <td><input name="price" SIZE="3"></td>
-                        <td><input name="weight" SIZE="5"></td>
-                        <td><input name="length" SIZE="5"></td>
-                        <td><input name="thickness" SIZE="5"></td>
-                        <td><input name="numberOfSheets" SIZE="5"></td>
-                        <td><input name="numberOfPackages" SIZE="5"></td>
-                        <td><input name="color" SIZE="5"></td>
-                        <td><input name="description" SIZE="5"></td>
-                        <td><label>DEFAULT NULL</label></td>
-                        <td class="action">
-                            <input type="submit"/>
-                        </td>
+                            <td class="dragHandle">&nbsp;</td>
+                            <td><input name="productId" SIZE="5"></td>
+                            <td><label>ParticleBoard</label></td>
+                            <td><input name="price" SIZE="3"></td>
+                            <td><input name="weight" SIZE="5"></td>
+                            <td><input name="length" SIZE="5"></td>
+                            <td><input name="thickness" SIZE="5"></td>
+                            <td><input name="numberOfSheets" SIZE="5"></td>
+                            <td><input name="numberOfPackages" SIZE="5"></td>
+                            <td><input name="color" SIZE="5"></td>
+                            <td><input name="description" SIZE="5"></td>
+                            <td><label>DEFAULT NULL</label></td>
+                            <td class="action">
+                                <input type="submit"/>
+                            </td>
                         </form>
                     </tr>
                 </table>
@@ -299,6 +299,91 @@
                             <div class="tab-action">
                                 <input type="submit" value="Загрузить" class="button"
                                        id="upload"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <div class="headlines">
+                    <h2>
+                        <span>Загрузка из excel</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <c:if test="${not empty errorExcel}">
+                            <label class="lab">${errorExcel}</label>
+                        </c:if>
+                    </p>
+                    <h2>Загрузка Robots</h2>
+                    <form class="formBox" method="post" action="uploadExcelRobots"
+                          enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form">
+                                <div class="col1">
+                                    <div class="clearfix file">
+                                        <div class="con">
+                                            <input type="file" class="upload-file"
+                                                   name="file"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-action">
+                                <input type="submit" value="Загрузить" class="button"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <c:if test="${not empty errorExcel}">
+                            <label class="lab">${errorExcel}</label>
+                        </c:if>
+                    </p>
+                    <h2>Загрузка Plywoods</h2>
+                    <form class="formBox" method="post" action="uploadFile"
+                          enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form">
+                                <div class="col1">
+                                    <div class="clearfix file">
+                                        <div class="con">
+                                            <input type="file" class="upload-file"
+                                                   name="file"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-action">
+                                <input type="submit" value="Загрузить" class="button"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <c:if test="${not empty errorExcel}">
+                            <label class="lab">${errorExcel}</label>
+                        </c:if>
+                    </p>
+                    <h2>Загрузка Particle Boards</h2>
+                    <form class="formBox" method="post" action="uploadFile"
+                          enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form">
+                                <div class="col1">
+                                    <div class="clearfix file">
+                                        <div class="con">
+                                            <input type="file" class="upload-file"
+                                                   name="file"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-action">
+                                <input type="submit" value="Загрузить" class="button"/>
                             </div>
                         </fieldset>
                     </form>
