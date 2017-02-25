@@ -1,0 +1,28 @@
+package myproject.dao.user;
+
+
+import myproject.entity.Purchase;
+import myproject.entity.users.Basket;
+import myproject.entity.users.Role;
+import myproject.entity.users.User;
+
+import java.util.List;
+
+public interface UserDAO {
+
+    void addUser(User user);
+    List getUsers();
+    User getUserByID(String username);
+    void deleteUser(String id);
+
+    void addRole(Role role);
+    void deleteRoleByID(int id);
+
+    void addToBasket(Basket basket);
+    void deleteProductInBasket(String username, String productId);
+    List<String> getProductIDUsers(String username);
+
+    List<Purchase> getPurchases();
+    void savePurchase(Purchase purchase);
+    void deletePurchaseByID(int id);
+}
