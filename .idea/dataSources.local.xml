@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="heroku_be5b31f46086956@us-cdbr-iron-east-04.cleardb.net" uuid="b0b42bda-9957-4925-aef7-5676aed174b6">
+    <data-source name="heroku_be5b31f46086956@us-cdbr-iron-east-04.cleardb.net" uuid="4a04d684-d9bb-4d8c-9a7f-07c47d54a95b">
       <database-info product="MySQL" version="5.5.46-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -10,6 +10,16 @@
       <secret-storage>master_key</secret-storage>
       <user-name>b5d1eaf13dbc01</user-name>
       <resolve-scope>heroku_be5b31f46086956:</resolve-scope>
+    </data-source>
+    <data-source name="onlinestorage@localhost" uuid="c6db0f89-eb93-49d0-a475-3310b20de612">
+      <database-info product="MySQL" version="5.7.16-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <resolve-scope>onlinestorage:</resolve-scope>
     </data-source>
   </component>
 </project>
