@@ -16,7 +16,7 @@ import java.util.Properties;
 public class MailService {
 
     private final String ADMIN_MAIL = "pinchukovartur@gmail.com";
-    private final String ADMIN_PASSWORD = "*****";
+    private final String ADMIN_PASSWORD = "9012qw9012QW";
 
     public void send(String subject, String text, String toEmail) {
 

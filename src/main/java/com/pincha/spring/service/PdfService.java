@@ -7,10 +7,12 @@ import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.pincha.spring.model.Product;
+import com.pincha.spring.model.Value;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.Map;
 
 public class PdfService extends AbstractPdfView {
@@ -20,28 +22,30 @@ public class PdfService extends AbstractPdfView {
         Product product = (Product) map.get("product");
         if (product.getValues().size() != 0) {
             PdfPTable table = new PdfPTable(product.getValues().size() + 2);
-            BaseFont bf = BaseFont.createFont("/fonts/arial.ttf",
+
+            BaseFont bf = BaseFont.createFont(map.get("filePath") + File.separator + "mystyles" + File.separator + "fonts" +File.separator +"arial.ttf",
                     "cp1251", BaseFont.EMBEDDED);
 
-            Font font = new Font(bf, 15);
+
+            Font font = new Font(bf, 7);
 
             table.addCell(new Paragraph("Наименование", font));
             table.addCell(new Paragraph("Описание", font));
 
-           /* for (int i = 0; i < product.getValues().size(); i++) {
-                table.addCell(new Paragraph(product.getValues().get(i).getAttribute().getAttributeName(), font));
+            for (Value value : product.getValues()) {
+                table.addCell(new Paragraph(value.getAttribute().getAttributeName(), font));
             }
 
             table.addCell(product.getProductName());
             table.addCell(product.getDescription());
 
-            for (int i = 0; i < product.getValues().size(); i++) {
-                table.addCell(product.getValues().get(i).getValue());
-            }*/
+            for (Value value : product.getValues()) {
+                table.addCell(value.getValue());
+            }
             document.add(table);
         } else {
             PdfPTable table = new PdfPTable(2);
-            BaseFont bf = BaseFont.createFont("c:/windows/fonts/arialbd.ttf",
+            BaseFont bf = BaseFont.createFont(map.get("filePath") + File.separator + "mystyles" + File.separator + "fonts" +File.separator +"arial.ttf",
                     "cp1251", BaseFont.EMBEDDED);
             Font font = new Font(bf, 15);
             table.addCell(new Paragraph("ProductName", font));

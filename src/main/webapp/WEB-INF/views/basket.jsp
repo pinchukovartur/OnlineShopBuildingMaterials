@@ -52,7 +52,7 @@
                 <li class="breadcrumb-nav-holder"> 
                     <ul>
                         <li class="breadcrumb-item">
-                            <a href="page_1">Главная</a>
+                            <a href="/">Главная</a>
                         </li>
                         <li class="breadcrumb-item current gray">
                             <a href="#">Корзина</a>
@@ -97,7 +97,7 @@
                 <div class="col-xs-12 col-sm-2 no-margin">
                     <div class="price">
                             <%--<input type="checkbox"/>--%>
-                            <a href="/buymaterial?${item.idProduct}">Заказать товар</a><br>
+                            <a href="/buy?productID=${item.idProduct}">Заказать товар</a><br>
                             <a href="/getPDF?id=${item.idProduct}">Скачать pdf</a>
                     </div>
                 </div>

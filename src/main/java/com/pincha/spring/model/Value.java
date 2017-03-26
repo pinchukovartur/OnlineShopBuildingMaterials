@@ -65,8 +65,8 @@ public class Value {
         this.attribute = attribute;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProductID",insertable = false,updatable = false) //////////------------------------------------
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ProductID",insertable = false,updatable = false)
     public Product getProduct() {
         return product;
     }

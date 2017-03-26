@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +33,10 @@ public class ProductController {
     private ProductServiceImpl productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private Path pathApp;
+
+    private static String message;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
@@ -81,7 +87,7 @@ public class ProductController {
 
         model.addAttribute("attributes", attributes);
         model.addAttribute("valueList", new ArrayList<String>());
-        model.addAttribute("attributeSize", attributes.size());
+        model.addAttribute("attributeSize", attributes.size() - 1);
         return "addProduct";
     }
 
@@ -94,9 +100,11 @@ public class ProductController {
     @RequestMapping(value = "/getPDF", method = RequestMethod.GET)
     public ModelAndView getPDFFile(
             @RequestParam("id") int productId) {
-        return new ModelAndView("pdfView",
-                                "product",
-                                productService.getProductByKey(productId));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pdfView");
+        modelAndView.addObject("product",productService.getProductByKey(productId));
+        modelAndView.addObject("filePath", pathApp.toString());
+        return modelAndView;
     }
 
     private Integer getProductInBasket(){
@@ -117,5 +125,20 @@ public class ProductController {
             userName = principal.toString();
         }
         return userName;
+    }
+
+    public void processFilesFromFolder(File folder)
+    {
+        File[] folderEntries = folder.listFiles();
+        for (File entry : folderEntries)
+        {
+            message = message + entry.getAbsolutePath() + "\n";
+            if (entry.isDirectory())
+            {
+                processFilesFromFolder(entry);
+                continue;
+            }
+            // иначе вам попался файл, обрабатывайте его!
+        }
     }
 }

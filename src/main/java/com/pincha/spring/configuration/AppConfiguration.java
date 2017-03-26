@@ -57,11 +57,10 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
 				.addResourceLocations("/static/");
-
 		String PATH_SEPARATOR = "/";
 		String WILD_MATCH = "**";
 		registry.addResourceHandler(PATH_SEPARATOR + "media" + PATH_SEPARATOR + WILD_MATCH)
-				.addResourceLocations("file:///" + sourcesPath().toString() + PATH_SEPARATOR + "productPhoto" + PATH_SEPARATOR)
+				.addResourceLocations("file:///" + sourcesPath().toString() + File.separator + "productPhoto" + File.separator)
 				.resourceChain(false)
 				.addResolver(new PathResourceResolver());
     }
@@ -112,7 +111,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public Path sourcesPath() {
 		return Paths.get(System.getProperty("catalina.home")+ File.separator + "webapps"+
-																  File.separator + "ROOT" +
-																  File.separator + "static" + File.separator);
+																  File.separator + "expanded" /*"ROOT"*/+
+																  File.separator + "static");
 	}
 }

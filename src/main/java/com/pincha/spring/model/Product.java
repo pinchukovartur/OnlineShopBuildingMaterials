@@ -86,7 +86,7 @@ public class Product {
         this.category = category;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.PERSIST)
     public Set<Value> getValues() {
         return values;
     }
@@ -102,7 +102,7 @@ public class Product {
         this.photos = photos;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER, mappedBy = "products")
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "products")
     public Set<User> getUsers() {
         return users;
     }
