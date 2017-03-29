@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -25,7 +27,6 @@ public class Product {
     private String productName;
     private String price;
     private String description;
-    private int categoryID;
     private Category category;
     private Set<Value> values;
     private Set<Photo> photos;
@@ -33,7 +34,8 @@ public class Product {
 
 
     @Id
-    @Column(name = "idProduct", unique = true, nullable = false, length = 11)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "idProduct", unique = true, length = 11)
     public int getIdProduct() {
         return idProduct;
     }
@@ -68,14 +70,6 @@ public class Product {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "categoryID", unique = true, nullable = false, length = 11, insertable = false,updatable = false)
-    public int getCategoryID() {
-        return categoryID;
-    }
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
@@ -86,7 +80,7 @@ public class Product {
         this.category = category;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.DETACH)
     public Set<Value> getValues() {
         return values;
     }
@@ -102,13 +96,16 @@ public class Product {
         this.photos = photos;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "products")
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY, mappedBy = "products")
     public Set<User> getUsers() {
         return users;
     }
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -132,5 +129,20 @@ public class Product {
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "idProduct=" + idProduct +
+                ", productName='" + productName + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", values=" + values +
+                ", photos=" + photos +
+                ", users=" + users +
+                '}';
     }
 }

@@ -102,4 +102,16 @@ public class Category {
         result = 31 * result + idCategory;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryName='" + categoryName + '\'' +
+                ", idCategory=" + idCategory +
+                ", catalogID=" + catalogID +
+                ", catalog=" + catalog +
+                ", productSet=" + productSet +
+                ", attributes=" + attributes +
+                '}';
+    }
 }

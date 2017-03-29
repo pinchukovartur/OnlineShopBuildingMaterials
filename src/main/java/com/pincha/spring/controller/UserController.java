@@ -81,7 +81,7 @@ public class UserController {
             user.getProducts().add(productService.getProductByKey(productID));
             userService.updateUser(user);
         }
-        return "redirect:/catalog?id=" + product.getCategoryID() + "&pageNumber=1";
+        return "redirect:/catalog?id=" + product.getCategory().getIdCategory() + "&pageNumber=1";
     }
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)

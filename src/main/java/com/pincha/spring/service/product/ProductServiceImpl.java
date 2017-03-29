@@ -4,15 +4,19 @@ package com.pincha.spring.service.product;
 import com.pincha.spring.dao.catalog.CatalogDAOImpl;
 import com.pincha.spring.dao.category.CategoryDAOImpl;
 import com.pincha.spring.dao.product.ProductDAOImpl;
+import com.pincha.spring.dao.value.ValueDAOImpl;
 import com.pincha.spring.model.Attribute;
 import com.pincha.spring.model.Catalog;
 import com.pincha.spring.model.Category;
 import com.pincha.spring.model.Product;
+import com.pincha.spring.model.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl {
@@ -27,6 +31,9 @@ public class ProductServiceImpl {
         this.productDAO = productDAO;
         this.catalogDAO = catalogDAO;
     }
+
+    @Autowired
+    private ValueDAOImpl valueDAO;
 
     public ArrayList<Catalog> getAllCatalogs() {
         return catalogDAO.getAll();
@@ -48,12 +55,32 @@ public class ProductServiceImpl {
         return productDAO.getByKey(key);
     }
 
-    public List<Attribute> getAttributeByCategory(int categoryId) {
-        List<Attribute> attributes = new ArrayList<>();
-        Category category = getCategoryByKey(categoryId);
-        for (Attribute attribute : category.getAttributes()) {
-            attributes.add(attribute);
-        }
-        return attributes;
-    }
+   public void saveProduct(Map<String,String> product, int categoryId){
+        Category category = categoryDAO.getByKey(categoryId);
+
+       Product newProduct = new Product();
+       newProduct.setCategory(category);
+       newProduct.setDescription("des");
+       newProduct.setPrice("awd");
+       newProduct.setProductName("newProduct");
+       /*productDAO.save(newProduct);*/
+
+       Set<Attribute> attributes = category.getAttributes();
+       Set<Value> values = new HashSet<>();
+       for(Map.Entry entry: product.entrySet()){
+           for (Attribute attribute: attributes){
+               if (entry.getKey().equals(attribute.getAttributeName())){
+
+                   Value value = new Value();
+                   value.setAttribute(attribute);
+                   value.setValue((String) entry.getValue());
+                   value.setProduct(newProduct);
+
+                   valueDAO.save(value);
+
+                    values.add(value);
+               }
+           }
+       }
+   }
 }

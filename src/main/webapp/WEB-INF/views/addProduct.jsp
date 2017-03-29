@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
 
@@ -24,18 +25,15 @@
     <div class="login-container">
         <div class="login-card">
             <div class="login-form">
-                <c:url var="addNewProduct" value="/addNewProduct"/>
-                <form action="${addNewProduct}" method="post" class="form-horizontal" modelAttribute="valueList">
-                    <c:forEach  var="i" begin="0" end="${attributeSize}">
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="${attributes[i]}"></label>
-                        <input type="text" class="form-control" id="username" placeholder="${attributes[i]}" name="${valueList[i]}"/>
-                    </div>
+                <form:form method="post" modelAttribute="productInputForm">
+                    <c:forEach items="${productInputForm.product}" var="item">
+                        <label>${item.key}</label>
+                        <input type="text" name="product['${item.key}']" value="${item.value}">
+                        <br>
                     </c:forEach>
-                    <div class="form-actions">
-                        <button class="btn btn-block btn-primary btn-default" value="Log in"></button>
-                    </div>
-                </form>
+                    <input type="hidden" name="idCategory" value="${productInputForm.idCategory}">
+                    <input type="submit" value="Отправить">
+                </form:form>
             </div>
         </div>
     </div>

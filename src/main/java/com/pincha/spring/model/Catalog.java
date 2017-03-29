@@ -57,4 +57,13 @@ public class Catalog {
         result = 31 * result + (catalogName != null ? catalogName.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Catalog{" +
+                "idCatalog=" + idCatalog +
+                ", catalogName='" + catalogName + '\'' +
+                ", categoryList=" + categoryList +
+                '}';
+    }
 }

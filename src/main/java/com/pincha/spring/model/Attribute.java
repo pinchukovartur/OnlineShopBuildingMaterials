@@ -75,4 +75,14 @@ public class Attribute {
         result = 31 * result + (attributeName != null ? attributeName.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Attribute{" +
+                "idAttribute=" + idAttribute +
+                ", attributeName='" + attributeName + '\'' +
+                ", categories=" + categories +
+                ", values=" + values +
+                '}';
+    }
 }

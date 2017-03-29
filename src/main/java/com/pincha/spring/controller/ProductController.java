@@ -3,27 +3,33 @@ package com.pincha.spring.controller;
 import com.pincha.spring.dao.catalog.CatalogDAOImpl;
 import com.pincha.spring.dao.category.CategoryDAOImpl;
 import com.pincha.spring.dao.product.ProductDAOImpl;
+import com.pincha.spring.forms.ProductInputForm;
 import com.pincha.spring.model.Attribute;
 import com.pincha.spring.model.Product;
 import com.pincha.spring.model.Value;
 import com.pincha.spring.service.product.ProductServiceImpl;
 import com.pincha.spring.service.user.UserService;
+import com.sun.tracing.dtrace.ModuleAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -79,22 +85,18 @@ public class ProductController {
 
     @RequestMapping(value = "/addNewProduct", method = RequestMethod.GET)
     public String addProductView(@RequestParam("categoryId") int categoryId, ModelMap model) {
-        List<String> attributes = new ArrayList<>();
+        Map<String, String> attributes = new HashMap<>();
         for (Attribute attribute: productService.getCategoryByKey(categoryId).getAttributes()){
-            attributes.add(attribute.getAttributeName());
-            System.err.println(attributes);
+            attributes.put(attribute.getAttributeName(), null);
         }
-
-        model.addAttribute("attributes", attributes);
-        model.addAttribute("valueList", new ArrayList<String>());
-        model.addAttribute("attributeSize", attributes.size() - 1);
+        model.addAttribute("productInputForm", new ProductInputForm(attributes, categoryId));
         return "addProduct";
     }
 
     @RequestMapping(value = "/addNewProduct", method = RequestMethod.POST)
-    public String addProduct(List<String> values, ModelMap model) {
-        System.out.println(values.size());
-        return "admin";
+    public String addProduct(@ModelAttribute("productInputForm") ProductInputForm productInputForm) {
+        productService.saveProduct(productInputForm.getProduct(), productInputForm.getIdCategory());
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/getPDF", method = RequestMethod.GET)

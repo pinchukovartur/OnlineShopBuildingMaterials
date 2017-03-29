@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `heroku_be5b31f46086956`.`Product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `heroku_be5b31f46086956`.`Product` (
-  `idProduct` INT(11) NOT NULL,
+  `idProduct` INT(11) NOT NULL auto_increment, -- -----------------------------------------
   `ProductName` VARCHAR(255) NOT NULL,
   `Price` VARCHAR(255) NULL,
   `Description` VARCHAR(255) NULL,
@@ -71,13 +71,13 @@ CREATE TABLE IF NOT EXISTS `heroku_be5b31f46086956`.`Value` (
   CONSTRAINT `at_value`
     FOREIGN KEY (`AttributeId`)
     REFERENCES `heroku_be5b31f46086956`.`Attribute` (`idAttribute`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `product_value`
     FOREIGN KEY (`ProductId`)
     REFERENCES `heroku_be5b31f46086956`.`Product` (`idProduct`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE cascade
+    ON UPDATE cascade)
 ENGINE = InnoDB;
 
 

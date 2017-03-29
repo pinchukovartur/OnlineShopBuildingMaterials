@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        userDao.persist(user);
+        userDao.save(user);
     }
 
     @Override

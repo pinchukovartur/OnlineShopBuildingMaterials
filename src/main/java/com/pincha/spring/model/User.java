@@ -68,7 +68,7 @@ public class User {
         this.enabled = enabled;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.PERSIST)
     public UserRole getUserRole() {
         return this.userRole;
     }
@@ -87,4 +87,15 @@ public class User {
         this.products = products;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", userRole=" + userRole +
+                ", products=" + products +
+                '}';
+    }
 }

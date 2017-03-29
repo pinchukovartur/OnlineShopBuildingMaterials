@@ -45,7 +45,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         return entity;
     }
 
-    public void persist(T entity) {
+    public void save(T entity) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.save(entity);
@@ -60,7 +60,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     public void deleteByKey(PK key) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(session.load(persistentClass,key));
+        session.delete(getByKey(key));
         transaction.commit();
         session.close();
     }
@@ -76,4 +76,5 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     public ArrayList<T> getAll(){
         return (ArrayList<T>) getSession().createQuery("from " + persistentClass.getName()).list();
     }
+
 }

@@ -5,6 +5,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,13 +16,12 @@ public class Value {
 
     private int idValue;
     private String value;
-    private int productId;
-    private int attributeId;
     private Attribute attribute;
     private Product product;
 
     @Id
-    @Column(name = "idValue", unique = true, nullable = false, length = 11)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "iDValue", unique = true, length = 11)
     public int getIdValue() {
         return idValue;
     }
@@ -29,31 +30,12 @@ public class Value {
     }
 
     @Basic
-    @Column(name = "Value", unique = true, nullable = false, length = 11)
+    @Column(name = "value", unique = true, nullable = false, length = 11)
     public String getValue() {
         return value;
     }
     public void setValue(String value) {
         this.value = value;
-    }
-
-    @Basic
-    @Column(name = "attributeId", unique = true, nullable = false, length = 11, insertable = false, updatable = false)
-    public int getAttributeId() {
-        return attributeId;
-    }
-
-    public void setAttributeId(int attributeId) {
-        this.attributeId = attributeId;
-    }
-
-    @Basic
-    @Column(name = "productId", unique = true, nullable = false, length = 11)
-    public int getProductId() {
-        return productId;
-    }
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -65,8 +47,8 @@ public class Value {
         this.attribute = attribute;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ProductID",insertable = false,updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "productId")
     public Product getProduct() {
         return product;
     }
@@ -75,18 +57,12 @@ public class Value {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Value value = (Value) o;
-        return productId == value.productId && (this.value != null ? this.value.equals(value.value) : value.value == null);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = value != null ? value.hashCode() : 0;
-        result = 31 * result + productId;
-        return result;
+    public String toString() {
+        return "Value{" +
+                "idValue=" + idValue +
+                ", value='" + value + '\'' +
+                ", attribute=" + attribute +
+                ", product=" + product +
+                '}';
     }
 }

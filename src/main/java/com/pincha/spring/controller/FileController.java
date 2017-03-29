@@ -49,7 +49,7 @@ public class FileController {
                 stream.flush();
                 stream.close();
 
-                photoDAO.persist(new Photo(file.getOriginalFilename(), productDAO.getByKey(productId)));
+                photoDAO.save(new Photo(file.getOriginalFilename(), productDAO.getByKey(productId)));
 
                 model.addAttribute("errorImage", "You successfully uploaded file=" + name);
                 return "redirect:/admin";
